@@ -11,6 +11,8 @@ function Promise(executor) {
     this.callback = {};//
     //保存实例对象的this值  否则跟内层函数调用时,未定义,this会默认指向Window
     const that = this;//self _this that 一般用这些值来保存this值
+
+    //resolve方法
     function resolve(data) {//那边传入实参,所以这里要写形参
         //只能改变一次对象
         //用判断语句解决此特性  如果对象状态已不为默认状态,则return 暂停函数向下执行,以保不再重复修改对象
@@ -27,9 +29,11 @@ function Promise(executor) {
 
     }
 
+    //reject方法
     function reject(data) {
         //用判断语句解决此特性  如果对象状态已不为默认状态,则return 暂停函数向下执行,以保不再重复修改对象
         if (that.PromiseState !== 'Pending') return;
+
 
         //执行reject改变对象的属性
         that.PromiseState = 'rejected';
@@ -41,7 +45,10 @@ function Promise(executor) {
         }
     }
 
+    // catch方法
     //用try-catch语句来适应 promise抛出异常      先try执行,区间内有异常则捕获传递到catch,进行错误处理
+
+
     try {
         //Promise构造器的特性  立刻同步执行里面的函数
         executor(resolve, reject);//所以这里要调用构造器函数   这里面是形参,与那边的 可以不同名,与上面的同名就行

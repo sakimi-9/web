@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./promise-all.js"></script>
+</head>
+
+<body>
+    <script>
+        //创建三个promise对象 
+        //要先new一个Promise对象,然后才能直接调用resolve,reject,all等等方法
+        let p1 = new Promise((resolve, reject) => {
+            resolve('Cursor nb!');
+        });
+        let p2 = Promise.resolve('success');
+        let p3 = Promise.resolve('is ok');
+
+
+
+        //all方法 接收一个数组,数组中可以是promise对象,也可以是普通值,返回一个promise对象
+        // 如果数组中所有promise对象都成功,则返回的值是成功的对象数组,如果数组中有一个promise对象失败,则返回的值是失败的对象
+        let result = Promise.all([p1, p2, p3]);
+        //race方法 接收一个数组,数组中可以是promise对象,也可以是普通值,返回一个promise对象      
+        // 返回的对象是数组中第一个成功或失败的promise对象,值是成功或失败的结果
+        let result1 = Promise.race([p1, p2, p3]);
+        console.log(result);
+        console.log(result1);
+
+        //then方法是异步执行的  
+        //promise写出来后,里面的函数体会立即执行,then方法会异步执行,所以输出顺序是111,333,ok,222
+        let p4 = new Promise((resolve, reject) => {
+            resolve('ok');
+            console.log(111);
+        });
+        p4.then(value => {
+            console.log(value);
+            console.log(222);
+
+        });
+        console.log(333);
+
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
