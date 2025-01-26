@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h6 {
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>命令行工具</h3>
+    <p>作用:通过命令行工具操控各盘符下的文件与文件夹 </p>
+    <p>种类:cmd 与 powershell</p>
+
+    <table border="2px">
+        <tr>
+            <td>cmd的常用命令</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>进入cmd</td>
+            <td>win: 快捷键win+r 输入cmd <br> mac: 快捷键commamd+空格 输入terminal</td>
+        </tr>
+        <tr>
+            <td>切换盘符 </td>
+            <td>盘符:</td>
+        </tr>
+        <tr>
+            <td>显示该目录下的文件夹与文件</td>
+            <td>win: dir <br>mac: ls</td>
+        </tr>
+        <tr>
+            <td>清除显示的命令记录 </td>
+            <td>win: cls <br>mac: clear</td>
+        </tr>
+        <tr>
+            <td>进入文件夹 </td>
+            <td>cd 文件夹名称</td>
+        </tr>
+        <tr>
+            <td>文件夹名称名称补全 </td>
+            <td>快捷键tab | 再tab一次切换到下一个拥有相同字符的名称</td>
+        </tr>
+        <tr>
+            <td>返回到上级目录 </td>
+            <td>cd.. (或者 cd../)</td>
+        </tr>
+        <tr>
+            <td>在目录下新建文件夹 </td>
+            <td>mkdir 新建文件夹名称</td>
+        </tr>
+        <tr>
+            <td>切换输入过的历史命令 </td>
+            <td>上下按键</td>
+        </tr>
+        <tr>
+            <td>-----------------</td>
+            <td>-----------------</td>
+        </tr>
+        <tr>
+            <td>powershell的常用命令</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>进入powershell </td>
+            <td>在文件目录下 shift+鼠标右击 或者 win中搜索powershell</td>
+        </tr>
+        <tr>
+            <td> 初阶命令与cmd的一样</td>
+            <td></td>
+        </tr>
+        <span>性能优化 防抖·节流</span><button id="btn1">防抖</button><button id="btn2">节流</button>
+        <h6>2</h6>
+        <h6>2</h6>
+        <h6>2</h6>
+        <h6>2</h6>
+        <h6>2</h6>
+        <h6>2</h6>
+        <h6>2</h6>
+        <h6>2</h6>
+    </table>
+    <script>
+
+        //debounce
+        function debounce(fn, delay) {
+            var timer = null;
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(fn, delay);
+            }
+        }
+        //throttle
+        function throttle(fn, delay) {
+            var valid = true;
+            return function () {
+                if (!valid) {
+                    return false;
+                }
+                valid = false;
+                setTimeout(function () {
+                    fn();
+                    valid = true;
+                }, delay)
+            }
+        }
+
+        function scroll() {
+            console.log(new Date(Date.now()));
+            console.log(document.documentElement.scrollTop);
+        }
+
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        btn1.onclick = function () {
+            window.onscroll = debounce(scroll, 300);
+        }
+        btn2.onclick = function () {
+            window.onscroll = throttle(scroll, 2000);
+        }
+
+        // var n = 0;
+        // btn.ondblclick = function (w,d,t) {
+        //     n++; console.log(n);
+        //     return function () {
+        //         if (n <= 10) {
+        //             if (n % 2 == 0) {
+        //                 w = d;
+        //             } else {
+        //                 w = f;
+        //             }
+        //         } else {
+        //             n = 0;
+        //         }
+
+        //     }
+        // }
+        // ondblclick   //这种复杂的切换模式暂时弄不成
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+<h3>fs介绍及文件交互</h3>
+<table>
+    <tr>
+        <td>fs 模块
+        </td>
+        <td>fs 全称为 file system ，称之为 文件系统 ，是 Node.js 中的 内置模块 ，可以对计算机中的磁盘进行操
+            作。用js实现对磁盘文件的交互</td>
+    </tr>
+    <tr>
+        <td>文件交互</td>
+        <td>
+            <ol>
+                <li>文件写入</li>
+                <li>文件读取</li>
+                <li>文件移动与重命名</li>
+                <li>文件删除</li>
+                <li>文件夹操作</li>
+                <li>查看资源状态</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+<h3>文件写入</h3>
+<table><i><b>文件写入 就是将 数据 保存到 文件 中，我们可以使用如下几个方法来实现该效果</b></i>
+    <tr>
+        <td>writeFile 异步写入</td>
+        <td>语法格式: fs.writeFile(file, data[, options], callback) <br><br>
+            <ol> 参数说明:
+                <li>file 文件名</li>
+                <li>data 待写入的数据</li>
+                <li>options 选项设置 （可选）</li>
+                <li>callback 回调函数设置</li>
+            </ol>
+            返回值: undefined
+        </td>
+    </tr>
+    <tr>
+        <td>writeFileSync 同步写入</td>
+        <td>比异步写入只少了回调函数，其他 一样 <br>
+            可选配置 {flag:'a'}时，也可以进行追加操作
+        </td>
+        <td>Node.js 中的磁盘操作是由其他 线程 完成的，结果的处理有两种模式:<br><br>
+            同步处理 JavaScript 主线程 会等待 其他线程的执行结果，然后再继续执行主线程的代码，
+            效率较低<br><br>
+            异步处理 JavaScript 主线程 不会等待 其他线程的执行结果，直接执行后续的主线程代码，
+            效率较好</td>
+    </tr>
+    <tr>
+        <td>appendFile / appendFileSync 追加写入</td>
+        <td>fs.appendFile跟异步写入的语法及格式一样<br>
+            fs.appendFileSync跟同步写入的语法及格式一样
+        </td>
+    </tr>
+    <tr>
+        <td>createWriteStream 流式写入</td>
+        <td>语法: fs.createWriteStream(path[, options]) <br>
+            参数说明:<br>
+            path 文件路径<br>
+            options 选项配置（ 可选 ）<br>
+            返回值: Object <br><br>
+            使用:<br>
+            <ol>
+                <li>导入fs模块 var fs = require('fs')</li>
+                <li>创建写入流通道 var ws = fs.createWriteStream('path')</li>
+                <li>用write方法不断写入 ws.write（要写入的内容）</li>
+                <li>全部写入完成后自动关闭通道 ws.close()</li>
+                <li>所以用close方法关闭通道，可选</li>
+            </ol>
+        </td>
+        <td>程序打开一个文件是需要消耗资源的 ，流式写入可以减少打开关闭文件的次数。<br>
+            流式写入方式适用于 大文件写入或者频繁写入 的场景, writeFile 适合于 写入频率较低的场景</td>
+    </tr>
+</table>
+<h5>文件写入的场景</h5>
+<table>
+    <tr>
+        <td>写入文件的场景<br>
+            文件写入 在计算机中是一个非常常见的操作，下面的场景都用到了文件写入</td>
+        <td>
+            <ul>
+                <li>下载文件</li>
+                <li>安装软件</li>
+                <li> 保存程序日志，如 Git</li>
+                <li>编辑器保存文件</li>
+                <li>视频录制</li>
+            </ul>当 需要持久化保存数据 的时候，应该想到 文件写入
+        </td>
+        </td>
+    </tr>
+</table>
+<h3>文件读取</h3>
+<table>文件读取顾名思义，就是通过程序从文件中取出其中的数据，我们可以使用如下几种方式:
+    <tr>
+        <td>readFile 异步读取</td>
+        <td>语法: fs.readFile(path[, options], callback) <br>
+            参数说明:<br>
+            path 文件路径<br>
+            options 选项配置<br>
+            callback 回调函数，异步读取会返回两个参数 读取成功的undefined(err) 和 文件数据(data) [toString()对data(Buffer)进行字符串转换]<br>
+            返回值: undefined</td>
+    </tr>
+    <tr>
+        <td>readFileSync 同步读取</td>
+        <td>语法格式比异步读取少 回调函数<br>
+            返回值: string | Buffer 意思是直接返回data
+        </td>
+    </tr>
+    <tr>
+        <td>createReadStream 流式读取</td>
+        <td>语法格式跟同步读取一样<br>
+            返回值: Object 所以 <br>
+            对它进行事件绑定rs.on() data 才能读取数据 <br>
+            比如 <code>rs.on('data',
+            chunk => { //chunk "块" 可以改成其他的 chunk是官方给的  <br>
+            console.log(chunk); //data(Buffer形式)传入chunk,流式读入每一个块为65536字节 64kb ,小于64kb就只会输出一个chunk  <br>
+            console.log(chunk.length);//数据的字节长度  <br>
+            console.log(chunk.toString());//数据转化成字符串  <br>
+            });</code>
+            <br><br>
+            事件绑定 end 可选 用于读取成功提示 <br>
+            <code>
+            //事件绑定 end 可选 用于读取成功提示  <br>
+            rs.on('end', () => { console.log('读取成功'); })</code>
+        </td>
+    </tr>
+</table>
+<h5>文件读取场景</h5>
+<table>
+    <tr>
+        <td>读取文件应用场景</td>
+        <td>
+            电脑开机<br>
+            程序运行<br>
+            编辑器打开文件<br>
+            查看图片<br>
+            播放视频<br>
+            播放音乐<br>
+            Git 查看日志<br>
+            上传文件<br>
+            查看聊天记录</td>
+    </tr>
+</table>
+<h3>文件（改变路径）移动与重命名</h3>
+<table>
+    <tr><strong>在 Node.js 中，我们可以使用 rename 或 renameSync 来移动或重命名 文件或文件夹<br>语法:</strong>
+        <td>
+            异步改变路径 fs.rename(oldPath, newPath, callback)
+        </td>
+        <td>
+            <ol>参数说明:
+                <li>oldPath 文件当前的路径</li>
+                <li>newPath 文件新的路径</li>
+                <li>callback 回调函数</li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <td>同步改变路径 fs.renameSync(oldPath, newPath)</td>
+        <td>比异步改变路径少个 回调函数</td>
+    </tr>
+</table>
+<h3>文件删除</h3>
+<table>
+    <tr><b>在 Node.js 中，我们可以使用 unlink 或 unlinkSync 来删除文件<br>
+            语法:</b>
+        <td>
+            异步删除<br>
+            fs.unlink(path, callback) <br>
+            fs.rm(path, callback)
+        </td>
+        <td>参数说明:<br><br>
+            path 文件路径
+            callback 操作后的回调</td>
+    </tr>
+    <tr>
+        <td>同步删除 fs.unlinkSync(path) <br>
+            fs.rmSync(path)</td>
+        <td>跟异步删除比，没有callback回调函数
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>关于rm remove移除</td>
+        <td>rm是js新引入的类似数据库操作的删除指令<br><br>
+            rm删除文件是上面那些格式，实际上rm还可以删除文件夹<br><br>
+            格式:fs.rm('path'[,options],callback),<br><br>
+            参数里面是有options可选配置的
+        </td>
+    </tr>
+</table>
+<h3>文件夹操作</h3>
+<strong>借助 Node.js 的能力，我们可以对文件夹进行 创建 、 读取 、 删除 等操作</strong>
+<table>
+    <tr>
+        <td>mkdir / mkdirSync 创建文件夹 <br>
+            make 制作 directory 文件夹
+        </td>
+        <td>语法格式: <br>
+            fs.mkdir('path'[,options],callback) <br>
+            fs.mkdirSync('path'[,options]) <br>
+            同步的 比 异步的少callback回调函数<br><br><br>
+            要递归创建文件夹时 将options设置为 {recursive:true}
+        </td>
+    </tr>
+    <tr>
+        <td>readdir / readdirSync 读取文件夹</td>
+        <td>格式跟mkdir的一样，<br>
+            不同的是，readdir的callback有两个参数<br>
+            err和data(Array形式展示目录) <br><br>
+            readdirSync相当于直接返回data(Array)</td>
+    </tr>
+    <tr>
+        <td>rmdir / rmdirSync 删除文件夹</td>
+        <td>格式跟mkdir的一样<br><br>
+            要递归删除文件夹时（删除整个文件夹及里面的文件夹和内容）<br>
+            options设置为 {recursive:true}
+        </td>
+    </tr>
+    <tr>
+        <td>推荐使用 rm / rmSync 删除</td>
+        <td>格式跟mkdir的一样<br><br>
+            要递归删除文件夹时<br>
+            options设置为 {recursive:true}
+        </td>
+    </tr>
+</table>
+<h3>查看资源状态</h3>
+<table><b>在 Node.js 中，我们可以使用 stat 或 statSync 来查看资源的详细信息
+        语法：<br></b>
+    <tr>
+        <td>status 状态<br><br>
+            fs.stat('path'[,options],callback) <br><br>
+            fs.statSync('path'[,options])
+        </td>
+        <td>
+            <ol>参数说明：
+                <li>path 文件夹路径</li>
+                <li>options 选项配置（ 可选 ）</li>
+                <li>callback 操作后的回调</li>
+            </ol><br><br>
+            fs.stat的callback有两个参数 err和data(stats的object) <br><br>
+        </td>
+    <tr>
+        <td>stats的object里重要的信息</td>
+        <td>
+            <ul>
+                <li>size 文件大小 （单位Byte）</li>
+                <li>birthtime 文件创建时间</li>
+                <li>atime 文件运行时间</li>
+                <li>mtime 文件修改时间</li>
+                <li>ctime 文件最后修改状态时间</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>对(err,data)=>{}里的相关操作</td>
+        <td>
+            <ul>
+                <li>data.isDirectory() 判断是否为文件夹</li>
+                <li>data.isFile() 判断是否为文件</li>
+            </ul>
+        </td>
+    </tr>
+    </tr>
+</table>
+<h3>fs的相对路径与__dirname</h3>
+<table>
+    <tr>
+        <td>html与fs模块的相对路径参照对象不同</td>
+        <td>html的相对路径参照对象是 当前文件路径 ./文件名.扩展名 这是创建当前文件的同级文件<br><br>
+            fs模块的相对路径参照对象是 命令行工作路径 命令行工作路径 ... ../代码> 时
+            ./文件名.扩展名 这是创建在 代码/子级下的同级文件<br><br>
+            相对路径中所谓的 当前目录 ，指的是 命令行的工作目录 ，而并非是文件的所在目录<br>
+            所以当命令行的工作目录与文件所在目录不一致时，会出现一些 BUG
+        </td>
+    </tr>
+    <tr>
+        <td>__dirname 保存的是 当前文件所在目录的绝对路径</td>
+        <td>__dirname+'/文件.扩展名' 拼接为 当前文件的绝对路径<br>
+            这样可以避免因为命令行工作目录没有切换导致的相对路径bug <br><br>
+            使用 fs 模块的时候，尽量使用 __dirname 将路径转化为绝对路径，这样可以避免相对路径产生的
+            Bug</td>
+    </tr>
+</table>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>变量</h3>
+    <p><b>具象化解释:</b>
+        <ul type="none">
+            <li>变量本质:固定空间</li>
+            <li>变量名:空间名称,用于通过名称操作空间</li>
+            <li>数据:空间中变化的量</li>
+        </ul>
+        <p>
+            变量提升:js引擎的工作方式是,先解析代码,获取所有被声明的变量(此时还没有赋值的),再一行一行的运行。<br>(所有变量声明的语句【此时还没有赋值】会被提升到代码的顶部)<br>
+            <br><br>以下 情况不会报错,值为undefined(未定义的,未知的)<br><br>
+            console.log(n);<br>
+            var n = 5 ;  <br><br>
+            实际情况为:<br>
+            var n;<br>
+            console.log(n);<br>
+            n = 5 ;  <br>
+
+
+        </p>
+        var 声明变量的关键字<br><br>
+        var n = 5; 这是在声明变量<br><br>
+        n = 5; 变量重新赋值为 <br><br>
+        console.log() 输出语句(控制台.打印())<br><br>
+        console.log(n) ; 打印n的值
+
+        <script>
+            var n = 5;
+            console.log(n);
+        </script>
+
+    </p>
+</body>
+</html>

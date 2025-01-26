@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 文件上传时，是通过页面的表单上传的，上传的是文件，不是其他一般数据，
+     所以要设置 form 属性 enctype='multipart/form-data' (许多部分/表单-数据) ，到时候请求报文 请求体 里面就会把文件解析成 多部分的表单文件数据 ，这样才能让请求体正确承载 文件 -->
+    <form action="/portrait" method="post" enctype="multipart/form-data">
+        用户名: <input type="text" name="username"><br>
+        头像: <input type="file" name="portrait-file"><br>
+        <!-- 上传的是文件，所以要把上传文件用的表单控件，设置 type='file' -->
+        <hr>
+        <button type="submit">提交</button>
+    </form>
+</body>
+
+</html>

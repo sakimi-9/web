@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串新增方法</h3>
+    <table border="2px">
+        <tr>
+            <td>includes()</td>
+            <td>作用:判断字符串中是否存在指定字符串，存在返回true，不存在返回false</td>
+            <td>格式:字符串.includes（指定字符串，起始位置） <br>起始位置参数可省略</td>
+        </tr>
+        <tr>
+            <td>startsWith()</td>
+            <td>作用:判断字符串的头部是否存在指定字符串，存在返回true，不存在返回false</td>
+            <td>格式:字符串.startsWith（指定字符串，起始位置） <br>起始位置参数可省略 <br>头部判断从起始位置开始</td>
+        </tr>
+        <tr>
+            <td>endsWith()</td>
+            <td>作用:判断字符串的尾部是否存在指定字符串，存在返回true，不存在返回false</td>
+            <td>格式:字符串.endsWith（指定字符串，起始位置） <br>起始位置参数可省略</td>
+        </tr>
+        <tr>
+            <td>----------</td>
+            <td>----------</td>
+            <td>----------</td>
+        </tr>
+        <tr>
+            <td>repeat()</td>
+            <td>作用:将原字符串重复n次，返回一个新的字符串</td>
+            <td>格式:原字符串.repeat(打印次数) <br>重复0次输出空字符串</td>
+        </tr>
+        <tr>
+            <td>----------</td>
+            <td>----------</td>
+            <td>----------</td>
+        </tr>
+
+        <tr>
+            <td>padStart()</td>
+            <td>作用:用指定字符补全长度，从头部开始补</td>
+            <td>格式:字符串.padStart(length参数，指定字符) <br>补不了返回原字符串</td>
+        </tr>
+        <tr>
+            <td>padEnd()</td>
+            <td>作用:用指定字符补全长度，从尾部开始补</td>
+            <td>格式:字符串.padEnd(length参数，指定字符)</td>
+        </tr>
+        <tr>
+            <td>----------</td>
+            <td>----------</td>
+            <td>----------</td>
+        </tr>
+
+        <tr>
+            <td>trimStart（）</td>
+            <td>作用:清除字符串前部空格等</td>
+            <td>格式:字符串.trimStart()</td>
+        </tr>
+        <tr>
+            <td>trimEnd（）</td>
+            <td>作用:清除字符串后部空格等</td>
+            <td>格式:字符串.trimEnd()</td>
+        </tr>
+        <tr>
+            <td>----------</td>
+            <td>----------</td>
+            <td>----------</td>
+        </tr>
+        <tr>
+            <td>at（）</td>
+            <td>作用:返回指定位置的字符，支持负索引（倒数从-1开始）</td>
+            <td>格式:字符串.at(位置下标) <br>超出索引范围返回undefined</td>
+        </tr>
+    </table>
+    <script>
+        var str = "hello world";
+        console.log(str.includes("llo"));//true
+        console.log(str.startsWith("e", 1));//true
+        console.log(str.endsWith("l"));//false
+        console.log(str.repeat(3));//"hello worldhello worldhello world"
+        console.log(str.padStart(15, "a"));//"aaaahello world"
+        console.log(str.padEnd(str.length + 5, "a"));//"hello worldaaaa"
+        console.log(str.trimStart(), str.trimEnd());//两个原字符串
+        console.log(str.at(6));//w
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../p33-p40.HTTP协议/img_style.css">
+    <link rel="stylesheet" href="../../p32.path模块/table style.css">
+</head>
+
+<body>
+    <h3>Mongodb 笔记补充</h3>
+    <table>
+        <tr>
+            <td>部分细节所在地方</td>
+            <td>各部分细节笔记,在对应的代码注释中</td>
+        </tr>
+        <tr>
+            <td>mongodb服务</td>
+            <td>mongod是服务端程序 <br>
+                mongo是客户端程序</td>
+        </tr>
+        <tr>
+            <td>环境配置是为了,不用mongodb的bin目录作为工作目录,也可以在命令行里输入以下命令 <br></td>
+            <td>
+                <ol>
+                    <li>mongod <br>
+                        打开服务端</li>
+                    <br><span>新开一个命令行</span>
+                    <li>mongo <br>
+                        打开客户端,连接服务端,然后就可以在 客户端 输入命令 进行与服务端交互</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="../Mongodb压缩包/mongodb-windows-x86_64-5.0.14.zip">Mongodb压缩包@5.0.14</a></td>
+            <td>点击下载</td>
+        </tr>
+        <tr>
+            <td>也可以看看别人做的<a href="">md笔记</a></td>
+            <td>这个是将官方笔记pdf->md,方便阅读与复制</td>
+        </tr>
+        <tr>
+            <td>笔记 字段类型 那里</td>
+            <td>不要相信用户的输入 意思是 用户可能会输入非法数据,来破坏网站 所以要做好字段验证,检查好要录入的数据</td>
+        </tr>
+        <tr>
+            <td>笔记 条件控制 的 正则匹配 那里</td>
+            <td>有两种写法 <ul>
+                    <li>/ / <br>简洁写法 但 解析能力有限 常用于 非变量 的正则匹配 </li>
+                    <li>new RegExp( )<br>常规写法 常用于 变量 的正则匹配</li>
+                </ul><br>
+                正则匹配还有可选参数 <br>
+                比如: model.find({name: /a/i 或者 new RegExp('a','i') }) 表示 模糊查询 name中含有a(不区分大小写)的文档 </td>
+        </tr>
+        <tr>
+            <td>mongoose 的代码模块化</td>
+            <td>通常是把 代码分成 3个部分 <ul>
+                    <li>db文件夹 <br>存放 db.js(连接到数据库框架) 还有 confing.js(url配置) </li>
+                    <li>models文件夹 <br>存放 XXmodel.js(各集合封装对象) </li>
+                    <li>curd文件夹 <br>存放 app.js(增删改查的主文件-运行文件)</li>
+                </ul>
+                <br>如何导入导出的 具体看看<a href="../p136-p148.Mongoose/mongoose模块化/db(连接数据库框架)/db.js">这个及同级目录文件 </a>
+            </td>
+        </tr>
+        <tr>
+            <td>mongodb的图形化工具 Robo 3T </td>
+            <td><a href="../Robo 3T-1.4 安装包/robo3t-1.4.4-windows-x86_64-e6ac9ec5.exe">Robo 3T-1.4 安装包</a><br>
+                <br> mongodb 的客户端 <br> 增删改查 用 mongoose 代码程序 |
+                变换结果查询 用 图形化工具 (用命令行mongo比较麻烦)
+            </td>
+        </tr>
+    </table>
+    <script>
+        console.log(Date.now());
+        //Date.now(),获取现在的时间戳
+        console.log(new Date());
+        //new Date(),获取现在的具体时间 因为 没有传参数时 default-> new Date(Date.now())
+        let time_sjc = Date.now();
+        let time_jtsj = new Date(Date.now());
+        let flag;
+        if (time_sjc == time_jtsj) {
+            flag = true;
+        } else {
+            flag = false;
+        }
+        console.log(flag);
+
+        console.log(time_jtsj);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../p33-p40.HTTP协议/img_style.css">
+    <link rel="stylesheet" href="../p32.path模块/table style.css">
+</head>
+
+<body>
+    <h3>创建http服务</h3>
+    <table>
+        <tr>
+            <td>创建服务 流程</td>
+            <td>
+                <ol>
+                    <li>导入http模块 <br><br>
+                        const http = require('http');</li><br>
+                    <li>创建http服务对象 serve <br><br>
+                        var serve = http.createServer((request, response) => {<br><br>
+                        response.setHeader('content-type', 'text/html;charset=utf-8');//设置响应头<br><br>
+                        response.end('响应体的内容')//设置响应体<br><br>
+                        })</li><br>
+                    <li>设置serve的监听函数<br><br>
+                        serve.listen(9000, () => {<br><br>
+                        console.log('监听函数设置成功(nodejs的端口设置成功,启动服务···)');<br><br>
+                        })</li><br>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>测试</td>
+            <td>终端窗口对应工作目录 运行代码<br><br>
+                浏览器地址栏输入 指定域名或IP 常为localhost:nodejs端口号 或 127.0.0.1:nodejs端口号
+            </td>
+        </tr>
+        <tr>
+            <td>注意事项</td>
+            <td>
+                <ul>
+                    <li>命令行里对应工作目录 CTRL+C 停止服务<br><br>
+                        更新代码后 要更新服务结果,需要 停止服务 重新运行代码 才行
+                    </li><br>
+                    <li>端口占用 两种情况导致 <br><br>
+                        1.上一个服务没停,新建服务又用同一个端口 2.这个终端窗口的服务没停,新开终端窗口运行同一个（同一端口）服务<br><br><br><br>
+                        端口占用 解决办法 <br><br>
+                        1.新建服务用新的端口 2.关停当前端口的服务
+                    </li><br>
+                    <li>端口占用的特殊情况<br><br> 端口号早已被其他程序给占用了<br><br><br><br>
+                        如何解决<br><br>
+                        win键后 打开资源监视器,网络那一栏,打开侦听端口,根据那个端口号的PID,来资源管理器关停对应PID的服务</li><br>
+                    <li>HTTP 协议默认端口是 80 。HTTPS 协议的默认端口是 443,HTTP 服务开发常用端口有 3000,
+                        8080,8090,9000 等<br><br><br><br>
+                        服务的监听函数设置默认端口后,地址栏输入URL时,可以不用输入端口号,因为默认指向默认端口号<br><br>
+                        百度哔哩哔哩,使用的就是默认端口号,所以输入URL时不用输入端口号也行,这也方便用户搜索
+                    </li><br>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>对于创建http服务的代码逻辑或理解</td>
+            <td><a href="./创建http服务.js">详细过程</a><br><br>
+                创建服务对象 浏览器向服务端发送请求,这里服务端是nodejs,设置nodejs端口后,监听函数监听到则启动服务<br>
+                启动服务后,serve对象接收来自浏览器 请求报文的封装请求对象 和 来自自己服务端 响应报文的封装响应对象 <br>
+                callback函数体里设置请求封装对象和响应封装对象的相关数据<br><br><br>
+                设置服务对象的监听函数（端口号设置,箭头函数执行任务）,监听后启动服务<br>
+                这个任务是设置好监听函数运行代码就会执行 无论监听是否成功<br>
+                端口号是数值类型number,不是字符串string <br>
+            </td>
+        </tr>
+        <tr>
+            <td>http serve 示意图</td>
+            <td><img src="./http服务示意图.jpg" alt="无"></td>
+        </tr>
+        <tr>
+            <td>其他问题</td>
+            <td>响应体内容为中文时 出现乱码<br>
+                response.setHeader('content-type', 'text/html;charset=utf-8');//设置响应头 解决中文乱码<br>
+                头名‘content - type’ （内容 - 属性）,头值‘text / html; charset = utf - 8’(文本 / 文档; 字符设置 = utf - 8编码)
+                <br><br>上面设置了响应头 ：内容-属性：文本/html文档;字符设置=utf-8编码   <br>
+                  所以支持html的语法,可以识别《br》换行, 还得设置js的才能识别 \r\n换行<br>
+            </td>
+        </tr>
+        <tr>
+            <td>另外关于\r\n 换行</td>
+            <td>\r ：将当前位置移到本行开头。又叫回车,对应键盘上的return键<br>
+                \n：将当前位置移到下一行开头。又叫换行,newline <br>
+                Windows操作系统,\r\n表示（回车并）换行</td>
+        </tr>
+    </table>
+    <h3>浏览器查看http报文</h3>
+    <table>
+        <tr>
+            <td>通过浏览器查看http报文 要点击的步骤 F12 网络里</td>
+            <td><img src="./1浏览器查看http报文/1要查看的点击步骤.png" alt="无"></td>
+        </tr>
+        <tr>
+            <td>查看请求行请求头 请求标头里</td>
+            <td><img src="./1浏览器查看http报文/2查看请求行与请求头.png" alt="无"></td>
+        </tr>
+        <tr>
+            <td>查看请求体 负载(或载荷)里</td>
+            <td><img src="./1浏览器查看http报文/3查看请求体.png" alt="无"></td>
+        </tr>
+        <tr>
+            <td>查看URL查询字符参数（额外参数） 负载(或载荷)里 </td>
+            <td><img src="./1浏览器查看http报文/4查看查询字符串（额外参数）.png" alt="无"></td>
+        </tr>
+        <tr>
+            <td>查看响应行响应头 响应标头里</td>
+            <td><img src="./1浏览器查看http报文/5查看响应行与响应头.png" alt="无"></td>
+        </tr>
+        <tr>
+            <td>查看响应体 响应里</td>
+            <td><img src="./1浏览器查看http报文/6查看响应体.png" alt="无"></td>
+        </tr>
+        <tr>
+            <td>URL里如何插入查询字符串参数</td>
+            <td> <br>
+                <!-- search 搜索 -->
+                在端口号后面 使用/search?键值对(&为键值对之间的分割符) 也可以直接用/?号代替/search?<br><br>
+                <img src="./1浏览器查看http报文/7URL插入查询字符串参数.png" alt="无">
+                <img src="./1浏览器查看http报文/7字符串参数示例.png" alt="无">
+            </td>
+        </tr>
+        <tr>
+            <td>报文favicon.ico是什么</td>
+            <td>请求的是每个窗口标签左边的字体图标形式的logo <br><br>
+                <img src="./1浏览器查看http报文/8字体图标logo.png" alt="无">
+                <img src="./1浏览器查看http报文/8字体图标logo示例.png" alt="无">
+            </td>
+        </tr>
+    </table>
+    <h3>获取http请求报文</h3>
+    <table>
+        <tr>
+            <td></td>
+            <td>具体详细的代码及注释:<br><a href="./获取http请求报文/获取请求行相关.js">请求行相关</a><br>
+                <a href="./获取http请求报文/获取请求头和体.js">请求头和体</a><br><br>
+                <img src="./获取http请求报文 属性及方法.png" alt="无">
+            </td>
+        </tr>
+        <tr>
+            <td>注意事项： </td>
+            <td>
+                <ol>
+                    <li>request.url 只能获取路径以及查询字符串,无法获取 URL 中的域名以及协议的内容</li>
+                    <li> request.headers 将请求信息转化成一个对象,并将属性名都转化成了『小写』<br>
+                        双拼的属性名,都打上了引号,不然-无法被解析</li>
+                    <li>关于路径：如果访问网站的时候,只填写了 IP 地址或者是域名信息,此时请求的路径为 『 /』</li>
+                    <li>关于 favicon.ico：这个请求是属于浏览器自动发送的请求</li>
+                    <li>url.parse(request.url,true).query <br>
+                        //parse第二个参数为true query返回对象形式 注意对象形式时,log的输出连接符只能用,号,不能用+号 <br>
+                        //parse没填第二个参数 query返回字符串形式</li>
+                    <li>object形式query时返回指定键名的值 url.parse(request.url,true).query.键名 </li>
+                </ol>
+            </td>
+            <td>
+        <tr>新 获取url对象和query(searchParams)查询字符串参数<br>
+            searchParams 搜索参数 </tr>
+        <tr>新的方法 不用导入url模块 而是 对URL类传入参数进行实例化 <br>
+            <ol>
+                <li>完整url传入 <br>如： let url = new URL('http://localhost:9000/search?username=zs&password=123456')
+                </li>
+                <li>分段url传入(请求路径,'路径/的前部分（协议+域名+端口号）') <br>如：let url = new URL(request.url, 'http://localhost:9000')
+                </li>
+            </ol>
+            <br>
+            新的方法 query变成了searchParams 需要获取指定属性的值时要用get('属性名') <br>
+            如：console.log(url.searchParams.get('username'))
+        </tr>
+        </td>
+        </tr>
+    </table>
+    <h3>网页资源的基本加载过程</h3>
+    <table>
+        <tr>
+            <td>对以下图片理解资源加载过程,浏览器向服务端发送了几次请求来获取所有资源并显示<br><br>
+                <ol>
+                    <li>浏览器先向服务端发送请求获取nodejs里读入的html</li>
+                    <li>浏览器发现html里引入了图片·js·css各一次,再向服务端并行发送3次请求</li>
+                    <li>发送4次请求加上默认发送的favicon.ico请求 <br>
+                        与 让浏览器自动刷新以呈现最新样式的ws插件的请求,共有6次请求</li>
+                    <li>6次请求后,浏览器呈现页面</li>
+                </ol>
+            </td>
+            <td><img src="./网页资源基本加载过程解析.png" alt="无"></td>
+        </tr>
+    </table>
+    <h3>http 实现网页引入外部资源 </h3>
+    <strong>html里从外部引入了js·css文件,让nodejs都能解析,浏览器可以呈现</strong>
+    <table>
+        <tr>
+            <td>核心思路:根据不同pathname来响应对应的响应头与响应体</td>
+            <td><a href="./练习/实现网页引入外部资源/http实现网页引入外部资源.js">引入外部资源较少时 用if-else来对应响应的具体过程</a></td>
+        </tr>
+    </table>
+    <h3>静态资源服务</h3>
+    <table>
+        <tr>
+            <td>静态资源
+            </td>
+            <td>是指内容长时间不发生改变的资源,例如图片,视频,CSS文件,JS文件,HTML文件,字体文件等
+            </td>
+        </tr>
+        <tr>
+            <td>动态资源</td>
+            <td>是指内容经常更新的资源,例如百度首页,网易首页,京东搜索列表页面等</td>
+        </tr>
+    </table>
+    <h3>静态资源搭建</h3>
+    <strong>网站输入 对应的pathname就能访问对应的静态资源</strong>
+    <table>
+        <tr>
+            <td>核心思路</td>
+            <td>输入对应的pathname，浏览器再次请求，request改变，通过url获得对应的pathname <br>
+                filepath会变成对应的路径>也就实现了不同路径访问对应资源</td>
+        </tr>
+        <tr>
+            <td>静态资源搭建来实现网页引入多个外部资源，包括html引入js,css <br>
+            </td>
+            <td>特别注意这个！！！<br>
+                response.setHeader('content-type', 'text/html;charset=utf-8');<br>
+                这只是html文件路径对应的响应头，不是css与js对应的响应头 <br>
+                所以这个放读取fs.readFile(filepath, (err,data)=>{})外面会阻塞引入在html里css与js的报文响应 不匹配 对应不上 后面的无法加载</td>
+        </tr>
+    </table>
+    <h3>网页中的URL</h3>
+    <b>网页中的URL主要分为两大类：相对路径与绝对路径</b>
+    <table>
+        <tr><strong>绝对路径可靠性强，而且相对容易理解，在项目中运用较多</strong>
+            <td>形式</td>
+            <td>特点</td>
+        </tr>
+        <tr>
+            <td>http://atguigu.com/w eb</td>
+            <td>直接向目标资源发送请求，容易理解。网站的外链会用到此形式</td>
+        </tr>
+        <tr>
+            <td>//atguigu.com/web</td>
+            <td>与页面URL的协议拼接形成完整URL再发送请求。大型网站用的比较多<br>
+                拼接当前协议再访问，如果http成功访问https的,这是做了重定向，比如：京东的http://jd.com重定向为https://jd.com</td>
+        </tr>
+        <tr>
+            <td>/web</td>
+            <td>与页面URL的协议、主机名、端口拼接形成完整URL再发送请求。中小型网站常用。不怕改协议主机端口，方便维护</td>
+        </tr>
+    </table>
+    <table>
+        <tr><b>相对路径在发送请求时，需要与当前页面URL路径进行 计算 ，得到完整URL后，再发送请求<br>
+                学习阶段用的较多例如当前网页url为http://www.atguigu.com/course/h5.html
+            </b>
+            <td>形式</td>
+            <td>最终的URL</td>
+        </tr>
+        <tr>
+            <td>./css/app.css</td>
+            <td>http://www.atguigu.com/course/css/app.css</td>
+        </tr>
+        <tr>
+            <td>js/app.js</td>
+            <td>http://www.atguigu.com/course/js/app.js</td>
+        </tr>
+        <tr>
+            <td>../img/logo.png</td>
+            <td>http://www.atguigu.com/img/logo.png</td>
+        </tr>
+        <tr>
+            <td>../../mp4/show.mp4</td>
+            <td>http://www.atguigu.com/mp4/show.mp4 <br>
+                再怎么上级也突破不了，根路径/</td>
+        </tr>
+    </table>
+    <table>
+        <h5>网页中使用URL的场景小结</h5>
+        <tr>
+            <td>包括但不限于如下场景：</td>
+            <td>
+                <ol>
+                    <li>a标签href</li>
+                    <li>link标签href</li>
+                    <li>script标签src</li>
+                    <li>img标签src</li>
+                    <li>videoaudio标签src</li>
+                    <li>form中的action</li>
+                    <li>AJAX请求中的URL</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3>设置资源(mime)类型 </h3>
+    <b> response.setHeader里设置，媒体类型（通常称为MultipurposeInternetMailExtensions或MIME类型）是一种标准，<br>
+        用来表示文档、文件或字节流的性质和格式。<br>
+        HTTP服务可以设置响应头Content-Type来表明响应体的MIME类型，浏览器会根据该类型决定如何处理资源</b><br>
+    <strong>设不设置都可以(浏览器有mime嗅探器，识别文件扩展名来配置相应的mime)，设置了更加规范，并且支持中文要自己设置</strong>
+    <table>
+        <tr>
+            <td> mime类型结构：[type]/[subType]
+            </td>
+            <td>例如：text/html text/css image/jpeg image/png application/json</td>
+        </tr>
+        <tr>
+            <td>下面是常见文件对应的mime类型 常用的mime对象</td>
+            <td>let mime={<br>
+                html:'text/html;charset=utf-8',<br>
+                css:'text/css',<br>
+                js:'text/javascript',<br>
+                png:'image/png',<br>
+                jpg:'image/jpeg',<br>
+                gif:'image/gif',<br>
+                mp4:'video/mp4',<br>
+                mp3:'audio/mpeg',<br>
+                json:'application/json'<br>
+                }</td>
+        </tr>
+        <tr>
+            <td>对于未知的资源类型,不属于常见的mime对象里的</td>
+            <td>可以选择application/octet-stream类型<br>
+                浏览器在遇到该类型的响应时，会对响应体内容进行独立存储，也就是我们常见的下载效果<br>
+                <code>response.setHeader('content-type', 'application/octet-stream')</code>
+            </td>
+        </tr>
+    </table>
+    <h4>完善错误处理 遇到未知错误的err.code <br>
+        <a href="https://nodejs.org/docs/latest/api/errors.html">复制code ctrl+f查询nodejs网站</a>
+    </h4>
+    <h3>GTE与POST运用场景与区别 面试常考</h3>
+    <strong>面试问道注意措辞 主要 相对 这些词语</strong>
+    <table>
+        <tr>
+            <td>GET请求的情况：</td>
+            <td>
+                <ol>
+                    <li>在地址栏直接输入url访问</li>
+                    <li>点击a链接</li>
+                    <li>外部资源引入 <ul>
+                            <li>link标签引入css</li>
+                            <li>script标签引入js</li>
+                            <li>img标签引入图片</li>
+                        </ul>
+                    </li>
+                    <li>form标签中的method为get（不区分大小写）</li>
+                    <li>ajax中的get请求</li>
+                </ol>
+                地址栏直接访问，外部引入资源，连接，form表单和Ajax为get请求时，所以一般情况为get请求
+            </td>
+        </tr>
+        <tr>
+            <td>POST请求的情况：
+            </td>
+            <td>
+                <ol>
+                    <li>form标签中的method为post（不区分大小写）</li>
+                    <li>AJAX的post请求</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><b>GET和POST请求的区别</b></td>
+            <td>GET和POST是HTTP协议请求的两种方式。<ol>
+                    <li>作用上， GET 主要 用来获取数据，POST 主要 用来提交数据</li>
+                    <li>参数位置上，GET带参数请求是将参数缀放到URL之后，在地址栏中输入url访问网站就是GET请求，POST带参数请求是将参数放到请求体中</li>
+                    <li>安全性上，POST请求 相对 GET安全一些，因为GET请求在浏览器中参数会暴露在地址栏</li>
+                    <li>请求大小上，GET请求大小有限制，一般为2K，而POST请求则没有大小限制</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

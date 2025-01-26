@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Set的方法</h3>
+    <table border="2px">
+        <tr>
+            <td>var s = new Set()</td>
+            <td>方便易读 以下示例格式</td>
+        </tr>
+        <tr>
+            <td>add</td>
+            <td>给set中添加元素，元素可以是数组 字符串 数值等 <br>s.add(元素)</td>
+        </tr>
+        <tr>
+            <td>delete</td>
+            <td>返回值为布尔类型，删除set中指定元素，删除了返回true，没有删除任何一个元素返回false <br>s.delete(元素)</td>
+        </tr>
+        <tr>
+            <td>has</td>
+            <td>返回值为布尔类型,判断指定元素是否为set中的元素，是则true，否则false <br>s.has(元素)</td>
+        </tr>
+        <tr>
+            <td>clear</td>
+            <td>没有返回值，清空set里的所有元素 <br>s.clear()</td>
+        </tr>
+    </table>
+    <script>
+        var s = new Set();
+        var arr = [12, 23, 33, 22, 22, 33, 45, 9];
+        arr.forEach(x => s.add(x));
+        console.log(s.delete(9));
+        console.log(s.has(9));
+        s.clear();
+        console.log(s);
+
+    </script>
+</body>
+
+</html>

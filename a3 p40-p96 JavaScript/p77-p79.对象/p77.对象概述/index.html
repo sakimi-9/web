@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>对象概述</h3>
+    <table border="2px">
+        <tr>
+            <td>object的定义</td>
+            <td>一组键值对的集合，一种无序复合数据的集合</td>
+        </tr>
+        <tr>
+            <td>描述</td>
+            <td>键（名）又被称为属性（名）<br>对象可以储存各种各样的数据，包括函数（在对象中也被称为方法），也包括嵌套对象<br><br>存储函数时，函数名写在function（）前</td>
+        </tr>
+        <tr>
+            <td>声明对象的语法格式</td>
+            <td>var 对象名 = {
+                属性:值，
+                属性（函数名）:function（）{函数体}，
+                属性（对象名）:{键值对集合，}
+                }</td>
+        </tr>
+        <tr>
+            <td>对象内属性读取方式</td>
+            <td>只写对象名，键值对会被全部读取<br><br>对象名.属性名<br>对象名.属性名（函数名时）<i>() </i><br>记得写括号<br><br>调用对象中的函数时，后面不写括号的话，会把:后的全部显示
+            </td>
+        </tr>
+        <tr>
+            <td>链式调用</td>
+            <td>调用对象内嵌套对象的属性，称作链式调用 <br><br>格式:<br>对象名.嵌套的对象名.其中的属性名</td>
+        </tr>
+    </table>
+    <script>
+        var 张三 = {
+            性别: "男",
+            工资: 4999,
+            资产: {
+                房子: null,
+                车子: undefined,
+            },
+            人生名言: function () {
+                console.log("每天进步一点点！");
+            },
+            领导: false
+        };
+        console.log(张三.资产.房子, 张三.人生名言());//链式调用  方法调用（觉得加括号）
+    </script>
+</body>
+
+</html>

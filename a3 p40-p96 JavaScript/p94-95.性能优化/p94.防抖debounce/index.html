@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h6 {
+            height: 300px;
+            width: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>防抖 debounce</h3>
+    <table border="2px">
+        <tr>
+            <td><b>作用:</b></td>
+            <td>用于优化事件处理函数的执行时机，以提高应用程序的性能和用户体验。</td>
+        </tr>
+        <tr>
+            <td><b>描述:</b></td>
+            <td>防抖策略的工作原理如下:当一个函数被频繁触发,防抖技术会推迟该函数的实际执行，直至<b>触发事件后的预定时间间隔内没有再次发生触发才触发执行</b>
+                。如果在等待期间又有新的触发发生，计时器会被重置，从而再度推迟函数的执行。</td>
+        </tr>
+        <tr>
+            <td><b>举例:</b></td>
+            <td>比如由于用户快速连续点击按钮、在输入框中快速输入文字等，防抖处理后，即使用户非常快速地连续触发事件，被防抖处理的函数也只会被执行一次，而且是在所有触发操作结束之后的一段静默期内执行</td>
+        </tr>
+        <tr>
+            <td>主要应用场景:</td>
+            <td>包括搜索框的输入建议、窗口大小调整事件（resize）、滚动事件处理等，这些场景下频繁执行函数可能会导致不必要的计算负担或者网络请求，通过防抖可以有效减少这类不必要的执行，提升效率和响应速度。</td>
+        </tr>
+        <tr>
+            <td><b>格式:</b> </td>
+            <td>function debounce(fn,delay){
+                var timer = null;
+                return function () {
+                if (timer) {
+                clearTimeout(timer);
+                }
+                timer = setTimeout(fn,delay)
+                }
+
+                }
+                function 原始事件函数名（）{事件处理}
+
+                元素节点.事件类型 = 防抖函数debounce(高频率触发的原始事件函数，预设时间间隔) </td>
+        </tr>
+    </table>
+    <h4>事件类型之滚动条事件</h4>
+    <p><b>scroll</b>滚动条滚动触发 <br>格式:Dom0级 <b>window</b>.onscroll = function（）{事件处理} <br><br>返回窗口滚动条滚动后距上/距左边距
+        document.documentElement.scrollTop/scrollleft</p>
+    <h6>3</h6>
+    <h6>3</h6>
+    <h6>3</h6>
+    <h6>3</h6>
+    <h6>3</h6>
+    <h6>3</h6>
+    <h6>3</h6>
+    <h6>3</h6>
+    <script>
+        // function debounce(fn, delay) {
+        //     var timer = null;
+        //     return function () {       //利用闭包 调用外部函数返回
+        //         if (timer) {            //将时间间隔内多次触发的定时器重置  
+        //             clearTimeout(timer);
+        //         }
+        //         timer = setTimeout(fn, delay)  //间隔内不再触发才执行
+        //     }
+
+        // };
+        // window.onscroll = debounce(scroll, 200)  //窗口滚动条滚动触发 防抖处理后的事件
+        // function scroll() {
+        //     console.log(document.documentElement.scrollTop);
+        // }
+
+        function debounce(fn, delay) {
+            var timer = null;
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(fn, delay);
+            }
+        }
+
+        function scroll() {
+            console.log(document.documentElement.scrollTop);
+            console.log(document.documentElement.scrollLeft);
+            console.log(new Date(Date.now()));
+        }
+        window.onscroll = debounce(scroll, 300);
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组扩展-扩展运算符</h3>
+    <table border="2px">
+        <tr>
+            <td>... 描述</td>
+            <td>ES6新增的数组运算符，可以把数组里的元素全部拎出来，拎成一行，元素之间空格隔开 | 相当于把数组的方括号和逗号去了</td>
+        </tr>
+        <tr>
+            <td>... 格式</td>
+            <td>...array 或者 ...[元素集合]</td>
+        </tr>
+        <tr>
+            <td>... 用处</td>
+            <td>数组里的元素全部拎出来后的形式，可以适应更多的方法，方便对数组简洁的进一步处理</td>
+        </tr>
+        <tr>
+            <td>... 用法示例</td>
+            <td>找出数组中最大的元素:<br>Math.max(...array) <br><br>不调用方法进行数组合并:<br>[...arr1,...arr2]</td>
+        </tr>
+    </table>
+    <script>
+        var arr = [1, 2, 3, 4, 5];
+        console.log(...arr);//数组元素全拎出来，空格隔开，一行排列     去数组里的符号
+        console.log([...arr, 6, 7, 8, [9, 10]]);//数组合并
+        console.log(Math.max(...arr));//返回数组中最大的元素
+        function arguments() {
+            console.log(arguments); //arguments读到没有写参数入口函数的传入参数
+        }
+        arguments(1, 2, 34, 5)
+    </script>
+</body>
+
+</html>

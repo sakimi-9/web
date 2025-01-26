@@ -1,0 +1,1 @@
+writeFileSync 是 同步写入

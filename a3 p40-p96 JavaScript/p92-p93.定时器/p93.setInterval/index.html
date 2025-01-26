@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h3>定时器之setInterval</h3>
+    <p>setInterval（）与setTimeout()的用法完全一致 <br><br> 唯一的区别是:setInterval() 是将第一个参数的代码块或调用函数 每隔多少时间执行一次 ，不设条件清除，则会无限执行
+        <br><br>clearInterval():清除定时器setInterval
+    </p>
+    <div></div>
+    <script>
+        var i = 0;
+        setInterval(function () {     //执行每秒i+1并打印
+            i++;
+            if (i <= 10) {
+                console.log(i);
+            } else {                  //i=10 时 清除定时器
+                clearInterval();    //不写参数 放在setInterval（）中，表示清除当前定时器setInterval（）
+            }
+        }, 1000);
+
+        var t_si = setInterval(function () {
+            console.log(new Date(Date.now()));
+        }, 1000);                       //打印每秒的当前具体时间
+        setTimeout(function () {        //5秒后执行函数代码块{清除定时器setInterval(t_si)}
+            clearInterval(t_si);
+        }, 5000);
+    </script>
+</body>
+
+</html>

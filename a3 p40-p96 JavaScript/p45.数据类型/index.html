@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数据类型</h3>
+    <strong>共有(三类)六种:</strong>
+    <ol>
+        <b>基本类型(原始类型)</b>
+        <li>数值:数字</li>
+        <li>字符串:单/双引号里的值</li>
+        <li>布尔:false与true</li>
+
+        <b>复合类型(引用类型/合成类型)</b>
+        <li>对象(object):由基本类型符合而成 <br>变量名={基本类型:值,基本类型:值,}; <br><i>注意中间用的是逗号</i></li>
+
+        <b>特殊值</b>
+        <li>null</li>
+        <li>undefined</li>
+    </ol>
+    <span>es6新增symbol和bigint</span>
+    <script>
+        // 数值
+        var m = 6;
+        // 字符串
+        var m1 = '文档';
+        // 布尔
+        var m2 = false;
+        m2 = true;
+        // 复合类型,特殊值
+        var m3 = {
+            m3_姓名:"张三",
+            m3_结婚:false,
+            m3_存款:null,
+            m3_工资:undefined,
+        };
+        console.log('m为'+m);
+        alert('m1为'+m1);
+        console.log(m3);
+// 复合类型 对象要在页面输出呈现出来,要先进行格式转换才行
+    </script>
+</body>
+
+</html>

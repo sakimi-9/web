@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>函数简介</h3>
+    <table border="2px">
+        <tr>
+            <td>定义</td>
+            <td>一段可以反复调用的代码块</td>
+        </tr>
+        <tr>
+            <td>函数的声明</td>
+            <td>function 函数名(参数){函数体;return 返回值 }
+                <br><br>返回值属于函数体中最后一条语句,返回值这条语句后不要写语句了，因为写了不会被执行<br><br>参数不写也可以，代价是函数不好灵活调用了
+                <br>声明函数时写完函数体后在参数处写好指定参数，方便调用时给指定参数分别赋值</td>
+        </tr>
+        <tr>
+            <td>函数的调用</td>
+            <td>调用格式: 函数名（） ; <br><br>说明:函数的声明有两个接口，参数作为入口，传入参数数据，（运行函数体），返回值作为出口，传出运行结果</td>
+        </tr>
+        <tr>
+            <td>函数名提升</td>
+            <td>js引擎视函数名同变量名，运行代码时会将函数声明提升至代码头部，声明中的函数体会被运行 <br><br>变量名提升，声明会被提升至头部，但此时不会被赋值，而函数名提升，其中的函数体会被运行</td>
+        </tr>
+    </table>
+    <script>
+        //变量名提升  声明提升，但此时不被赋值
+        console.log(num);//undefined
+        var num = 5;
+
+        // 函数的声明
+        function kjb() {
+            for (var a = 1; a <= 9; a++) {
+                document.write("<br>");
+                for (var b = 1; b <= a; b++) {
+                    document.write(" " + a + "*" + b + "=" + a * b);
+                }
+            }
+        }//打印99乘法口诀表的函数
+        kjb();//调用 函数
+        function sf(x, y) {
+            z = (x + y) * y / 2;
+            return z;
+        }//计算x至y的和 的函数
+        console.log("输出x至y的和" + sf(1, 100));//给指定参数分别赋值 然后调用函数
+
+        //计算长方形面积 的函数
+        function cfxs(x, y) {
+            z = x * y;
+            return z;
+        }
+        console.log("长29，宽78，此长方形面积为:" + cfxs(29, 78));
+    </script>
+</body>
+
+</html>

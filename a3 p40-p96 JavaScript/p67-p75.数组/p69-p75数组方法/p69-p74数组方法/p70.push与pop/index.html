@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组方法 push与pop</h3>
+    <table border="2px">
+        <tr>
+            <b>push与pop,主要用于对数组尾部元素的添加与删除，都会改变原数组</b>
+            <td>push</td>
+            <td>作用:向原数组末尾添加一个或多个元素，并返回新数组的<strong>长度</strong> <br><br>格式:arr.push(添加的元素)
+                <br><br>push()括号里不写添加的元素，此时直接返回数组长度 <br>arr.length === arr.push()</td>
+        </tr>
+        <tr>
+            <td>pop</td>
+            <td>作用:把原数组最末尾的一个元素删除，并返回删除的<strong>元素</strong> <br><br>格式:arr.pop()
+                <br><br>注意，这个写出来一次就会删除一次原数组而push（）括号里不写东西的话就不会改变原数组</td>
+        </tr>
+    </table>
+    <script>
+        // push 与 pop 向原数组末尾添加与删除元素
+        var arr = [1, 2, 3, 4, 5];
+        arr.push(6, 7);//arr = [1,2,3,4,5,6,7]  返回 7
+        console.log('新数组的长度' + arr.push());
+        if (arr.length === arr.push()) {
+            console.log("true");
+        }//push()里不写添加的元素时 ，与length作用相同
+
+        // pop 删除原数组末端的元素 返回删除的元素
+        arr.pop();//返回7
+        console.log("删除的是" + arr.pop());//返回6
+        console.log("此时的新数组为" + arr);
+    </script>
+</body>
+
+</html>

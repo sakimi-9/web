@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>布尔运算符</h3>
+    <table border="2px">
+        <tr>
+            <td>! 取反运算符</td>
+            <td>对变量进行取反 | 布尔值取反很简单,非布尔值取反 只要记住以下6个取反的结果为true,其他都为false<br><br>null undefined NaN 0 false 空字符串('')</td>
+        </tr>
+        <tr>
+            <td>&&且运算符</td>
+            <td>全真才真,一假则假 |有一个假的,之后的都不用看了</td>
+        </tr>
+        <tr>
+            <td>||或运算符</td>
+            <td>全假才假,一真则真 |有一个真的就为true</td>
+        </tr>
+    </table>
+    <script>
+        // 只有以下六个取反为true 其他都为false
+        document.write(!undefined);
+        document.write(!NaN);
+        document.write(!0);
+        document.write(!'');
+        document.write(!null);
+        document.write(!false);
+
+        // &&
+        document.write(3 > 4 && 3 > 0);
+        document.write(58 >= 23 && 23 <= 29);
+
+        // ||
+        document.write(3 !== '3' || 4 === '4');
+    </script>
+</body>
+
+</html>

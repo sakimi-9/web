@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table,
+    tr,
+    td {
+      text-align: left;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>Vuex状态管理</h3>
+  <table>
+    <tr>
+      <td>状态管理 描述</td>
+      <td>状态管理是通过store仓库直接把数据分发给要使用该数据的组件，不受父子级关系的限制<br>
+        vuex也是官方的工具，但不是原生自带的，需要在create vue项目时集成，或者用命令安装vuex <br>
+        安装vuex命令:cnpm install --save vuex
+      </td>
+    </tr>
+    <tr>
+      <td>步骤（和vue router都是官方工具，步骤几乎一样）</td>
+      <td>
+        <ol>
+          <li>配置vuex状态管理</li>
+          <li>引入与挂载</li>
+          <li>组件读取</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td>配置vuex状态管理</td>
+      <td>在src中创建一个store的文件夹，里面存放vuex的状态管理配置文件index.js <br>
+        格式: <br>
+        import {createStore} from 'vuex'; //引入vuex工具 createStore创建仓库函数
+        export default createStore({ //导出 声明store仓库=createStore创建仓库函数
+        state:{ //对象参数里 用state对象存储仓库里的变量数据
+        变量数据
+        }
+        })
+
+      </td>
+    </tr>
+    <tr>
+      <td>引入与挂载</td>
+      <td>在main.js主入口引入与挂载store仓库 <br>
+        格式:<br>
+        import store from './store' //引入仓库
+        const app = createApp(App) //router和store都有时这么做更加清晰
+        app.use(store) //挂载仓库 明确使用vuex中的store仓库功能
+        app.use(router)
+        app.mount('#app')
+
+      </td>
+    </tr>
+    <tr>
+      <td>组件读取</td>
+      <td>在组件中读取store仓库中的数据，有两种方式，返回值读取和快捷读取，读取次数少时用返回值读取，需要返回读取时用快捷读取<br>
+        返回值读取:<br>
+        组件中 $store.state.仓库中的变量 //返回仓库中state对象中该变量的值
+        <br>
+        快捷读取:<br>
+        import {mapState} from 'vuex'; //引入vuex中快捷读取方式工具
+        在data(){}同级下<br>
+        computed:{ //在computed计算对象中用mapState(['仓库中的变量'])快捷读取，在前面用扩展运算符...把这个数组里的变量拎出
+        ...mapState(['仓库中的变量']) //然后可以直接用那个变量名来读取值了,数组里面是字符串的形式
+        }
+      </td>
+    </tr>
+  </table>
+  <p>简单的状态管理，可以创建一个简单的响应式api对象，也可以来存取与分发数据变量<br>
+    创建一个store.js 文件<br>
+    import { reactive } from "vue"; //响应式api对象
+    export const store = reactive({
+    a:3
+    })
+    在组件的script setup里导入<br>
+    script setup标签里
+    import { store } from "../store/store.js"; //导入仓库对象
+
+    之后可以用store对象索引，store.变量来读取<br>
+    如 template 里 {{}}store.b
+
+  </p>
+</body>
+
+</html>

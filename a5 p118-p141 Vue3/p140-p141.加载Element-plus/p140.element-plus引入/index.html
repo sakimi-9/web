@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>element-plus引入</h3>
+    <a href="https://element-plus.org/zh-CN/">element-plus官网</a>
+    <table border="2px">
+        <tr>
+            <td>element-plus 描述</td>
+            <td>element-plus是饿了么基于vue向设计师和开发者提供的开源组件库，里面有各种组件的ui等等</td>
+        </tr>
+        <tr>
+            <td>第三方 命令行 安装</td>
+            <td>element-plus组件库属于第三方，需要命令行安装到项目根目录下<br>
+                命令:cnpm install element-plus --save
+            </td>
+        </tr>
+        <tr>
+            <td>完整引入</td>
+            <td>如果对打包后的文件大小不是很在乎，那么使用完整导入会更方便。 内存大，步骤少<br><br>
+                在总入口main.js里，进行引入与挂载<br>
+                import ElementPlus from 'element-plus'
+                import 'element-plus/dist/index.css'
+
+                app.use(ElementPlus)
+            </td>
+        </tr>
+        <tr>
+            <td>按需引入</td>
+            <td>对项目内存大小敏感则用按需引入，但需要安装额外的插件。 内存小，步骤多<br><br>
+                首先需要安装unplugin-vue-components 和 unplugin-auto-import这两款插件<br>
+                命令:cnpm install -D unplugin-vue-components unplugin-auto-import
+                在vue.config.js中 将里面的代码换成
+                //官网的是vite ts形式的暂时不知道如何处理来适配，现在只能用完整
+                引入
+                <!-- import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
+}) -->
+
+            </td>
+        </tr>
+        <tr>
+            <td>使用方式</td>
+            <td>在element-plus官网，找到想要的组件，点击查看源代码，对包括组件含class的div容器复制，<br>
+                因为已经对element-plus完整引入了，所以下面的js和css不用复制，只有有的组件的属性值需要用js定义一下</td>
+        </tr>
+    </table>
+</body>
+
+</html>

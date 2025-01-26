@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./public.css">
+    <style>
+        span {
+            color: aquamarine;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>CSS的引入方式:</h3>
+    <ol type="I">
+        <li>内联样式(行内样式):
+            <ol type="a">
+                <li>缺点:缺乏整体性和规划性(不能通过设置一个来让多个应用),维护成本极高</li>
+                <li>使用方式:在HTML元素标签里,以style="样式"的形式运用</li>
+                <li>比如:<p style="color: blue;font-size: 20px;">内联样式使用示例</p>
+                </li>
+            </ol>
+        </li>
+        <li>内部样式:
+            <ol type="a">
+                <li>
+                    <ul>
+                        <li>优点:单个页面的CSS代码具有整体性和规划性以及方便维护,方便当单个文档需要特殊的样式时使用</li>
+                        <li>缺点:当多个页面时容易混乱,又不好维护了</li>
+                    </ul>
+                </li>
+                <li>使用方式:CSS代码写在head里的style标签中</li>
+                <li>比如:<span>内部样式示例</span>
+                </li>
+            </ol>
+        </li>
+        <li>外部样式:
+            <ul type="square">
+                <li>优点:非常方便,写或改一次CSS代码可以多个页面同时调用生效</li>
+                <li>使用方式:在外部写好只含有CSS代码的.css文件,在要使用的页面里,head中用link标签来调用</li>
+                <li>比如:<em>外部样式示例</em></li>
+            </ul>
+        </li>
+    </ol>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>对象解构赋值</h3>
+    <table border="2px">
+        <tr>
+            <td>作用</td>
+            <td>对象中某个属性使用率非常高时，可以用对象解构赋值，把它单独拎出来，使用该属性时就等于使用对象中的该属性</td>
+        </tr>
+        <tr>
+            <td>格式<br>声明类型（var let const 等）</td>
+            <td>声明类型 {属性集合} = 所属对象 <br>单独拎出来的这个属性是所属这个对象<br><br> 声明类型 {属性集合} = {属性:值，属性:值等}
+                <br>单独拎出来的这个属性对应着对象里的这个键值对<br><br> ({属性集合} = {属性:值}) <br>这个不用写声明类型，避免了let 与 const的重复声明报错，有很大弊端
+            </td>
+        </tr>
+        <tr>
+            <td>注意事项</td>
+            <td>
+                <ol>
+                    <li>{}里的变量名必须是所属对象里有的（名称一样，且存在）</li>
+                    <li>无声明类型的那种格式，很难读，而且容易出错，不如直接用 对象.属性名 这种原来的格式</li>
+                    <li>声明对象时的声明类型用var ，对象解构赋值时的声明类型用另外两个，这样可以避免重复声明报错</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <script>
+        var object_1 = {
+            name: "张三",
+            sex: "man",
+            age: 31,
+        }                   //要对象解构赋值的对象声明用var最好
+        var object_2 = {
+            mb: ["矢志不渝"]
+        }
+        const { log } = console;   //这种不清除属性的值的，用所属对象的格式，来简写常用的方法
+
+        const { name, sex, mb } = { name: "张三", sex: "man", mb: ["矢志不渝"] };   //这种键值对的格式，可以给不属于同一对象的属性分别进行对应的对象解构赋值
+        log(name, sex, mb);
+        let hello = "Hello";
+        ({ hello } = { hello: "Hello" });  //这种无声明类型的解构格式，最好不要用，很不易读
+        log(hello);
+
+        // // debounce 防抖
+        // function debounce(fn, delay) {
+        //     var timer = null;
+        //     return function () {
+        //         if (timer) {
+        //             clearTimeout(timer);
+        //         }
+        //         timer = setTimeout(fn, delay)
+        
+        // console.log("🤡");
+        // }
+
+        // //throttle 节流
+        // function throttle(fn, delay) {
+        //     var valid = true;
+        //     return function () {
+        //         if (!valid) {
+        //             return false;
+        //         }
+        //         valid = false;
+        //         setTimeout(function () { fn(); valid = true; }, delay)
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>

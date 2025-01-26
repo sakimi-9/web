@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组方法 unshift与shift</h3>
+    <table border="2px">
+        <tr>
+            <b>unshift与shift,主要用于对数组头部元素的添加与删除，都会改变原数组 <br><br>与push-pop 的作用相同但反向 push对标unshift , pop对标shift <br>添加 返回长度
+                ， 删除 返回该删除元素</b>
+            <td>unshift</td>
+            <td>作用:向原数组头部添加一个或多个元素，并返回新数组的<strong>长度</strong> <br><br>格式:arr.unshift(添加的元素)
+                <br><br>unshift()括号里不写添加的元素，此时直接返回数组长度 <br>arr.length === arr.unshift()
+            </td>
+        </tr>
+        <tr>
+            <td>shift</td>
+            <td>作用:把原数组头部的一个元素删除，并返回删除的<strong>元素</strong> <br><br>格式:arr.shift() <br><br>注意，这个
+                <b>写出来一次就会删除一次原数组，在while（）的括号里也一样，</b>而unshift（）括号里不写东西的话就不会改变原数组
+            </td>
+            <td>还有一个作用:循环遍历，并情况清空数组 <br><br>空数组.shift（）时，返回undefined，！undefined的Boolean为true，所以undefined本身Boolean为false
+                那么有了以下格式: <br> <br>for循环的 for(var arr1 ;arr1 = arr.shift();){
+                console.log(arr1);
+                }<br><br>while循环的 var arr1; while( arr1 = arr.shift()){console.log(arr1)}</td>
+        </tr>
+    </table>
+</body>
+<script>
+    // unshift()括号里不写添加元素时，与push()一样，和length的作用相同 
+    var arr = [1, 2, 3, 4, 5];
+    console.log(arr.length === arr.unshift() ? "true" : "false");
+    // unshift 向原数组头部添加一个或多个元素 再返回新数组的长度
+    console.log(arr.unshift(6, 7));//7
+    console.log(arr);//[1,2,3,4,5,6,7]
+    // shift 把原数组头部第一个元素删除 再返回该删除的元素
+    arr.shift();//写一次，删除一次
+    console.log(arr.shift());//6
+    //用shift 来循环遍历并清空数组
+    // var arr1;
+    // while (arr1 = arr.shift()) {
+    //     console.log(arr1);
+    // }
+
+    for (var arr1; arr1 = arr.shift();) {
+        console.log(arr1);
+    }
+</script>
+
+</html>

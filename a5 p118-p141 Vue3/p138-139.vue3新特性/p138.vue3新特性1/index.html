@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>vue新特性1</h3>
+    <p>vue3比vue2有六大亮点，其中最大一个亮点是组合式API</p>
+    <table border="2px">
+        <tr>
+            <td>组合式api setup() 描述</td>
+            <td>setup(){}和data(){}是同级关系，都是写在导出对象里<br>
+                setup()包括了data()对数据的声明和返回功能，<br>
+                也包括了methods对方法的声明，<br>
+                setup（）里的传入参数为props和ctx(context)时，又包含了props的数据传递功能，用ctx代替this来获取实例对象
+            </td>
+        </tr>
+        <tr>
+            <td>ref()和reactive()还有代替methods</td>
+            <td>setup(){}的ref()和reactive()方法，代替了data()中对值的声明，ref是对简单类型的数据声明，reactive是对复合类型的数据声明(对象参数的形式声明)，ref和reactive要引入,对方法的声明也是直接写在setup中<br><br>
+                但对数据和方法的声明，后面都要写在setup(){}的return对象中，否则值不能在template中被调用 <br><br>
+                因为方法也是直接写在这个里面，所以方法中对数据有修改时，不需要用this指向实例了，而是用 属性.value = 值 的方式来修改数据的值 <br>
+            </td>
+        </tr>
+        <tr>
+            <td>组合式api setup(){}中 对数据及方法的声明与返回 格式:</td>
+            <td>import {ref,reactive} from 'vue'
+
+                setup（）{
+                const a = ref(6);
+                const str = ref('我不是AI');
+                const object = reactive({
+                list:['1','2','3']
+                });
+                function fn(){
+                return a.value = 8
+                };
+
+                return{
+                a,
+                str,
+                object,
+                fn
+                }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>代替props的部分功能和context代替this获取实例对象</td>
+            <td>setup(props,ctx){}时，setup有了props的数据传递功能，可用 声明类型 传递的数据 = props.传递的数据 的形式传递数据，然后在return中返回就能调用该数据了，外部还是要用
+                props:{数据:数据类型} 来对数据的数据类型指明
+                <br>用ctx代替this来获取实例对象，那么setup中没有this了，都是用context来代替
+            </td>
+        </tr>
+        <tr>
+            <td>组合式api setup(){}中 对props和ctx的使用格式:</td>
+            <td>props:{
+                cd_1:Number,
+                cd_2:Array
+                }
+                setup(props,ctx){
+                const cd_1 = props.cd_1;
+                const cd_2 = props.cd_2;
+                console.log(ctx);
+
+                return{
+                cd_1,
+                cd_2,
+                }
+                }
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

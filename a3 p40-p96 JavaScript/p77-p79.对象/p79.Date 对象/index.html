@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h3>Date 对象</h3>
+    <a href="https://www.bilibili.com/video/BV1gY4y1U78C?p=79&vd_source=fd101f9f2a3b78d7b2b056f02fa9d819">Date对象
+        js原生时间库的教学视频</a><br><br><br>
+    <table border="2px">
+        <tr>
+            <td>时间戳</td>
+            <td>
+                <ul>
+                    <li>描述:当前时间距离时间零点（格林威治时间1970年1月1日）的总时间（单位为毫秒，1000毫秒为1秒）</li>
+                    <li>返回当前时间戳:Date.now()</li>
+                    <li>时间戳转换具体时间:new Date(时间戳)</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <b>Date的常用实例方法</b><br><br>
+    <i>Date对象提供了一系列get方法,用来获取实例对象某个方面的值实例方法get类</i>
+    <b>实例方法调用格式:</b><br><em>代表具体时间的变量名.实例方法（）</em><br><br><span>比如<br>var t = new Date(Date.now());t1.实例方法</span>
+    <ul type="square">
+        <li>getTime():返回实例距离1970年1月1日00:00:00的毫秒数</li>
+        <li>getDate():返回实例对象对应每个月的几号(从1开始)</li>
+        <li>getDay():返回星期几,星期日为0,星期一为1,以此类推</li>
+        <li>getYear():返回距离1900的年数</li>
+        <li>getFullYear():返回四位的年份</li>
+        <li>getMonth():返回月份(0表示1月,11表示12月)</li>
+        <li>getHours():返回小时(0-23)</li>
+        <li>getMilliseconds():返回毫秒(0-999)</li>
+        <li>getMinutes():返回分钟(0-59)</li>
+        <li>getSeconds():返回秒(0-59)</li>
+    </ul>
+    <img src="./Date时间库的各方法.jpg"
+        style="width: 1000px;height: 500px;background-repeat: no-repeat;;background-size: cover;">
+    <script>
+        var tim = new Date(Date.now());//获取当前时间戳，将时间戳转化为具体时间
+        console.log(tim);
+        console.log(tim.getDate());// tim代表具体时间的变量名，就是这里的实例  调用实例方法 getDate() 返回今天多少号
+    </script>
+</body>
+
+</html>

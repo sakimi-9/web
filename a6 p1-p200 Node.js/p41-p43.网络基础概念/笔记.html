@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../p32.path模块/table style.css">
+    <link rel="stylesheet" href="../p33-p40.HTTP协议/img_style.css">
+</head>
+
+<body>
+    <h3>网络基础概念</h3>
+    <table>
+        <tr>
+            <td>IP的介绍</td>
+            <td>IP本身是一个数字标识<br><br>
+                作用： IP用来标志网络设备，实现设备间的通信</td>
+        </tr>
+        <tr>
+            <td>IP的分类</td>
+            <td>分为: <ol>
+                    <li>广域网IP <br>
+                        广域网IP 可以共享（比如 一个公司的所有网络设备 可以共用一个广域网IP 然后通过广域网IP与其他地方通信） <br>
+                        各广域网IP由通信运营商分配</li>
+                    <li>局域网IP <br>
+                        局域网IP 可以复用（不同局域网可以用一样的局域网ip） <br>
+                        各设备的局域网IP由路由器分配</li>
+                    <li>本地回环IP地址 <br>
+                        本地回环ip地址 127.0.0.1 永远指向本机 <br>
+                        另外 域名localhost 是指向127.0.0.1的（约定俗成）| localhost:8080,8080是端口号 <br>
+                        域名和IP地址是URL里同一个地方的，URL那个地方用127.0.0.1还是用localhost,都是指向本机</li>
+                </ol><br><br>
+                作用： IP分类是为了解决ip地址只有40亿，不够用的问题
+            </td>
+        </tr>
+        <tr>
+            <td>端口</td>
+            <td>端口是应用程序的数字标识<br>
+                作用：为了实现不同主机应用程序之间的通信<br>
+                一台现代计算机有65536个端口（0~65535）64kb个<br>
+                一个应用程序可以使用一个或多个端口 <br><br><br>
+                举个例子，A在成都用电脑上的WeChat 给在杭州的B的电脑上的微信发了条信息<br>
+                这个过程，电脑之间是通过广域网IP进行通信，通信的数据报文是 通过 微信的端口号来匹配交流的 <br>
+                此时IP举例 198.232.32.2:20=>122.222.34.1:12
+            </td>
+        </tr>
+        <tr>
+            <td>IP分类图</td>
+            <td><img src="./IP分类及范围.png" alt=""></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

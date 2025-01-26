@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>状态管理核心</h3>
+    <p>状态管理核心是状态管理配置文件中createStore（{}）创建仓库函数的四个功能对象，第一个state存放数据，后三个都是存放函数，后两个函数要通过触发事件来调用函数(不用事件反复触发的话，这个函数只是一次性的)<br>
+    <ul>
+        <li>state 仓库中 存放变量数据的</li>
+        <li>getters 仓库中 筛选变量数据函数的，用数据范围的函数筛选数据，常用三目表达式来筛选</li>
+        <li>mutations 仓库中 直接修改状态的（修改变量的值），存放修改数据的函数的</li>
+        <li>actions 仓库中 存放异步操作函数的,存在异步操作的mutations，常有网络请求axios，提交的也是mutantions </li>
+    </ul>
+    <span>modules模块，这个里面也是放上面四个属性的，相当于大仓库里面的小仓库<br>
+        当应用变得非常复杂时，store 对象可能会变得相当臃肿。为了解决这个问题，Vuex 允许我们将 store 分割成模块（modules）。每个模块拥有自己的 state、mutations、actions 和
+        getters，同时模块内部还支持嵌套子模块</span>
+    </p>
+    <table>
+        <tr>
+            <td>state</td>
+            <td>组件读取state中的数据 格式:<br>
+                返回值读取<br>
+                $store.state.数据变量<br><br>
+                快捷读取<br>
+                先引入 import {mapState} from 'vuex'<br>
+                data(){}同级下 计算属性对象computed:{
+                ...mapState(['数据变量']),
+                } <br>
+                然后可以直接用变量读取了 span 数据变量
+            </td>
+            <td>store中的格式示例
+                state:{
+                a:2,
+                数据键值对
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>getters</td>
+            <td>组件读取getters中的筛选函数 格式:<br>
+                返回值读取<br>
+                $store.getters.筛选函数<br><br>
+                快捷读取<br>
+                先引入 import {mapGetters} from 'vuex'<br>
+                data(){}同级下 计算属性对象computed:{
+                ...mapGetters(['筛选函数']),
+                } <br>
+                然后可以直接用函数读取了 span 筛选函数</td>
+            <td>
+                store中的格式示例
+                getters:{
+                getA(state){
+                return state.a > 1 ? state.a : "a不符合范围"
+                }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>组件读取mutations中的改变函数 格式:<br>
+                返回值读取<br>
+                $store.commit('改变函数'，改变函数除state外的参数) <br>
+                在methods中返回 事件函数（）{ this.$store.commit('改变函数'，改变函数除state外的参数)}
+                <br><br>
+                快捷读取<br>
+                先引入 import {mapMutation} from 'vuex'<br>
+                上两个在计算属性对象中，后两个在methods:{
+                ...mapMutations(['改变函数']),
+                } <br>
+                然后事件函数中 this.改变函数
+                <br> 可以直接用事件触发读取 含改变函数的事件函数,这两个都只能在函数中被调用，不能直接返回值出现在双花括号中
+            </td>
+            <td> store中的格式示例
+                mutations:{
+                addA(state，num){
+                return state.a += num
+                }
+                }</td>
+        </tr>
+        <tr>
+            <td>组件读取actions中的异步函数 格式:<br>
+                返回值读取<br>
+                $store.dispatch('异步函数') <br>
+                在methods中返回时 异步操作函数(commit){this.$store.dispatch('异步函数')}
+                <br><br>
+                快捷读取<br>
+                先引入 import {mapAction} from 'vuex'<br>
+                methods:{
+                ...mapActions(['异步函数']),
+                }
+                <br>
+                然后事件函数中 this.异步函数
+                <br> 可以直接用事件触发读取 含异步函数的事件函数，这两个都只能在函数中被调用，不能直接返回值出现在双花括号中
+            </td>
+            <td>store中的格式示例
+                actions:{
+                asyncAddA({commit}){ //里面是（{commit}）
+                axios.get("url").then(res =>{commit.addA(res.data[0])})
+                }
+                }</td>
+        </tr>
+    </table>
+</body>
+
+</html>

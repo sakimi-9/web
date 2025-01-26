@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Element 对象-属性</h3>
+    <p><b>描述:</b>Element是Dom树上的一个常用大节点。Element对象对应着网页的HTML元素节点的对象。每个HTML元素节点的对象，在Dom树上都会转化为一个Element节点对象</p>
+    <table border="2px">
+        <tr><b>Element 元素节点中常用的对象与属性</b>
+            <td>属性 id</td>
+            <td>格式:标签变量名.id <br>用处:修改该标签id的id名</td>
+        </tr>
+        <tr>
+            <td>属性 className</td>
+            <td>格式:标签变量名.className <br>用处:修改该标签类class的类名，也可以修改为多个类名（空格隔开）</td>
+        </tr>
+        <tr>
+            <td>对象 classList</td>
+            <td>格式:标签变量名.classList.方法 <br>用处:对该标签class类名进行独立修改<br><br>classList有以下方法 <ol>
+                    <li>add() :增加一个class类名</li>
+                    <li>remove() :删除一个class类名</li>
+                    <li>contains() :检测该元素节点是否含有指定的class类名<br>有则返回true 无则返回false</li>
+                    <li>toggle() :检测该元素节点是否含有指定的class类名,有则删除，无则添加 | 相当于把上面三个方法整合到了一起</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>属性 innerHTML</td>
+            <td>格式:标签变量名.innerHTML / 标签变量名.innerHTML = "内容"<br>后面不写内容时，返回该标签的内容
+                后面用内容赋值时，将修改该标签的内容<br><br>可识别内容为标签，所以内容不仅可以是文本字符串 也可以是图片 超链接 等等 <br>内容要为图片 超链接时，用标签的形式写入 比如“《a
+                href=""》《/a》”</td>
+        </tr>
+        <tr>
+            <td>属性 innerText</td>
+            <td>格式:标签变量名.innerText / 标签变量名.innerText = "内容"<br>后面不写内容时，返回该标签的内容
+                后面用内容赋值时，将修改该标签的内容<br><br>只能识别内容为字符串，所以内容只能是字符串文本</td>
+        </tr>
+    </table>
+    <div id="container"></div>
+    <script>
+        //通过Dom用js对网页进行增删改查 小实操
+        var newdiv = document.createElement("div");//创建 div 标签
+        var id = document.createAttribute("id");//创建 属性 id 
+        // id.value = "s";//给id定义名称
+        id.id = "s";//给id属性节点的id命名  跟上面的意思一样
+        newdiv.setAttributeNode(id);//将id属性塞入div标签
+        newdiv.id = "s1";//给div标签的id改名
+        var content = document.createTextNode("我是内容");//创建内容
+        newdiv.appendChild(content);//将内容塞入div标签
+        console.log(newdiv.innerText);//输出 返回的div标签已有内容
+        //将div的单文本内容改成（图片 超链接 文本都有）的内容 
+        newdiv.innerHTML = "<a herf='https://cn.bing.com/images/search?q=%E5%B0%8F%E5%A7%90%E5%A7%90%E5%9B%BE%E7%89%87&form=IQFRML&first=1' title='更多图片'><img src='1.png' alt='图片没了' style='width: 350px;height: auto; background-repeat: no-repeat; background-size:cover'></a>js写的内容";
+        var s2 = document.createAttribute("class");//创建class属性 并赋值给s2
+        s2.className = "s2";//将s2节点的class类名定义为 s2
+        // s2.value = "s2";//与上面一样
+        newdiv.setAttributeNode(s2);//将class属性塞入div标签
+        newdiv.className = "s2 s3 s4";//将div已有的class单个类名 添加至3个  
+        newdiv.classList.add("s5");//将div已有的class类名集合 再单独添加一个
+        console.log(newdiv.classList.contains("s5") ? "有s5" : "没有s5");//输出 判断div的class类名集合里 是否有s5
+        newdiv.classList.remove("s4");//将div已有的class类名集合里的 s4单独删除
+        console.log(newdiv);//输出 该变量名所储存的信息
+        var container = document.getElementById("container");//将返回id为container的父容器标签赋值
+        container.appendChild(newdiv);//将newdiv子容器塞入container父容器
+    </script>
+</body>
+
+</html>

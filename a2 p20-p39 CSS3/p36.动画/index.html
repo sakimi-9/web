@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 200px;
+            height: auto;
+            background: #000;
+            animation: myanimation 2s linear 0s infinite alternate;
+            animation-play-state: paused;
+        }
+     
+
+        .container:hover {
+            animation-play-state: running;
+        }
+
+        .container:active {
+            animation-play-state: paused;
+        }
+
+        @keyframes myanimation {
+            0% {
+                width: 300px;
+                height: 300px;
+                background-color: rgba(253, 1, 1, 0.1);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 0);
+            }
+
+            16% {
+                width: 400px;
+                height: 400px;
+                background-color: rgba(253, 1, 1, 0.16);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 0.16);
+            }
+
+            32% {
+                width: 500px;
+                height: 500px;
+                background-color: rgba(253, 1, 1, 0.32);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 0.32);
+            }
+
+            50% {
+                width: 600px;
+                height: 600px;
+                background-color: rgba(253, 1, 1, 0.50);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 0.50);
+            }
+
+            66% {
+                width: 700px;
+                height: 700px;
+                background-color: rgba(253, 1, 1, 0.66);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 0.66);
+            }
+
+            83% {
+                width: 800px;
+                height: 800px;
+                background-color: rgba(253, 1, 1, 0.83);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 0.83);
+            }
+
+            100% {
+                width: 900px;
+                height: 900px;
+                background-color: rgba(253, 1, 1, 1);
+                box-shadow: 20px 20px 20px rgba(253, 1, 1, 1);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <h2>动画</h2>
+    <a href="https://www.bilibili.com/video/BV1gY4y1U78C?t=2.2&p=36">b站 前端-动画 教学视频</a>
+    <ol>
+        <li>(利用关键帧)@keyframes创建动画<ul>
+                <li>@keyframes name(动画名称){ <br>
+                    0%(from){CSS样式} <br>
+                    percent{CSS样式} <br>
+                    100%(to){CSS样式} <br>
+                    }</li>
+            </ul>
+        </li>
+        <li>animation执行动画<ul>
+                <li>animation:name duration timing-function delay iteration-count direction;</li>
+                <li>animation:动画名称 持续时间 执行速率 执行延时 循环次数 播放方向 <br>名持速延循方 不一定要全部设置 与时间相关的单位为s/ms </li>
+                <li>timing-function:ease(默认,逐渐变慢) | linear(匀速) | ease-in(加速) | ease-out(减速) | ease-in-out(先加后减)</li>
+                <li>iteration-count:值(数字) | infinite(无限循环)</li>
+                <li>direction:normal(默认,向前播放) | alternate(从零开始,偶数向前,奇数向后) <br>将animation里的direction设置为alternate,就可以不用把关键帧里的修改为对称数据也可以实现呼吸效果</li>
+            </ul>
+        </li>
+        <li>animation-play-state(设置动画播放状态):running(播放) | paused(暂停)
+            <br>在容器中设置完动画各参数后再设置播放状态为暂停,这样就不会默认播放了<br>常与伪类选择器搭配使用<br>比如 设置:hover时播放 :link时暂停 或者 :visited时播放与暂停 ...</li>
+    </ol>
+    <p><i>动画运用例子</i>
+    <ol>
+        <li>关键帧+背景颜色改变 可实现背景颜色自动切换<br></li>
+        <li>关键帧+阴影改变(透明度改变)+(圆角)+背景颜色改变(透明度改变) 可实现呼吸效果<br>关于呼吸效果 代码优化:将animation里的direction设置为alternate,就可以不用把关键帧里的修改为对称数据也可以实现呼吸效果</li>
+    </ol>
+    </p>
+    <span>:hover与:active时容器变化动画:颜色加大小 呼吸效果(没有时间搞对称的了)</span>
+    <div class="container"></div>
+
+
+</body>
+
+</html>

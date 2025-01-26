@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 concat</h3>
+    <p>
+    <table border="2px">
+        <tr><b>concat</b>
+            <td>用处:</td>
+            <td>用于字符串连接，返回新的字符串，不改变原来的字符串</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>连接主体.concat(连接对象，【/+号隔开】连接对象)</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>连接主体和连接对象是字符串还是变量名都可以，连接对象可以是一个或多个</li>
+                    <li><b>concat括号里</b> 的连接对象数据类型不是字符串时，会强制转换成字符串类型再相连<br>也就是concat不管括号里的数据类型，直接合并成字符串</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>+号连接:</td>
+            <td>可以用+号连接字符串来代替concat方法（+来连接更常用） <br>但要注意数据类型，用+号相连时，不会连接非字符串类型的，而是将其进行运算</td>
+        </tr>
+    </table>
+    </p>
+    <script>
+        // concat使用格式
+        var str1 = "晴川历历汉阳树";
+        document.write(str1.concat(',', "芳草萋萋鹦鹉洲" + '。'));
+        document.write("<br>");
+        document.write("<br>");
+
+        // concat 括号里不管数据类型直接合并成字符串
+        var one = '1';
+        var two = 2;
+        var three = 3;
+        document.write(one.concat(two, three));
+        document.write("<br>");
+        document.write("<br>");
+
+        // 用+号连接字符串 
+        document.write(one + str1 + ',' + "芳草萋萋鹦鹉洲" + '。');
+        document.write("<br>");
+        document.write("<br>");
+        //  用+号连接字符串 ，注意数据类型 ，数值类型的会直接运算
+        document.write(1 + 2 + 3 + str1);
+    </script>
+</body>
+
+</html>

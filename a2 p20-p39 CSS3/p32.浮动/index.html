@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 700px;
+            height: 700px;
+            background-color: #666;
+            float: left;
+        }
+
+        span {
+            float: left;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+            background-size: cover;
+            float: left;
+        }
+
+        nav {
+            width: 700px;
+            height: 30px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: left;
+        }
+
+        li {
+            margin: 20px;
+            float: left;
+
+        }
+
+        a:link {
+            color: #00ff00;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: rgb(111, 234, 240);
+        }
+
+        a:active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>浮动 float
+        <li>值(只有两个,！没有向上向下) <br>left:向左浮动<br>right:向右浮动</li>
+        <li>描述<br>
+            <ol>
+                <li>元素float后,会脱离标准(文档)流,那 <a href="../p31.文档流/index.html">三个问题</a> 自动解决 </li>
+                <li>在float层的元素(块元素也包括),默认水平排列</li>
+                <li>当嵌套浮动层的底部容器宽度不够时,元素会自动排列到第二层</li>
+            </ol>
+        </li>
+        <li>
+            <ol>
+                <div>示例
+                    <li><span style="font-size: 40px;">我的字很大</span>文字以上边为基准对齐</li>
+                    <li>两图之间没有空隙<br>
+                        <img src="./1.jpg" alt="">
+                        <img src="./2.jpg" alt="">
+                    </li>
+                    <li>用无序列表制作导航栏<br>
+                        <nav>
+                            <ul>
+                                <li><a href="#">水果</a></li>
+                                <!-- url为#时让它点击不跳转 -->
+                                <li><a href="#">数码</a></li>
+                                <li><a href="#">母婴</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                </div>
+            </ol>
+        </li>
+    </ul>
+</body>
+
+</html>

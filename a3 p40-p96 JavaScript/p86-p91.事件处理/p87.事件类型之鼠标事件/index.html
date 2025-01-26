@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            float: left;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>鼠标类型之鼠标事件</h3>
+    <b>使用Dom0级事件处理时，记得在以下属性前加on,此时格式:元素节点.on以下属性 = function（）{事件处理}</b><br><br>
+    <b>使用Dom2级事件处理时，记得在以下属性前不用加on,格式:元素节点.addEventListener("属性"，function（）{事件处理}）</b><br><br>
+    <ol>
+        <li>click:鼠标点击时触发</li><br><br>
+        <li>dblclick:鼠标双击时触发</li><br><br>
+        <li>mousedown:鼠标按下时触发</li><br><br>
+        <li>mouseup:鼠标抬起时触发</li><br><br>
+        <li>mouseenter:鼠标进入该块元素节点时触发，再进入该节点的子节点不再触发<br> 5-8这四个，没有父子级节点之分时，上一对与下一对效果一样</li><br><br>
+        <li>mouseleave:鼠标离开块该元素节点时触发，再离开该节点的父节点不再触发<br>上面这一对，只对设置的节点生效</li><br><br>
+        <li>mouseover:鼠标进入块元素节点时就触发，无论父子节点都触发<br>下面这一对，只要设置对父节点，父子节点都会生效 </li><br><br>
+        <li>mouseout:鼠标离开块元素节点时就触发，无论父子节点都触发</li><br><br>
+        <li>mousemove:鼠标在块元素节点内移动就会触发</li><br><br>
+        <li>wheel:滑动滚轮就会触发</li><br><br>
+    </ol>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div>
+        <div></div>
+    </div>
+
+
+    <script>
+        //div0 
+        var div0 = document.getElementsByTagName("div")[0];
+        div0.setAttribute("style", "width:200px;height:200px;background-color:aqua;");
+        div0.onclick = function () {
+            console.log("这是div0 单击");
+        }
+        //div1
+        var div1 = document.getElementsByTagName("div")[1];
+        div1.setAttribute("style", "width:250px;height:250px;background-color:#f0f;");
+        div1.ondblclick = function () {
+            console.log("这是div1 双击");
+        }
+        //div2
+        var div2 = document.getElementsByTagName("div")[2];
+        div2.style.cssText = ("width:300px;height:300px;background-color:#00ff00;");
+        div2.onmousedown = function () {
+            console.log("这是div2 按下触发");
+        }
+        //div3
+        var div3 = document.getElementsByTagName("div")[3];
+        div3.style.width = "350px";
+        div3.style.height = "350px";
+        div3.style.backgroundColor = "#ffff00";
+        div3.onmouseup = function () {
+            console.log("这是div3 抬起触发");
+        }
+        //div4
+        var div4 = document.getElementsByTagName("div")[4];
+        div4.style.width = "400px";
+        div4.style.height = "400px";
+        div4.style.backgroundColor = "#00fff0";
+        div4.onmousemove = function () {
+            console.log("这是div4 块内移动");
+        }
+        //div5
+        var div5 = document.getElementsByTagName("div")[5];
+        div5.style.cssText = "width:300px;height:300px;background-color:#000000;";
+        div5.addEventListener("wheel", function () {
+            console.log("这是div5 滑轮滚动");
+        })
+        //div6嵌套div7 mouseenter mouseleave 
+        var div6 = document.getElementsByTagName("div")[6];
+        var div7 = document.getElementsByTagName("div")[7];
+        // div6.appendChild(div7);
+        div6.setAttribute("style", "width:350px;height:350px;background-color:#112244;");
+        div7.style.cssText = "width:300px;height:300px;background-color:#556677;";
+        // div6.onmouseenter = function(){
+        //     console.log("这是div6 mouseenter 进入父节点触发");
+        // };
+        // div6.addEventListener("mouseleave",function(){
+        //     console.log("这是div6 mouseleave 离开子节点触发");
+        // });
+        div6.onmouseover = function () {
+            console.log("这是div6 mouseover 进入节点触发");
+        };
+        div6.addEventListener("mouseout", function () {
+            console.log("这是div6 mouseout 离开节点触发");
+        });
+    </script>
+</body>
+
+</html>

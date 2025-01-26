@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组方法 reverse</h3>
+    <table border="2px">
+        <tr>
+            <td>用处:</td>
+            <td>用于数组翻转，返回元素顺序全部颠倒的新数组。 会改变原数组</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>数组/arr.reverse()</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>这是数组的方法，字符串没有。<br><br>
+                所以字符串颠倒: <br>str.split("").reverse().join("")</td>
+        </tr>
+    </table>
+    <script>
+        // reverse 数组颠倒
+        var arr = [1, 2, 3, 4, 5, 6];
+        arr = arr.reverse();//会改变原数组
+        console.log(arr);//[6,5,4,3,2,1]
+
+        // 字符串颠倒的实现  str.split("").reverse().join(""); . 字符串没有这个方法 所以  
+        var str = "hello world";
+        str = str.split('');//先将字符串全分割并以数组形式返回
+        str = str.reverse();//数组颠倒
+        console.log(str.join(""));//数组元素全合并，并以字符串形式返回
+    </script>
+</body>
+
+</html>

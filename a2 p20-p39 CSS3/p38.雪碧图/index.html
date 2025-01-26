@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            background-color: #dcf0ad;
+            position: relative;
+            left: 400px;
+            display: flex;
+        }
+        .sprite1 {
+            display: block;
+            width: 100px;
+            height: 120px;
+            background-image: url(./sprite雪碧图.png);
+            background-position: -28px -76px;
+        }
+        .sprite2{
+            display: block;
+            width: 100px;
+            height: 120px;
+            background-image: url(./sprite雪碧图.png);
+            background-position: 122px -72px;
+        }
+        .sprite3 {
+            display: block;
+            width: 100px;
+            height: 120px;
+            background-image: url(./sprite雪碧图.png);
+            background-position: -532px -75px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>雪碧图</h2>
+    <p>CSS雪碧图,是一种网页图片处理方式。<br>可以将一个页面涉及到的所有零星图片都包含到一张大图上去
+        <i>作用:<ol>
+                <li>减少图片的字节</li>
+                <li>减少网页的http请求(减少服务器无意义的资源损耗),从而大大提高页面的性能</li>
+            </ol>
+            <ol><b>原理:</b>
+                <li>通过background-image引入背景图片(引入大图)</li>
+                <li>通过background-position把背景图片移动到所需位置(移切出所需小图)| 移大切小 比如 想要展示一张右下角的小图,则需要将大图左移和上移 (-xpx -ypx)</li>
+            </ol>
+            <ol><b>操作细节:</b>
+                <li>可以用span标签来承载小表情,但先要display:block 才能识别宽高,<br>另一个display:inline (展示为行内元素)</li>
+                <li>不知道小图片的具体位置,可以先运行页面,右键检查该图片,再去样式里的bg-position (用上下键/)改数值调出位置数据,再复制数据</li>
+            </ol>
+            <br><br><br>
+            <em>flex与float层都有让元素水平排列的默认效果</em>
+        </i>
+        <div><span class="sprite1"></span>
+        <span class="sprite2"></span>
+        <span class="sprite3"></span></div>
+        
+    </p>
+
+</body>
+
+</html>

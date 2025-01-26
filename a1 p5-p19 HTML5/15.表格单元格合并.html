@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3 align="center">表格单元格合并</h3>
+    <strong>单元格的两个属性:</strong>
+    <P>
+        <em>colspan:左右列合并 水平合并 合并时 以左为基准,删除右 <br>
+            rowspan:上下行合并 垂直合并 合并时 以上为基准,删除下 <br>
+            不删除的话,会将有的单元格挤成多余的   多余的内容会撑大单元格<br>
+        </em>
+    <ol>
+        <span>搞几个例子</span>
+        <li>合并1 2</li>
+        <li>合并3 8</li>
+        <li>合并4 9 14</li>
+        <li>合并5 10 15</li>
+        <li>合并16 17 21 22</li>
+    </ol>
+    </P>
+    <strong>为什么图片放不进去,因为没有设置内容与单元格框的垂直·水平间距</strong>
+    <table border="2" width="1000" height="800">
+        <tr>
+            <td colspan="2">单元格1</td>
+            <td rowspan="2">单元格3</td>
+            <td rowspan="3">单元格4</td>
+            <td rowspan="3">单元格5</td>
+        </tr>
+        <tr>
+            <td>单元格6</td>
+            <td>单元格7</td>
+
+
+
+        </tr>
+        <tr>
+            <td>单元格11</td>
+            <td>单元格12</td>
+            <td>单元格13</td>
+
+
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="2">单元格16</td>
+
+            <td>单元格18</td>
+            <td>单元格19</td>
+            <td>单元格20</td>
+        </tr>
+        <tr>
+
+
+            <td>单元格23</td>
+            <td>单元格24</td>
+            <td>单元格25</td>
+        </tr>
+
+    </table>
+</body>
+
+</html>

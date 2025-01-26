@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>定时器之setTimeout</h3>
+    <table border="2px">
+        <tr>
+            <td>定时器</td>
+            <td>
+                <p>js提供定时执行代码的功能。主要由setTimeout()和setInterval()这两个函数完成，它们向任务队列添加定时任务</p>
+            </td>
+        </tr>
+        <tr>
+            <td>setTimeout()</td>
+            <td>
+                <p>用来指定某个函数或函数代码块在多少毫秒后执行。返回的是一个整数，表示定时器的编号，可以用这个编号来取消这个定时器。这个也是出现一次执行一次，赋值时也会执行一次，要注意</p>
+            </td>
+        </tr>
+        <tr>
+            <td>格式</td>
+            <td>
+                <p>setTimeout(函数名[/function（）{代码块}],延迟时间（单位毫秒））</p>
+            </td>
+        </tr>
+        <tr>
+    </table>
+    <table border="2px"><b>其他相关知识 this指向 与 clearTimeout()</b>
+        <td>关于this</td>
+        <td>
+            <p>this永远指向当前调用者<br> 但setTimeout()里的this指向为全局指向<br><br> 可以改为对象内的局部指向<br>
+                可以先在调用setTimeout()的函数里用this给变量名赋值，再在setTimeout()里用变量名来指向当前对象</p>
+        </td>
+        </tr>
+        <tr>
+            <td>clearTimeout()</td>
+            <td>清除定时器setTimeout() <br><br>格式:clearTimeout( 指定定时器编号变量名 ) 或者 不写参数放在setTimeout()中清除当前定时器</td>
+        </tr>
+    </table>
+    <script>
+        var dy = function () {
+            console.log("延时输出");
+        };
+        setTimeout(dy, 3000);//注意第一个参数为函数变量名时没有括号
+        var z = setTimeout(dy, 3000);
+        var n = "张三";
+        var s = {
+            n: "李四",
+            getn: function () {
+                console.log(this.n);
+            },
+            getn1: function () {
+                setTimeout(function () { console.log("全局变量", this.n); }, 3000)
+            },
+            getn2: function () {
+                var that = this;    //将局部指向赋值给that
+                setTimeout(function () { console.log("局部变量", that.n); }, 6000)
+            }
+        }
+        console.log(z);//打印 任务列表的定时器编号 2
+        s.getn();
+        s.getn1();
+        s.getn2();
+        clearTimeout(z);//清除2号定时器
+    </script>
+
+
+</body>
+
+</html>

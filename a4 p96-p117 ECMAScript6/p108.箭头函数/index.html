@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>箭头函数</h3>
+    <table border="2px">
+        <tr>
+            <td>格式说明 <br>var fn = (参数)=>返回值 </td>
+            <td>参数为1个时，括号可以省略</td>
+        </tr>
+        <tr>
+            <td>var fn = (参数)=>返回值 </td>
+            <td>参数为0个或多个时，括号不能省略 <br>0个时括号是用来占位的</td>
+        </tr>
+        <tr>
+            <td>var fn = (参数)=>{代码块}</td>
+            <td>后面只有一条语句时，相当于return返回值 <br>后面有多条语句则要将代码块写在{}里
+            </td>
+        </tr>
+        <tr>
+            <td>var fn = (参数)=>（{返回值为对象}）</td>
+            <td>当只有一条语句，且返回值为对象 外面要用括号括起来，否则会报错</td>
+        </tr>
+        <tr>
+            <td>-----</td>
+            <td>-----</td>
+        </tr>
+        <tr>
+            <td>箭头函数最常用的作用</td>
+            <td>很简洁的写匿名函数 <br>比如:setTimeout(()=>{代码块},delay)</td>
+        </tr>
+        <tr>
+            <td>箭头函数里的this</td>
+            <td>箭头函数根本没有自己的this，而是引用外部的this，所以这个this指向的是外层作用域所定义的<br>所以setoutTime()里用箭头函数时，直接指向外层作用域，不用在外层先用this赋值变量，再用变量指代
+            </td>
+        </tr>
+    </table>
+    <script>
+        var obfn = {
+            fn1: (x) => x + 1,
+            fn2: (y, z) => y + z,
+            fn3: () => console.log("0909"),
+            fn4: () => ({
+                a: 3,
+                b: 4
+            })
+        }
+        var { fn1, fn2, fn3, fn4 } = obfn;
+        var obfn1 = {
+            "0": fn1(1),
+            "1": fn2(2, 3),
+            "2": fn3(),
+            "3": fn4(),
+        }
+        setTimeout(() => {
+            console.log(obfn);
+            console.log(obfn1);
+        }, 2000);
+    </script>
+</body>
+
+</html>

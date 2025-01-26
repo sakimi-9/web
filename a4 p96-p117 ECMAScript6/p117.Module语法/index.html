@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Module语法</h3>
+    <p>模块（Module）体系的描述:历史上，JavaScript一直没有模块（module)体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装起来。其他语言都有这项功能，比如Ruby的require、Python的import,甚至就连CSS都有@import,但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍
+        <br><br>也就是说，js可以在HTML里用script
+        src来引入不同的js文件，然后文件产生交互，但是js不能直接在js文件里，对不同的文件进行交互，这于开发大型复杂的项目形成了巨大阻碍，es6新增的Module体系解决了这个问题
+    </p>
+    <b>Module语法</b>
+    <table border="2px">
+        <tr>
+            <td>export</td>
+            <td>
+                <ul>
+                    <li>描述:设置js文件的导出接口，在要进行导出的各类声明前使用关键字export</li>
+                    <li>格式:export 各类声明 <br>export default 类与函数等 <br><br>比如:export var a = 12;export class Lei{};</li>
+                    <li>export default命令 <br>描述:在要进行导出的一个声明前使用命令export default ,只能对一个声明使用，import的文件里
+                        可以不用知道具体声明的名字，用其他的名字也可以import进行默认调用</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>import</td>
+            <td>
+                <ul>
+                    <li>描述:设置js文件的导入接口，在文件头部导入（方便调用运行）,文件名可以用./同级路径来索引</li>
+                    <li>格式:import {具体声明名称} from '来源文件名' <br>| 对具体声明导入 <br><br>
+                        import {具体声明名称 as 改名后的名称} from '来源文件名' <br>| 对具体声明名称改名后导入<br><br>
+                        import * as 对象改名后的名称 from '来源文件名' <br>| 对要导入所有声明的对象 * 改名后导入<br><br>
+                        <br>比如:import a as b from '来源文件名'
+                    </li><br><br>
+                    <li>as <br>描述:改名，把要导入的具体声明名称改名，改成想要的名字（比如，那个名称与本文件的另一个声明冲突了，这种情况就可以改了）</li><br>
+                    <li>* <br>描述:对象，* 代表着export要导出的所有声明，这些声明都塞到了*这个对象里，用 *
+                        要将这个as改名后使用，用具体的对象名称更加方便<br>此时调用格式:对象名称.具体声明名称 </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <b>测试方式</b>
+    <table border="2px">
+        <tr>
+            <td>测试方式描述</td>
+            <td>我们采用Nodejs方式进行测试Module语法
+                但是nodejs采用的是CommonJS的模块化规范，使用require引入模块；而import是ES6的模块化规范关键字。想要使用import,必须引入babel转义支持，通过babel进行编译，使其变成node的模块化代码。
+                疑惑:为啥不用前端方式测试，前端方式测试会更加麻烦</td>
+        </tr>
+        <tr>
+            <td>第一步:全局安装babel-cli <br>| 这个权限要求比较高，要打开 powershell管理员 运行 | 记得在npm前加c下载更快 |有的时候全局工具包安装完了最好重启vscode</td>
+            <td>npm install -g babel-cli</td>
+        </tr>
+        <tr>
+            <td>第二步:安装 babel-preset-env npm <br>| 在文件根目录下，打开终端运行，不要多空格</td>
+            <td>npm install -D babel-preset-env</td>
+        </tr>
+        <tr>
+            <td>第三步:运行代码 <br>| 测试用的文件是 import 的导入运行文件 不是 export 的导出配置文件</td>
+            <td>babel-node --presets env 测试文件名（如index.js）</td>
+        </tr>
+    </table>
+    <!-- <script src="./hello.js"></script>
+    <script src="./index.js"></script>  浏览器环境里用不了nodejs的api-->
+</body>
+
+</html>

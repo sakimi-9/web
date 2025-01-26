@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>无序列表组合</h3>
+    <hr>
+    <p>
+        无序列表ul 列表项li 双标签 运用场景非常多 如 导航栏 菜单 等等 可用CSS来给属性标记和字体修饰 如 颜色 大小等等
+        <br>
+        属性 有四种值(用三种形状或无形状来无序标号) type
+        <br>
+        ul>li*n{列表项内容} :快速生成一个包含n个列表项内容为“列表项”的无序列表 <br>
+        <em>ul 代表无序列表 > 代表含有子集元素 li 代表列表项 * 代表乘以 n 代表个数(写成数字形式) {} 代表要显示的内容</em>
+        <i>如 ul>li*5 </i>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <b>如 ul>li*6{nb} </b>
+        <ul>
+            <li>nb</li>
+            <li>nb</li>
+            <li>nb</li>
+            <li>nb</li>
+            <li>nb</li>
+            <li>nb</li>
+        </ul>
+    <br>
+
+    <span>disc:黑色实心圆点 默认</span>
+    <span>circle:黑色空心圆</span>
+    <span>square:黑色正方形 </span>
+    <span>none:空白无序标号 </span>
+    <h4>示例</h4>
+    <ul type="none">
+        <li>水果
+            <ul type="disc">
+                <li>苹果</li>
+                <li>香蕉</li>
+                <li>梨子</li>
+            </ul>
+        </li>
+        <li>动物
+            <ul type="circle">
+                <li>龙</li>
+                <li>虎</li>
+                <li>豹</li>
+            </ul>
+        </li>
+        <li>学科
+            <ul type="square">
+                <li>理科
+                    <ol type="i">
+                        <li>数学</li>
+                        <li>物理</li>
+                        <li>化学</li>
+                    </ol>
+                </li>
+                <li>文科
+                    <ol type="i">
+                        <li>语文</li>
+                        <li>英语</li>
+                        <li>历史</li>
+                    </ol>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+</body>
+
+</html>

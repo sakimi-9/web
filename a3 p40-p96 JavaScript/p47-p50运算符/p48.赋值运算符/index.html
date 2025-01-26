@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>赋值运算符</h2>
+    <p>
+    <table border="2px">
+        <tr>
+            <td>各赋值运算符示例</td>
+            <td>形式</td>
+        </tr>
+        <tr>
+            <td>n = m</td>
+            <td>n = m</td>
+        </tr>
+        <tr>
+            <td>n += m</td>
+            <td>n = n + m</td>
+        </tr>
+        <tr>
+            <td>n -= m</td>
+            <td>n = n - m</td>
+        </tr>
+        <tr>
+            <td>n *= m</td>
+            <td>n = n * m</td>
+        </tr>
+        <tr>
+            <td>n /= m</td>
+            <td>n = n / m</td>
+        </tr>
+        <tr>
+            <td>n %= m</td>
+            <td>n = n % m</td>
+        </tr>
+    </table>
+    <b>左结合,从左至右的计算,右结合,相反 <br>+ - * / % 都是左结合,= 为右结合,把=右边的计算结果赋值给左边</b>
+    </p>
+    <script>
+        var num1 = 23;
+        var num2 = num1;
+        console.log(num1 += num2);
+        console.log(num1 %= num2);
+    </script>
+</body>
+
+</html>

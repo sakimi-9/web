@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <style>
+        @media screen and (max-width:768px) {
+            .box {
+                width: 300px;
+                height: 300px;
+                background-color: #650909;
+            }
+
+            .b1 {
+                display: none;
+            }
+
+        }
+
+        @media screen and (min-width:768px) and (max-width:992px) {
+            .box {
+                width: 400px;
+                height: 400px;
+                background-color: #0de870;
+            }
+
+            .b1 {
+                font-size: 20px;
+                color: rgb(255, 0, 247);
+            }
+        }
+
+        @media screen and (min-width:992px) {
+            .box {
+                width: 400px;
+                height: 400px;
+                background-color: #0d1ce8;
+            }
+
+            .b1 {
+                color: red;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h3>媒体查询</h3>
+    <b>作用:自动识别并根据不同的终端设备(屏幕大小),调整出合适的CSS样式</b>
+    <p>head 里的[meta name="viewport" content="width=device-width,
+        initial-scale=1.0"]这句话的意思:<br><i>将使用设备的宽度设置为视图的宽度,并禁止初始缩放</i>
+    <ul>
+        <li><b>元信息里这句话具体解释</b></li>
+        <li>name="viewport" | 当前进行视图设置</li>
+        <li>content="width=device-width, initial-scale=1.0" | 设置宽度为当前设备的宽度,初始缩放比例1(也就是不能缩放)</li>
+        <li>content="maximum-scale=1.0, user-scalable=no" | 用户可缩放的最大比例为1,用户是否可以缩放视图 (默认)no为不能 (这两个值也出现了,也要明白什么意思)</li>
+        <li>另外,如果把这句话删了,样式将会根据不同屏幕的大小进行等比例缩放,这会影响样式的显示效果</li>
+    </ul>
+    <b>如何使用媒体查询</b><br>
+    <P><b>第一种 单用最大(/最小)宽度限制 媒体查询:</b>@media screen(空格)and (max-width:npx){
+        容器/元素{样式}
+        } <br>
+        <b>第二种 同时用最小和最大宽度限制 媒体查询:</b>@media screen(空格)and (min-width:npx) and (max-width:npx){
+        容器/元素{样式}
+        } <br><br><br>
+        <i>补充常用常用的像素范围与对应设备,各个设备各有不同</i><br>
+    <ul>
+        <li>(max-width:768px) 用于手机</li>
+        <li>(min-width:768px) and (max-width:992px) 用于平板</li>
+        <li>(min-width:992px) 用于电脑</li>
+        <li>另外,苹果手机的宽度像素要记为双倍的 比如iPhone12 的宽度为390px 实际记为780px </li>
+    </ul>
+    <strong>display:none | 展示为无 <br>用于屏幕宽度缩小后,对某些内容的不显示 <br>比如 电脑访问时该网站有两张大广告 ,在媒体查询中进行对一张广告该属性设置后,手机端就只能看到一张广告</strong>
+    </P>
+    </p>
+    <div class="box">
+        <p class="b1">啦啦啦啦啦啦啦</p>
+    </div>
+
+</body>
+
+</html>

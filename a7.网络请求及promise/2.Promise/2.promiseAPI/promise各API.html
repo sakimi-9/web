@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise API</title>
+</head>
+
+<body>
+    <h2> promise 各API<a
+            href="https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_Promise%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md#%E4%BA%8Cpromise-api-%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3">
+            Notze</a></h2>
+    <script>
+        //1.  promise对象括号里是excutor构造函数,执行到promise对象时会立即同步执行excutor构造函数里的函数
+        const p = new Promise((resolve, reject) => {
+            if (undefined) {
+                resolve('a');
+            }
+            reject('err');
+        })
+
+        //2. p.then()可以传成功与错误的回调(传onresolve或两个都传)   p.catch()只能传错误的回调函数
+        p.then(value => {
+            console.log(value);
+        }, reason => {
+            console.log(reason);
+        })
+
+        p.catch(reason => {
+            console.warn(reason);
+        })
+
+        //3. promise.resolve()  具体笔记看上面url,下面只操作,没有这么多时间自己做笔记了
+        //下面这几个是 promise类的函数方法,拿过来直接用,不用new
+        const p_resolve = Promise.resolve('ok');
+        console.log(p_resolve);
+
+        //4. promise.reject()
+        const p_reject = Promise.reject('err');
+        console.log(p_reject);
+
+        p_reject.catch(reason => {
+            console.log(reason);
+        })//错误时调用reject(),必须要有onreject()错误回调来处理错误
+
+        //5. promise.all()  参数为promise对象为元素的数组
+        const p_all = Promise.all([p, p_reject, p_resolve]);
+        console.log(p_all);
+
+        //6. promise.race()  参数也为promise对象为元素的数组  区别看笔记
+        const p_race = Promise.race([p, p_reject, p_resolve]);
+        console.log(p_race);
+
+
+
+    </script>
+</body>
+
+</html>

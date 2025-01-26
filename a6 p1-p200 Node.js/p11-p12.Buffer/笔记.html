@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="2px">
+        <tr><strong>Buffer（缓冲器）</strong>
+            <td>1. 概念</td>
+            <td>
+                <ol>
+                    <li>Buffer 是一个类似于数组的 对象 ，用于表示固定长度的字节序列</li>
+                    <li>Buffer 本质是一段内存空间，专门用来处理 二进制数据 。（显示形式并不一定是二进制） 。 <br>
+                        显示形式可能是 十六进制的 因为先是 将字符转换为Unicode或者ASCII 然后转化为 十六进制</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>2. 特点</td>
+            <td>
+                <ol>
+                    <li>Buffer 内存大小固定且无法调整(内存内容可以改变)</li>
+                    <li>Buffer 性能较好，可以直接对计算机内存进行操作</li>
+                    <li>每个元素的大小为 1 字节（byte）1byte = 8bit</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>3. 使用</td>
+            <td>
+                <ol>
+                    <li>创建 Buffer</li>
+                    <li>Buffer 与字符串的转化</li>
+                    <li>Buffer 的读写</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>创建 Buffer <br>Node.js 中创建 Buffer 的方式主要如下几种:</td>
+            <td>
+                <ol>
+                    <li> Buffer.alloc <br>
+                        //创建了一个长度为 10 字节的 Buffer，相当于申请了 10 字节的内存空间，每个字节的值为 0
+                        let buf_1 = Buffer.alloc(10);<br>
+                        // 结果为 <code>尖括号Buffer 00 00 00 00 00 00 00 00 00 00</code></li>
+                    <li>Buffer.allocUnsafe <br>
+                        //创建了一个长度为 10 字节的 Buffer，buffer 中可能存在旧的数据, 可能会影响执行结果，所以叫
+                        unsafe，但是这种加载更快，因为不需要对全部空间重新申请 <br>
+                        let buf_2 = Buffer.allocUnsafe(10);
+                    </li>
+                    <li>Buffer.from <br>
+                        //通过字符串创建 Buffer,
+                        let buf_3 = Buffer.from('hello'); <br>
+                        //通过数组创建 Buffer
+                        let buf_4 = Buffer.from([105, 108, 111, 118, 101, 121, 111, 117]);
+                    </li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td> Buffer 与字符串的转化
+            </td>
+            <td>我们可以借助 toString 方法将 Buffer 转为字符串
+                toString 默认是按照 utf-8 编码方式进行转换的。</td>
+        </tr>
+        <tr>
+            <td>Buffer 的读写
+            </td>
+            <td>Buffer是类似数组对象 所以可以直接通过 [] 的方式对数据进行处理。<br>
+                注意: <br>
+                1. 溢出 如果修改的十进制数值超过 255 ，则超过 8 位的二进制数据会被舍弃 比如 Buffer.from(361).toString(2) =>Buffer 69 <br>
+                2. 中文 一个 utf-8 的中文字符 一般 占 3 个字节 <br>
+                <br>
+                let buf_4 = Buffer.from([105, 108, 111, 118, 101, 121, 111, 117]);
+                console.log(buf_4.toString())
+                <br>
+                //读取
+                console.log(buf_3[1]);
+                <br>
+                //修改
+                buf_3[1] = 97;
+                <br>
+                //查看字符串结果
+                <b><i>console.log(buf_3.toString())</i></b>
+                <br>
+                //二进制转换 只能将缓冲器里的数据单个的二进制转换
+                <strong>console.log(buf_3[0].toString(2))</strong>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

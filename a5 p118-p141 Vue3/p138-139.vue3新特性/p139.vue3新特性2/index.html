@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>vue3新特性2</h3>
+    <table border="2px">
+        <tr>
+            <td>setup中的生命周期函数</td>
+            <td>setup中也可以使用生命周期函数 ，并且不限制同种函数的数量，方便维护内容，以前同种的只能有一个，内容过多不方便维护<br>
+                里面没有了create的两个函数，因为setup的起点就是created后，所以那两个用不着 <br>
+                setup中的生命周期函数，使用时 要在原来的函数前加上on，然后小驼峰命名法<br>
+                还有格式上不再是普通函数形式，而是参数为箭头函数的函数形式，内容都放在箭头函数的函数体内里
+            </td>
+        </tr>
+        <tr>
+            <td>setup中的生命周期函数 格式:</td>
+            <td>setup(){
+                onMounted(() => {
+                内容
+                }); //这是渲染完成1
+                onMounted(() => {
+                内容
+                }); //这是渲染完成2，分多个方便对内容进行维护
+                onBeforeUpdated(() => {
+                内容
+                })
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>setup中的provide inject</td>
+            <td>setup中使用的方法一般需要引入，比如ref reactive , 生命周期函数 provide 和 inject也是要引入才能使用 <br>
+                这两个是用于上层组件对下层组件进行数据传递，并且支持跨层级传递<br><br>
+                provide用在上层组件的setup中，是给下层传递数据的接口<br>
+                inject用在上层组件的setup中，是对上层数据接收的接口<br>
+            </td>
+        </tr>
+        <tr>
+            <td>上下组件 setup中的provide inject使用格式</td>
+            <td>上层组件中
+                import {provide} from 'vue'
+
+                set(){
+                provide("数据变量","变量的值")
+                }
+            <td>下层组件中
+                import {inject} from 'vue'
+
+                set(){
+                const 数据变量 = inject("数据变量")
+
+                return{
+                该数据变量
+                }
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>新特性 fragment（碎片）</td>
+            <td>现在在template中可以允许有多个根节点，意思是可以有多个根级的父容器，以前只能存在一个根节点</td>
+        </tr>
+    </table>
+</body>
+
+</html>

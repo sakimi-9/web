@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 slice</h3>
+    <p>
+    <table border="2px">
+        <tr><b>slice</b>
+            <td>用处:</td>
+            <td>用于返回字符串中位置1至位置2（不包括位置2）的字符，也不会改变原先字符串 <br>
+                根substring的用处一样，但在细节上有所区别</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>str代表字符串变量名， str.slice(位置1,位置2)</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>到位置2但不会返回位置2，起始位置为0的话，终点位置是n就返回前n位<br>
+                        填起始(小)到结束(大位置)时，和substring的作用一模一样
+                    </li>
+                    <li>如果 只写位置1，则会返回位置1至结束所有的字符 <br>
+                        只填起始位置参数时，和substring的作用一模一样</li>
+                    <li>上面两个与substring作用一样的，下面的有区别</li>
+                    <li>如果 位置1比位置2大，则返回空字符串
+                        <br>substring会进行参数位置交换
+                    </li>
+                    <li>如果 位置参数有负数的，则以倒数的为起始位置
+                        <br>substring会将负数当成0
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    </p>
+</body>
+
+</html>

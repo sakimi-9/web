@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Class类的继承</h3>
+    <table border="2px">
+        <tr>
+            <td>继承的描述</td>
+            <td>子类可以继承父类的属性及方法，通过关键字extends实现 <br>父类的实例方法与属性 还有静态方法与属性 全部继承<br>注意一个: 继承静态属性上，子类不会继承父类的名字，子类.name
+                返回的是自己的名字 </td>
+        </tr>
+        <tr>
+            <td>格式</td>
+            <td>class 子类类名 extends 父类类名 {}</td>
+        </tr>
+        <tr>
+            <td>扩展说明</td>
+            <td>子类扩展自己的实例方法 静态方法（也是用static） 静态属性（也是在外边用类名.属性来声明） 这些跟父类的格式一样<br><br>不一样的是 扩展实例属性的格式<br>class 子类类名 extends
+                父类类名 {
+                constructor（父类属性，子类扩展属性）{
+                super（父类属性）；
+                this.扩展属性 = 属性
+                }
+                }
+                <br><br>
+                子类扩展实例属性，需要调用super（）方法，（）里面放父类的属性，constructor（）里也要放父类的属性，调用super（）方法是为了先完成对父类构造函数的塑造（继承实例属性的调用），然后在此基础上进行扩展，不用super（）方法会报错
+            </td>
+        </tr>
+        <tr>
+            <td>子类调用</td>
+            <td>因为继承为全继承，所以调用格式上，静态属性与方法 只是把父类类名改成子类类名，实例还是用 实例名.来调用</td>
+        </tr>
+    </table>
+    <script>
+        class Lei {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            log() {
+                console.log(`姓名${this.name}
+年龄${this.age}`);
+            }
+            static say() {
+                console.log("hello");
+            }
+        }
+        Lei.name = `Lei`;
+        Lei.age = 999;
+        //子类继承 extends 关键字实现
+        class Lei_a extends Lei {
+            constructor(name, age, school) {
+                super(name, age);
+                this.school = school;
+            }  //扩展自己的方法 super（）方法，完成对父类构造函数的塑造
+            static say_1() {
+                console.log("world");
+            }
+            getschoolName() {
+                console.log(this.school);
+            }
+        }
+        Lei_a.age = 990;  //子类自己的静态属性声明
+        console.log(`我不继承父的名字${Lei_a.name}`);//子类不会继承父类的名字
+        const zs = new Lei_a('张三', 29, '二中');//子类 实例化对象
+        zs.log();//实例 通过子类调用方法
+        zs.getschoolName();//调用子类的方法
+        Lei_a.say();//调用子类自己的静态方法
+        Lei_a.say_1();
+    </script>
+</body>
+
+</html>

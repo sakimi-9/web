@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>记账本</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <div>
+    <h2>添加记录</h2>
+    <hr>
+    <form action="account/create" method="post" enctype="multipart/form-data">
+      <!-- <label> </label>标签
+        在HTML中，`<label>`标签用于定义表单控件的标签。它可以改善用户体验和可访问性，尤其是在屏幕阅读器等辅助技术中。
+          `<label>`标签与表单元素如`<input>`, `<select>`, 或 `<textarea>`相关联，并且通常包含描述这些表单元素用途的文字。
+      通过使用`for`属性并将它的值设置为与之相关的表单元素的`id`，可以确保当用户点击标签时，浏览器会自动将焦点移动到对应的表单控件上。这在提高网站的可用性和可访问性方面非常有用。
+       -->
+      <label for="事项">事项:</label><br><input type="text" name="事项" id="事项"><br>
+      <label for="发生时间">发生时间:</label> <br><input type="datetime-local" id="发生时间" name="发生时间"><br>
+      <!-- input type='data' 时 ,文本框内嵌日历表,datatime-local 日历表加具体时间 -->
+      <label for="类型">类型:</label> <br><select id="类型" name="类型">
+        <option value="支出">支出</option>
+        <option value="收入">收入</option>
+      </select><br>
+      <label for="金额">金额:</label> <br><input type="number" name="金额" id='金额'><br>
+      <label for="备注">备注: </label><br><textarea name="备注" id='备注'></textarea><br>
+      <hr id="hr_2">
+      <button type="submit" id="button">添加</button>
+    </form>
+  </div>
+</body>
+
+</html>

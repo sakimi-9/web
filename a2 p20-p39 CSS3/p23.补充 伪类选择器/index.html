@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a:link {
+            color: #00ff00;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: rgb(111, 234, 240);
+        }
+
+        a:active {
+            color: red;
+        }
+
+        /* odd 奇数  even 偶数 */
+        a:nth-child(odd) {
+            color: #aef;
+        }
+
+        a:nth-child(even) {
+            color: #fcb;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>伪类选择器</h3>
+    <b>一般用于给a标签装饰</b>
+    <table border="2">
+        <tr>
+            <td>伪类选择器种类 love hate(爱恨交织 l v h a)</td>
+            <td>描述</td>
+            <td>示例</td>
+        </tr>
+        <tr>
+            <td>:link</td>
+            <td>访问前的状态 (alt+b的快捷运行的扩展有点bug :link 的颜色设置很可能会失效 用F5运行就没事)</td>
+            <td><a href="/a1 p5-p19 HTML5/图片/cat child.jpg">图片</a></td>
+        </tr>
+        <tr>
+            <td>:visited</td>
+            <td>访问之后的状态</td>
+            <td><a href="/a1 p5-p19 HTML5/图片/cat child.jpg">图片</a></td>
+        </tr>
+        <tr>
+            <td>:hover</td>
+            <td>鼠标悬停时的状态</td>
+            <td><a href="/a1 p5-p19 HTML5/图片/cat child.jpg">图片</a></td>
+        </tr>
+        <tr>
+            <td>:active</td>
+            <td>鼠标点击时的状态</td>
+            <td><a href="/a1 p5-p19 HTML5/图片/cat child.jpg">图片</a></td>
+        </tr>
+        <tr>
+            <td>:nth-child(n/odd/even)</td>
+            <td>选择其父元素的第(n个/奇数个/偶数个)子元素呈现样式</td>
+            <td><a href="/a1 p5-p19 HTML5/图片/cat child.jpg">图片</a></td>
+            <!-- table,tr;nth-child(odd){样式} 奇数行tr呈现样式 -->
+            <!-- table,td;nth-child(even){样式} 偶数列td呈现样式 -->
+            <!-- table,tr,td;nth-child(2){样式} 第2个表格呈现样式 -->
+        </tr>
+    </table>
+</body>
+
+</html>

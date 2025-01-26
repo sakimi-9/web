@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container1{
+            width: 700px;
+            /* 不设置高度 */
+            background-color: #e0baba;
+            overflow: hidden;
+            clear: both;
+        }
+        .container2{
+            width: 700px;
+            /* 不设置高度 */
+            background-color: #e0baba;
+            margin: 70px;
+            overflow: hidden;
+            clear: both;
+        }
+        .box1{
+            width: 200px;
+            height: 200px;
+            background-color: #1814f4;
+            margin: 10px;
+            float: left;
+        }
+        .box2{
+            width: 200px;
+            height: 200px;
+            background-color: #14f488;
+            margin: 10px;
+            float: left;
+        }
+        .box3{
+            width: 200px;
+            height: 200px;
+            background-color: #b5f414;
+            margin: 10px;
+            clear: both;
+        }
+        .box4{
+            width: 200px;
+            height: 200px;
+            background-color: #b5f414;
+            margin: 10px;
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>清除浮动</h3>
+    <p><b>浮动效果并不完美的,也有负面效果,所以非必要不要使用浮动</b>
+        <br>负面效果,比如:父元素容器container高度塌陷(高度没有设置却没有被子元素撑开),并且还影响了后续没有浮动的子元素,造成显示效果不理想
+    </p>
+    <ol><b>如何解决浮动的副作用</b>
+        <li>设置设置父元素容器container的高度(但很多时候,container的高度要灵活适应,不能够设置)</li>
+        <li>container设置高度后,清除没有浮动的子元素所受float负面效果<br>给该元素设置CSS代码clear:both(任何方向的浮动负面效果都给清除,不用想设置clear:left还是clear:right)
+        </li>
+        <li>container没有设置高度的前提下,给父元素设置CSS代码clear:both + overflow:hidden(组合使用)并且 给受影响的元素设置CSS代码clear:both<br>从而解决高度塌陷</li>
+        <li>container没有设置高度的前提下,只给子元素设置CSS代码clear:both + display:block(组合使用)就行 |相当于设置一个不受float层默认效果(水平排列)影响的块元素 <br>但上面那种更为常用,因为受影响的子元素越多,所加的代码相对更少<br>从而解决高度塌陷</li>
+    </ol>
+    <div class="container1">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+    </div>
+    <div class="container2">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box4"></div>
+    </div>
+    <p>
+        <b>补充</b>
+        单用overflow:hidden的意思:<br>
+        将溢出container的子元素的超出部分隐藏<br>
+        单用display:block的意思:<br>
+        设置该元素展示样式为块元素(这样就可以独占一行,向下垂直排列了)
+    </p>
+</body>
+
+</html>

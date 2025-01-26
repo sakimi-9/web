@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组的扩展方法</h3>
+    <table>
+        <tr>
+            <td>Array.from()</td>
+            <td>将类数组转化为数组 <br>格式: Array.from(伪数组)</td>
+            <td>三种伪数组 | 伪数组只能用数组的下标读取方式，和length属性<ol>
+                    <li><em>arguments</em><span>这个关键字，可以让函数括号内不写参数入口，也可以读到传入参数的伪数组</span></li>
+                    <li><em>NodeList</em><span>元素节点集合，由document.querySelectorAll(“标签”)返回</span></li>
+                    <li><em>类数组的对象</em><span>对象里键值对的属性名为字符串形式从0开始，里面还是可以有length属性 <br><br>比如:var object = {
+                            "0":9,
+                            "1":"zs",
+                            "2":false,
+                            length:3
+                            }</span></li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>Array.of()</td>
+            <td>将元素集合转化为数组 <br>格式: Array.of(元素集合)</td>
+            <td>比如:Array.of(1,2,3,4,5) </td>
+        </tr>
+    </table>
+    <p><b>Array()</b>这个数组方法，可以创建n个空间的数组 <br>格式:Array（空间个数）<br>比如:Array(3) //[,,,]</p>
+</body>
+<h6>1</h6>
+<h6>2</h6>
+<h6>3</h6>
+<h6>4</h6>
+<script>
+    function ob() {
+        console.log(Array.from(arguments));
+    }
+    var h6 = document.querySelectorAll("h6");
+    var object = {
+        "0": 5,
+        "1": 6,
+        "2": "7",
+        length: "3"
+    }
+    var object1 = {
+        a: ob(1, 2, 3, 4),
+        ...object,
+        b: Array.of(8, 9, 10),
+        c: Array.from(h6)
+    }
+    console.log(object1);
+</script>
+
+</html>

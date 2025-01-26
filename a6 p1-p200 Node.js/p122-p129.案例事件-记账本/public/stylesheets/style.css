@@ -1,0 +1,60 @@
+div {
+  margin: 10px 412px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+hr {
+  width: 263px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  color: rgba(240, 236, 236, 0.5);
+
+}
+
+#hr_2 {
+  display: block;
+  margin-left: 10px;
+}
+
+/* shift+tab 把字段往前推（缩进） */
+
+
+input,
+select,
+option,
+textarea,
+button {
+  width: 250px;
+  height: 30px;
+  border: 2px solid rgb(127, 122, 122);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px 10px;
+  box-sizing: content-box;
+  /* form控件 select选项框与其它文本框 出现在一起时,必须设置 box-sizing ,这样才能让它们的盒子大小统一 
+  box-sizing: content-box 盒子尺寸:内边距与内容 算在一起 盒子会被撑的更大 boder-box 内边距与边框 算在一起 盒子会被压缩  */
+}
+
+label {
+  display: block;
+  margin-left: 10px;
+}
+
+button {
+  background-color: #54a1cd;
+  color: aliceblue;
+  padding-top: 5px;
+}
+
+#button:active {
+  background-color: #3f7ca5;
+}

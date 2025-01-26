@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 substring</h3>
+    <p>
+    <table border="2px">
+        <tr><b>substring</b>
+            <td>用处:</td>
+            <td>用于返回字符串中位置1至位置2（不包括位置2）的字符，也不会改变原先字符串</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>str代表字符串变量名， str.substring(位置1,位置2)</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>到位置2但不会返回位置2，起始位置为0的话，终点位置是n就返回前n位</li>
+                    <li>如果 只写位置1，则会返回位置1至结束所有的字符</li>
+                    <li>如果 位置1比位置2大，则会自动调换位置（一般按1小2大来写，方便阅读）</li>
+                    <li>如果 位置参数有负数的，则会将此位置参数自动变成0</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    </p>
+    <script>
+        var str1 = '晴川历历汉阳树';
+        var str2, str3, str4;
+        // substring 返回位置1至位置2（不包含）的字符
+        str2 = str1.substring(0, 2);//晴川
+        document.write(str2);
+        document.write("<br>");
+        document.write("<br>");
+
+        // substring 位置参数含负数，位置1大于位置2，自动转换和调换
+        str3 = str1.substring(4, -9);//晴川历历 起始位置为0，终点位置为4，返回前4位
+        document.write(str3);
+        document.write("<br>");
+        document.write("<br>");
+
+        //substring 只写一个位置参数，返回起始位置至结束所有字符
+        str4 = str1.substring(4);//汉阳树
+        document.write(str4);
+    </script>
+</body>
+
+</html>

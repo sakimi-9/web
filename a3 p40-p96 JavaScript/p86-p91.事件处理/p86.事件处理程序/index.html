@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>事件处理程序</h3>
+    <button onclick="button_onclick_h()">按钮</button>
+    <button id="button_d0">按钮</button>
+    <button id="btn">按钮</button>
+    <table border="2px">
+        <tr><b>三种类型（以按钮为例）</b>
+            <td>HTML事件</td>
+            <td>格式:<br>html里: button标签里onclick="该标签onclick属性函数()" <br>js里: 该标签onclick属性=function(){事件处理}</td>
+            <td>缺点:html和js的代码没有分离，不方便维护 <br>不用</td>
+        </tr>
+        <tr>
+            <td>DOM 0级事件</td>
+            <td>格式:<br>button变量名.onclick = function(){事件处理}</td>
+            <td>特点:html和js代码分离，但事件处理只能处理一个，多个时，前面的事件会被最后一个覆盖 <br>只有一个事件时使用</td>
+        </tr>
+        <tr>
+            <td>DOM 2级事件</td>
+            <td>格式:<br>button变量名.addEventListener("click",function(){事件处理})</td>
+            <td>特点:可同时处理多个事件（再写几次该方法），但写起来麻烦
+                <br>多个事件时使用<br><br>使用的是元素节点的addEventListener()方法，add(增加)Event(事件)listener(听者)</td>
+        </tr>
+    </table>
+    <script>
+        //html事件 标签里调用onclick的事件处理函数
+        var button_onclick_h = document.getElementsByTagName("button")[0].onclick;
+        button_onclick_h = function () {
+            console.log("点击按钮打印");
+        }
+        //dom0级事件 创建事件处理函数给标签的onclick属性赋值
+        var button_d0 = document.getElementById("button_d0");
+        button_d0.onclick = function () {
+            console.log("点击按钮打印111");
+        }
+        //dom2级事件 将“click”属性及值事件处理函数 通过addEventListener()增加事件监听者 塞入标签
+        var btn = document.getElementById("btn");
+        btn.addEventListener("click", function () { console.log('点击按钮打印222222') });
+        btn.addEventListener("click", function () { console.log('点击按钮打印456447647646') });
+    </script>
+</body>
+
+</html>

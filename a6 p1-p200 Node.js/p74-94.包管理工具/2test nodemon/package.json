@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "nodemon": "^3.1.4",
+    "uniq": "^1.0.1"
+  },
+  "scripts": {
+    "server": "node ./http服务.js",
+    "start": "node ./http服务.js"
+  }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Class类的基本语法</h3>
+    <table border="2px">
+        <tr>
+            <td>---------</td>
+            <td>组成</td>
+            <td>作用</td>
+            <td>格式</td>
+            <td>声明及声明解释</td>
+            <td>实例化格式</td>
+        </tr>
+        <tr>
+            <td>Class类</td>
+            <td>构造函数，属性，方法</td>
+            <td>提供组织代码（类的组成的代码）和创建可复用对象（类的实例）的方式</td>
+            <td>es6的
+                class 类名{
+
+                constructor(属性){
+                this.属性 = 属性；
+                this.方法 = function(){任务代码块}
+                }
+
+                方法（）{
+                任务代码块
+                }
+                }
+                <br><br><br>
+                es5的
+                function 类名（属性）{
+                this.属性 = 属性；
+                }
+
+                类名.prototype.方法名 = function(){
+                任务代码块
+                }
+            </td>
+            <td>es6的结构上更加清晰，更像面向对象的编程语法，不具有类提升<br><br><br>
+                es6的组成内容都整合在类的{}里，结构清晰<br><br>
+                用class关键字来声明类，类名首字母要大写<br><br>
+                类里的匿名构造函数用constructor方法来声明，类里必选要有constructor方法，如果没有，编译时也会自动加上显式的constructor方法<br><br>
+                方法也是用对象扩展里的简写形式，方法名（）{}就行<br><br>
+                ----------------------- <br><br>
+                es5的用的是函数形式，可读性较低，具有函数提升<br><br><br>
+                函数形式用function来声明类，类名首字母大写<br><br>
+                es5的类组成内容不变，组成形式是分离独立的<br><br>
+                声明该类的方法要用类的prototype属性，所以要索引的形式来声明，类名.prototype.方法名 =function（）{}
+            </td>
+            <td>声明类型 实例名 = new 类名（传入构造函数里的属性参数）；
+                实例名.（调用类里的）方法（）；
+                实例名.属性 <br><br>
+                类与构造函数实例化对象时都是用new关键字，代表着，这个实例成为一个新的类对象 构造函数对象，之后可以像类 构造函数一样调用里面的属性与方法来结合自身数据专属使用（区别于通用，相当于类与构造函数是通用模板
+                ，实例化对象是将通用改为了特殊专用）
+            </td>
+        </tr>
+        <tr>
+            <td>constructor构造函数</td>
+            <td>属性，方法</td>
+            <td>提供组织代码（构造函数的组成）和创建可复用对象（构造函数的实例）的方式</td>
+            <td>
+                function 构造函数名（属性）{
+                this.属性 = 属性；
+                this.方法 = function（）{任务代码块}
+                }
+            </td>
+            <td>类里的匿名构造函数用constructor方法来声明,不是类里的构造函数，用function声明，构造函数名也是首字母大写<br><br>
+                关于this指向，里面都是用属性 具体方法来给this.属性 this.方法赋值，这是为了在外部构造函数实例化对象，实例可以直接用.属性
+                .方法来调用，因为实例的属性值给this.属性赋值，所以this指向实例<br><br>构造函数里方法的代码块里要调用实例的属性值时也是用this.属性。外部实例才是直接用.属性 .方法来调用</td>
+            <td>声明类型 实例名 = new 构造函数名（属性参数）；</td>
+        </tr>
+        <tr>
+            <td>function函数</td>
+            <td>特定任务代码块</td>
+            <td>执行特定任务</td>
+            <td>function 函数名(参数){
+                代码块
+                }
+            </td>
+            <td>调用时 函数名（）里放入具体参数，传参，执行代码块，return 传出结果，结果被调用</td>
+            <td>函数名（具体参数）调用就行</td>
+        </tr>
+    </table>
+    <script>
+        //es6 类 的格式
+        class Lei {
+            constructor(name, sex, age) {
+                this.name = name;
+                this.sex = sex;
+                this.age = age;
+            }
+            fn_log() {
+                console.log(`
+                "姓名:"  ${this.name}
+                "性别:"  ${this.sex}
+                "年龄:" ${this.age}
+                 `
+                );//console.log()的换行用es6的字符串模板``   document.write()的换行才是用（）里输入换行标签“<br>”
+
+            }
+        }
+        const zsclass = new Lei('张三', 'man', '28');
+        zsclass.fn_log();
+        alert("弹窗形式");
+
+        //es5 类 的格式
+        function fnLei(name, sex, age) {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+        };
+        fnLei.prototype.log = function () {
+            console.log(`
+                "姓名:"  ${this.name}
+                "性别:"  ${this.sex}
+                "年龄:" ${this.age}
+                 `
+            )
+        }
+        const ls = new fnLei('李四', 'woman', '32');
+        ls.log();
+
+        //构造函数
+        function Constructor(log) {
+            this.cslog = () => { console.log(`${log}`); }
+        }
+        const l = new Constructor("嗯 加油");
+        l.cslog();
+    </script>
+</body>
+
+</html>

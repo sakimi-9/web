@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>for循环</h3>
+    <p>for(表达式1;表达式2;表达式3){循环的语句块} <br><br>
+        格式: <br><br>
+        for(起始表达式;布尔表达式;迭代因子){循环体} <br><br>
+        更简易的表达: <br>
+        for(起点;终点;算法){循环体}
+        <br><br><br>
+    <ul>
+        <li>起始表达式:只在循环初次执行,用来规定起始值</li>
+        <li>布尔表达式:每次循环都会执行,布尔值为true,继续执行循环体,布尔值为false,结束循环</li>
+        <li>迭代因子:每次循环末尾执行,让循环变量重复同一变化的式子,通常递增循环变量(比如自增)</li>
+    </ul>
+    <ul type="cricle"><b>注意事项</b>
+        <li>保留分号,三个表达式可以删,全都省略则会造成死循环</li>
+        <li>表达式1 可以放for循环的前一行,表达式3可以放循环体的最后一句,语法意思不变,但怎么做会让代码不易读</li>
+    </ul>
+    </p>
+    <script src="./script.js">
+        // 打印0-200里的所有偶数
+        // for(var n = 0 ;n <=200 ; n++){
+        //     console.log(n%2==0?n:"");
+        // }
+        for (var n = 0; n <= 200; n++) {
+            if (n % 2 == 0) { console.log(n) }
+        }
+
+    </script>
+</body>
+
+</html>

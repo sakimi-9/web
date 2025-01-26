@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组方法 join</h3>
+    <table border="2px">
+        <tr>
+            <td>用处:</td>
+            <td>用于规定（插入的）分割符对数组进行分割，以字符串的形式。 分割符插入可见<br><br>对标字符串的方法 split，返回以数组形式，分割符移除不可见 <br><br>可用这两个方法将数组字符串相互转化
+            </td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>数组/arr.join（'分割符'） <br>arr.join("") <br>arr.join()</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>可以规定要插入的分割符，返回以字符串形式并显示分割符</li>
+                    <li>分割符为空字符串时，字符串会被全部合并，以字符串形式返回整串字符</li>
+                    <li>join()空格内为空时，代表没有规定分割符， <b>(默认以数组内间隔的逗号来分割)</b>以字符串形式返回用逗号进行全分割的字符串</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <strong>split与join三种形式区别</strong><br><br>
+    <i>都不改变原数组或原字符串</i>
+    <table border="2px">
+        <tr>
+            <td> </td>
+            <td>("分割符")</td>
+            <td>("")</td>
+            <td>()</td>
+        </tr>
+        <tr>
+            <td>数组.join() <br><br>返回以字符串形式</td>
+            <td>插入（数组中未有的）分割符分割 <br><br>分割符返回后可见</td>
+            <td>全合并 成一个完整的字符串</td>
+            <td>全分割 以数组中默认间隔的逗号来分割各字符</td>
+        </tr>
+        <tr>
+            <td>字符串.split() <br><br>返回以数组形式</td>
+            <td>移除（字符串中已有的）分割符分割 <br><br>分割符返回后不可见</td>
+            <td>全分割 成一个各元素之间用逗号间隔的数组</td>
+            <td>全合并 只有一个完整字符串为元素的数组</td>
+        </tr>
+    </table>
+
+    <script>
+        //用split与join 将字符串与数组相互转换
+        var str = "昔人已乘黄鹤去，此地空余黄鹤楼。 黄鹤一去不复返，白云千载空悠悠。晴川历历汉阳树，芳草萋萋鹦鹉洲。暮乡关何处是？烟波江上使人愁。";
+        // var arr = ["昔人已乘黄鹤去，", "此地空余黄鹤楼。", " 黄鹤一去不复返，", "白云千载空悠悠。", "晴川历历汉阳树，", "芳草萋萋鹦鹉洲。", "暮乡关何处是？", "烟波江上使人愁。"];
+        arr = arr.split("");//全分割 数组形式 逗号间隔
+        // arr = arr.join("");//全合并 字符串形式 完整字符串
+        // arr = arr.split();//全合并 数组一个元素 完整字符串
+        arr = arr.join();//全分割 字符串 数组的默认间隔逗号分割每个子字符
+        console.log(str);
+        // console.log(arr);
+    </script>
+</body>
+
+</html>

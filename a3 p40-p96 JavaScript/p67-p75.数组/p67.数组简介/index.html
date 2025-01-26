@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组的简介</h3>
+    <b>数组的定义:</b><i>数组（array）是按次序排列的一组值</i><br><br>
+    <b>格式:</b><span>[元素，元素（...）]</span>
+    <ul><b>描述:</b>
+        <li>下标:每个元素的位置都有下标（编号），整个数组用方括号表示[]</li>
+        <li>数据类型:数组里的元素可以是任何数据类型的数据，数值，字符串，布尔值，也包括数组</li>
+        <li>多维数组:数组里嵌套数组，叫多维数组，比如，嵌套两层，叫二维数组</li>
+        <li>数组越界:指定数组下标时，下标大于数组最大下标，则返回undefined</li>
+        <li>length:数组的length属性，可以返回数组的长度<br>有括号的叫方法，无括号的叫属性</li>
+    </ul>
+    <ol><b>数组下标的使用:</b>
+        <li>数组可先声明个空数组，再用数组名[下标]来指定赋值，赋值时不用var</li>
+        <li>数组名[下标]也可来指定返回的值</li>
+        <li>多维数组时，数组名[一维数组下标][二维数组下标]...[n维数组下标]</li>
+    </ol>
+</body>
+<script>
+    // array 数组 什么数据类型的都可以储存在其中
+    var array = [1, "2", [3, 4, 5], true];
+    array[4] = false;
+    console.log(array);
+
+    //array 数组的length属性 返回数组的长度
+    console.log(array.length); //5
+
+    // array 数组嵌套的下标指定
+    console.log(array[2][2]);//5
+
+    // array 数组越界 下标超出范围，返回undefined
+    console.log(array[2][99]);//undefined
+
+</script>
+
+</html>

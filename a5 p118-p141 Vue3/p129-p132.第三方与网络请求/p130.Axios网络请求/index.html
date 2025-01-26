@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: left;
+        }
+
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>Axios网络请求 描述</td>
+            <td>Axios是一个第三方的基于promise对象的网络请求库 <br>
+                Axios的命令行安装:cnpm install --save axios <br>
+                vue中的网络请求，不论是Axios还是其他的，都是写在生命周期函数mounted(){}中，渲染完成对网络请求进行调用
+            </td>
+        </tr>
+        <tr>
+            <td>-------</td>
+        </tr>
+        <tr>
+            <td>局部引入</td>
+            <td>局部引入描述:在单个组件文件中引入，只能让单个组件局部使用<br>
+                组件引入:import axios from 'axios'<br>
+                Axios网络请求按照method请求方式分为get与post
+                <br>post有参数要求和参数转字符串的安装依赖， 安装依赖:cnpm install --save querystring 要使用则需要引入:import querystring from
+                'querystring' 转换参数格式:qs.stringfy({})
+                <br> 它们都有快捷引入方式
+            </td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>格式:mounted(){}中 axios({method:"get",
+                url:"地址"
+                }).then(res => {对res的属性进行处理（如，res.data）}) <br><br>
+                格式解释:axios函数（）内传入参数，是以对象的形式传入，里面有method网络请求形式，还有url请求的地址，post的还有参数设置,写在data:{}里<br>
+                axios基于promise对象，它也是用.then函数来处理数据，res是数据对象，数据在里面以对象的形式存储，处理时要对res的属性进行调用
+            </td>
+        </tr>
+        <tr>
+            <td>post</td>
+            <td>格式:mounted(){}中 axios({method:"post",
+                url:"地址",
+                data:qs.stringfy({
+                user_id:"",
+                password:"",
+                verification_code:""
+                })
+                }).then(res => {对res的属性进行调用处理 （如，res.data）})</td>
+        </tr>
+        <tr>
+            <td>快捷请求</td>
+            <td>快捷请求是把method的方式值，提了出来 <br>
+                axios.get({url:""}).then(res => res.data) <br>
+                axios.post({url:"",data:qs.stringfy({})}).then(res => res.data)
+            </td>
+        </tr>
+        <tr>
+            <td>-------</td>
+        </tr>
+        <tr>
+            <td>全局引入</td>
+            <td>全局引入描述:在main.js总入口文件引入<br>
+                import axios from "axios"
+
+                const app =createApp(App);
+                app.config.globalProperties.$axios = axios;
+                app.mount('#app')
+                <br><br> 让全局组件文件使用，使用（格式上axios=>）this.$axios在组件中调用即可
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

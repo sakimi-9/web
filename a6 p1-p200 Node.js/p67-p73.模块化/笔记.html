@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../p33-p40.HTTP协议/img_style.css">
+    <link rel="stylesheet" href="../p32.path模块/table style.css">
+</head>
+
+<body>
+    <h1>Node.js 模块化</h1>
+    <h3>模块化 介绍</h3>
+    <table>
+        <tr>
+            <td>什么是模块化与模块</td>
+            <td>将一个复杂的程序文件依据一定规则（规范）拆分成多个文件的过程称之为 模块化<br>
+                其中拆分出的 每个文件就是一个模块<br>
+                模块的内部数据是私有的，不过模块可以暴露内部数据以便其他模块使用</td>
+        </tr>
+        <tr>
+            <td>什么是模块化项目</td>
+            <td>编码时是按照模块一个一个编码的， 整个项目就是一个模块化的项目，跟vue组件化开发一样的</td>
+        </tr>
+        <tr>
+            <td>模块化好处</td>
+            <td>
+                <ol>
+                    <li>减少变量命名冲突</li>
+                    <li>高复用性，代码及函数可以跨文件使用</li>
+                    <li>高维护性，针对单个出问题的模块进行维护即可</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3>暴露数据（导出模块）</h3>
+    <b> 模块暴露数据的方式有两种：
+        <ol>
+            <li>module.exports = value</li>
+            <li>exports.name = value</li>
+        </ol>
+    </b>
+    <table>
+        <tr>
+            <td>注意事项
+            </td>
+            <td>使用时有几点注意：module.exports 可以暴露 任意 数据 <br>
+                不能使用 exports = value 的形式暴露数据，模块内部 module 与 exports 的隐式关系<br>
+                exports = module.exports = {} ，require 返回的是目标模块中 module.exports 的值</td>
+        </tr>
+        <tr>
+            <td>exports.name = value</td>
+            <td>是将value在exports对象里创建同名属性并赋值</td>
+        </tr>
+        <tr>
+            <td>举例解释
+                <br>不能使用 exports = value 的形式暴露数据
+            </td>
+            <td> exports===module.exports 为true <br>
+                因为 exports=module.exports={}<br>
+                但 module.exports可以暴露任何数据，exports不行<br>
+                因为 require引入直接指向module.exports<br>
+                exports = 'sss' //{}<br>
+                module.exports = 'aaa'// aaa<br><br>
+                exports.name = value 相当于=> exports=module.exports={name:value}
+            </td>
+        </tr>
+    </table>
+    <h3>补充 js里的jq(jquery)与json 是什么</h3>
+    <table>
+        <tr>
+            <td>jquery</td>
+            <td>jQuery 是建立在 JavaScript 基础上的一套工具库(js库)，用于简化常见的编程任务。<br><br><br>
+                jQuery通过提供一系列简化DOM树遍历、事件处理、动画和Ajax交互的方法，使得JavaScript编程更加简单。<br>
+                它提供了一种更简洁、更一致的方式来编写JavaScript代码，减少了对不同浏览器兼容性的担忧。
+            </td>
+        </tr>
+        <tr>
+            <td>json</td>
+            <td>定义：JSON是一种轻量级的数据交换格式,易于人阅读和编写，同时也易于机器解析和生成。<br><br><br>
+                用途：JSON常用于Web应用程序中作为数据传输的格式，比如从服务器发送数据到客户端，或反之。<br>
+                语法：JSON基于JavaScript的一个子集，主要使用对象和数组两种结构来表示数据。JSON只能包含字符串键名的对象和基本类型的值（数字、字符串、布尔值、null），以及数组和嵌套的对象。</td>
+        </tr>
+    </table>
+    <h3>导入模块</h3>
+    <b>在模块中使用 require 传入文件路径即可引入文件<br>
+        如： const test = require('./me.js');
+    </b>
+    <table>
+        <tr>
+            <td><strong>require 使用的一些注意事项：</strong></td>
+            <td>
+                <ol>
+                    <li>对于自己创建的模块，导入时路径建议写 相对路径 ，且不能省略 ./ 和 ../ <br>
+                        fs模块里的路径，建议写绝对路径，因为终端工作目录可能会干扰相对路径<br>
+                        而这里，require('相对路径')，不会被工作目录干扰，也更加省时省力<br>
+                        省略./等路径标识，require会找不到文件，这是导入nodejs内置模块的格式
+                    </li><br>
+                    <li>js 和 json 文件导入时可以不用写后缀<br>
+                        c/c++编写的 node 扩展文件也可以不写后缀，但是一般用不到</li><br>
+                    <li>如果导入其他扩展名的文件，会按照处理js文件那样进行处理</li><br>
+                    <li>如果导入的路径是个文件夹，则会 首先 检测该文件夹下 package.json 文件中 main 属性对应路径的文件，<br>
+                        如果存在则导入，反之如果文件不存在会报错。<br>
+                        如果 main 属性不存在，或者 package.json 不存在，则会尝试导入文件夹下的 index.js 再尝试index.json ，如果还是没找到，就会报错</li><br>
+                    <li>导入 node.js 内置模块时(fs path url 等等)，直接 require 模块的名字即可，无需加 ./ 和 ../</li><br>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>关于 json与js的数据格式转换</td>
+            <td>JSON.parse(json_object)=>jscode 解析json对象转为jscode <br><br>
+                JSON.stringify(js_object)=>json形式 转js对象为json形式 <br><br>
+                <a href="./3导入模块/me.js">具体过程</a>
+            </td>
+        </tr>
+    </table>
+    <h3>导入模块的基本流程</h3>
+    <b>实在不理解也不影响做项目</b>
+    <table>
+        <tr>
+            <td>require 导入 自定义模块 的基本流程 </td>
+            <td>
+                <ol>
+                    <li>将相对路径转为绝对路径，定位目标文件</li>
+                    <li>缓存检测</li>
+                    <li>读取目标文件代码</li>
+                    <li>包裹为一个函数并执行（自执行函数）。通过 arguments.callee.toString() 查看自执行函数</li>
+                    <li>缓存模块的值</li>
+                    <li>返回 module.exports 的值</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>流程图 </td>
+            <td><img src="./资料图/自定义模块require流程图.png" alt="无"></td>
+        </tr>
+    </table>
+    <h3>CommonJS 规范</h3>
+    <span>commonjs是一种模块化标准</span>
+    <b>面试可能问<br>
+        哪些程序使用了commonjs模块化规范--nodejs <br><br>
+        nodejs模块与commonjs的关系--二者关系有点像 JavaScript 与 ECMAScript,nodejs模块是对CommonJS 的一种实现,CommonJS
+        是nodejs的一种规范（/标准/规格）<br><br>
+        module.exports 、 exports 以及 require 这些都是 CommonJS 模块化规范中的内容。<br>
+    </b>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <h3>字符串</h3>
+        <li>组成:是由零个或多个字符组成的，放在单/双引号中</li>
+        <li>引号嵌套:异种的引号可以直接相互嵌套 | 比如 “ ' ' ” 或 ' “ ” ' <br>但同种的不能直接嵌套，因为最近的引号会进行配对，导致中间的字符会空出来，从而报错 <br>要想同种引号嵌套不报错，则需要转义
+        </li>
+        <li>转义:用于引号嵌套转义或字符串换(分)行转义，在每个引号前或者需要换行处插入反斜杠\</li>
+        <li>字符串换行:代码中，字符串默认只能写在一行中，分成多行会报错 <br>要想换行不报错，则需转义</li>
+        <li>length:字符串的length属性，用于读取字符串的长度（字符个数），只读属性 <br>格式:document.write(字符串的变量名(字符串也行).length)</li>
+    </ul>
+    <script>
+        document.write('<br>');
+
+        // 引号嵌套
+        document.write('注意力“很宝贵”');
+        document.write('<br>');
+        document.write("时间'很紧张'");
+        document.write('<br>');
+        document.write("只做\"一件事\"");
+        document.write('<br>');
+        document.write('其他\'屁事\'都不要管');
+        document.write('<br>');
+
+        // 代码内，字符串分行
+        document.write('<br>');
+        document.write('昔人已乘黄鹤去，此地空余黄鹤楼。\
+                        黄鹤一去不复返，白云千载空悠悠。\
+                        晴川历历汉阳树，芳草萋萋鹦鹉洲。\
+                        日暮乡关何处是？烟波江上使人愁。');
+        document.write('<br>');
+        //  输出读取的字符串的长度   
+        document.write('昔人已乘黄鹤去，此地空余黄鹤楼。\
+                        黄鹤一去不复返，白云千载空悠悠。\
+                        晴川历历汉阳树，芳草萋萋鹦鹉洲。\
+                        日暮乡关何处是？烟波江上使人愁。'.length);
+
+
+
+    </script>
+</body>
+
+</html>

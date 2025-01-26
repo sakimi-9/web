@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>数组方法 Array.isArray</h3>
+    <b>Array.isArray 判断变量是否为数组，是则返回 <i>true</i>，不是则返回 <i>false</i> <br>主要弥补typeof对数组的判断不准确，只能判断到object，而不是array</b>
+    <b>格式</b><i>Array.isArray(变量)</i>
+    <script>
+        // typrof 对数组的判断 object
+        var arr = [1,2,3,4];
+        console.log(typeof arr);//object
+
+        // Array.isArray 对数组的判断 true
+        console.log(Array.isArray(arr));//true
+    </script>
+</body>
+</html>

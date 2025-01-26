@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #content {
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgb(112, 132, 145);
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn">发送请求</button>
+    <button class="btn">取消请求</button>
+    <div id="content"></div>
+    <script>
+        //dom树获取标签对象
+        const btn = document.getElementsByClassName('btn');
+        let content = document.getElementById('content');
+
+        //标识变量
+        let sending = false;//是否处于发送中,默认为否   用于处理重复发送(减少服务器压力)
+
+        let xhr = null;//外层声明 内层赋值 让它成为全局变量
+        //事件绑定
+        btn[0].onclick = () => {//发送请求
+            if (sending) {//重复发送测试 可用浏览器的设置3G
+                xhr.abort();
+            }//开始Ajax请求前,先检测是否处于重复发送中,如果是,则 取消 上一个请求
+
+            //Ajax基本操作
+            //1.Ajax对象实例化
+            xhr = new XMLHttpRequest();
+            //2.初始化
+            xhr.open('GET', 'http://localhost:3000/server');
+
+            sending = true;//处于发送时,设置为是
+
+
+            //3.发送
+            xhr.send();
+
+            //4.事件绑定
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {//检测请求是否处理完毕
+                    sending = false;//发送完毕,重新设置为默认值false
+                    if (xhr.status >= 200 && xhr.status < 300) {//检测http通信是否正常
+                        content.innerHTML = xhr.response;
+                    }
+
+                }
+            }
+
+        }
+
+        btn[1].onclick = () => {//取消请求
+            //xhr.abort();  abort 中止    ajax请求的readystate在变成4之前,可以取消请求
+            xhr.abort();
+        }
+    </script>
+</body>
+
+</html>

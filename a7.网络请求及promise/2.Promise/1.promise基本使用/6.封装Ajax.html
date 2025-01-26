@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+           * 封装一个函数 sendAJAX 发送 GET AJAX 请求
+           * 参数   URL
+           * 返回结果 Promise 对象
+           */
+
+        let sendAJAX = (url) => {
+            return new Promise((resolve, rejcet) => {
+                // ajax
+                //1.ajax对象实例化
+                const ajax = new XMLHttpRequest();
+                //2.初始化
+                ajax.responseType = "json";//将请求的respond自动转json
+                ajax.open('GET', url);
+                //3.发送
+                ajax.send();
+                //4.处理返回结果
+                ajax.onreadystatechange = () => {
+                    if (ajax.readyState == 4) {//检测ajax状态是否就绪
+                        if (ajax.status >= 200 && ajax.status < 300) {//检测路由通信
+                            resolve(ajax.response);
+                        }
+                        else {
+                            rejcet(ajax.status);
+                        }
+                    }
+                }
+            })
+        }
+        sendAJAX('https://baijiahao.baidu.com/s?id=1815650862314754148').then(
+            value => {
+                console.log(value);
+            },
+            reason => {
+                console.warn(reason);//通了,status为200,但百度那边,没有设置该网页url的Ajax跨域允许
+
+            }
+        )
+    </script>
+</body>
+
+</html>

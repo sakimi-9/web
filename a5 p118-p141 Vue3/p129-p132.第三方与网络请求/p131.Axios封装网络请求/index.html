@@ -1,0 +1,95 @@
+Axios 是一个基于 promise 的 HTTP 库，可以用于浏览器和 node.js 中。它易于使用且功能强大，支持多种请求类型，如 GET、POST、PUT、DELETE
+等，并能处理请求和响应的配置、拦截请求和响应、转换请求和响应数据等。在实际项目开发中，为了提高代码的可维护性和复用性，通常会对 Axios 进行封装，以适应不同的项目需求。下面简单介绍如何使用 Axios
+进行网络请求以及如何对其进行基本的封装。
+
+### 基础使用
+
+首先，确保你的项目中已安装 Axios。如果未安装，可以通过 npm 或 yarn 安装:
+
+```bash
+npm install axios
+# 或
+yarn add axios
+```
+
+然后，你可以直接使用 Axios 发起请求:
+
+```javascript
+import axios from 'axios';
+
+// 发起 GET 请求
+axios.get('https://api.example.com/data')
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error('Error fetching data:', error);
+});
+
+// 发起 POST 请求
+axios.post('https://api.example.com/data', {
+key: 'value'
+})
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error('Error posting data:', error);
+});
+```
+
+### 封装网络请求
+
+封装的目的主要是统一处理错误、设置默认配置（如基础URL、超时时间、请求头等）、添加请求/响应拦截器等。以下是一个简单的 Axios 封装示例:
+
+```javascript
+// 创建 axios 实例并设置默认配置
+const instance = axios.create({
+baseURL: 'https://api.example.com',
+timeout: 10000, // 请求超时时间
+headers: {'X-Custom-Header': 'foobar'}
+});
+
+// 添加请求拦截器
+instance.interceptors.request.use(config => {
+// 在发送请求之前做些什么，比如添加Token
+if (localStorage.getItem('token')) {
+config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+}
+return config;
+}, error => {
+// 对请求错误做些什么
+return Promise.reject(error);
+});
+
+// 添加响应拦截器
+instance.interceptors.response.use(response => {
+// 对响应数据做点什么
+return response.data;
+}, error => {
+// 对响应错误做点什么，比如根据错误码提示用户
+if (error.response.status === 401) {
+// 处理未授权的情况
+}
+return Promise.reject(error);
+});
+
+// 导出封装后的 axios 实例
+export default instance;
+```
+
+之后，在其他模块中使用封装后的实例进行网络请求:
+
+```javascript
+import myAxios from './myAxios';
+
+myAxios.get('/data')
+.then(data => {
+console.log(data);
+})
+.catch(error => {
+console.error('Request failed:', error);
+});
+```
+
+通过这样的封装，你可以更加灵活地管理请求配置，提升代码的可读性和可维护性，同时便于统一处理网络请求中的各种情况，如错误处理、鉴权等。

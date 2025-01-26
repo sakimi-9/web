@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 4px solid rgb(162, 235, 107);
+            border-collapse: collapse;
+            width: 700px;
+            height: 400px;
+        }
+
+        td {
+            border: 1px solid rgb(107, 178, 229);
+            color: chocolate;
+            background-color: #f3d5fc;
+            text-align: left;
+            vertical-align: bottom;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h3>表格table属性</h3>
+    <table>
+        <tr>
+            <td>table属性</td>
+            <td>值</td>
+        </tr>
+        <tr>
+            <td>border边框设置 |CSS里只对table设置border，那么只有表格的最外边框会生效</td>
+            <td>线的粗细npx(空格)线的形式（空格）线的颜色 |CSS里的border有并列的三个值，这三个值都要设置才能使样式生效 <br>线的大小要带单位，线的形式solid(实线)为常用，线的颜色也不要忘</td>
+        </tr>
+        <tr>
+            <td>border-collapse边框折叠</td>
+            <td>collapse |双线框变单线框</td>
+        </tr>
+        <tr>
+            <td>width·height设置表格的宽与高</td>
+            <td>npx</td>
+        </tr>
+    </table>
+    <h3>单元格td属性</h3>
+    <table>
+        <tr>
+            <td>td属性</td>
+            <td>值</td>
+        </tr>
+        <tr>
+            <td>border边框设置 |CSS里只对td设置border，那么只有单元格的边框会生效</td>
+            <td>线的粗细npx(空格)线的形式（空格）线的颜色 |CSS里的border有并列的三个值，这三个值都要设置才能使样式生效 <br>线的大小要带单位，线的形式solid(实线)为常用，线的颜色也不要忘</td>
+        </tr>
+        <tr>
+            <td>background-color单元格背景颜色·color字体颜色</td>
+            <td>单词·rgb·rgba·十六进制</td>
+        </tr>
+        <tr>
+            <td>text-align·vertical-align 文字水平对齐方式·文字垂直对齐方式 <br>默认为左中对齐</td>
+            <td>left center right|top center(middle) bottom</td>
+        </tr>
+        <tr>
+            <td>padding单元格内容填充（内边距，文字与单元格边框的距离）<br>用这个文字就自动以中中方式对齐<br>或者用以下来具体设置<ul>
+                    <li>padding-(top·bottom·left·right)</li>
+                    <li>padding(两个值时):上下 左右 </li>
+                    <li>padding(三个值时):上 左右 下 </li>
+                    <li>padding(四个值时 顺时针):上 右 下 左 </li>
+                </ul>
+            </td>
+            <td>npx</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+<!-- 启用与取消注释:ctrl+/ -->

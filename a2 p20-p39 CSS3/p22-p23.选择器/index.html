@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            color: red;
+        }
+
+        em {
+            color: aqua;
+        }
+
+        .em1 {
+            color: coral;
+        }
+
+        .em2 {
+            font-size: 30px;
+        }
+
+        #span1 {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>选择器</h2>
+    <p>内部样式时,写在头部head的style里;<br>外部样式时,写在单独的.CSS文件中</p>
+    <table border="2">
+        <tr>
+            <td><b>全局选择器</b></td>
+            <td>作用:全局样式初始化(覆盖标签自带的样式)</td>
+            <td></td>
+            <td>用法:CSS代码中 *{声明(样式)}</td>
+            <td>比如:<i>全局选择器示例</i></td>
+        </tr>
+        <tr>
+            <td><b>元素选择器</b></td>
+            <td>作用:对某个标签进行全局(部)声明</td>
+            <td></td>
+            <td>用法:CSS代码中 标签名{声明}</td>
+            <td>比如:<em>元素选择器示例</em></td>
+        </tr>
+        <tr>
+            <td><b>class类选择器</b></td>
+            <td>作用及特点:非常灵活,使用率最高<br>可重复使用</td>
+            <td>命名规则:只能使用英文·数字·-号,不能以数字开头</td>
+            <td>用法:CSS代码中 .类名{声名} (泪点) <br>HTML元素中 <标签名 class=“类名(多个类名时用空格隔开)”>(!注意 class 不能在同个标签中重复出现)</td>
+            <td>比如:<em class="em1 em2">类选择器示例</em></td>
+        </tr>
+        <tr>
+            <td><b>id选择器</b></td>
+            <td>作用及特点:用于需要特殊样式的<strong>一个标签</strong><br>不能重复使用,id只能出现一次</td>
+            <td>命名规则:也是不能以数字开头</td>
+            <td>用法:CSS代码中 #id名{声明} (敬爱地)<br>HTML元素中 <标签名 id=“id名”>
+            </td>
+            <td>比如:<span id="span1">id选择器示例</span></td>
+        </tr>
+    </table>
+    <h3>选择器的合并用法</h3>
+    <p>选择器1,选择器2,选择器n{共用的同一套声明} <br>
+        比如:<a href="./选择器的合并用法示例 index.html">选择器的合并用法示例</a><br>
+    </p>
+    <h3>内联样式</h3>
+    <p style="color: darkslateblue;font-size: 15px;">这是一个内联样式示例</p>
+    <h3>CSS(行内样式与各选择器)的优先级</h3>
+    <ol>
+        <li>内联样式</li>
+        <li>id选择器</li>
+        <li>class类选择器</li>
+        <li>元素选择器</li>
+        <li>全局选择器</li>
+    </ol>
+    <table border="2">
+        <tr><strong>越特殊,优先级越高</strong>
+            <td></td>
+            <td>内联样式</td>
+            <td>id选择器</td>
+            <td>class类选择器</td>
+            <td>元素选择器</td>
+            <td>全局选择器</td>
+        </tr>
+        <tr>
+            <td>相当于</td>
+            <td>个人</td>
+            <td>家庭</td>
+            <td>团体</td>
+            <td>群体</td>
+            <td>全体</td>
+        </tr>
+        <tr>
+            <td>优先级排名</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+    </table>
+</body>
+
+</html>

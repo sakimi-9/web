@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/login" method="post">
+        <!--action也可以不写全，写成/login，会以当前网页的url自动补全，但前提是在当前网页  -->
+        username: <input type="text" name="username"> <br>
+        password: <input type="password" name="password">
+        <!-- 切记，表单控件，输入框这种，一定要写好 name属性，否则，获取请求体时，读取不到数据，因为键值对对应不上 -->
+        <button type="submit">commit</button>
+    </form>
+</body>
+
+</html>

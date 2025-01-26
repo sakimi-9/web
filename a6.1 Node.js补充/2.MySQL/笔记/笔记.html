@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF8">
+    <meta name="viewport" content="width=devicewidth, initialscale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../1.ES模块化写法/CSS/img_style.css">
+    <link rel="stylesheet" href="../../1.ES模块化写法/CSS/table style.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>MySQL与MongoDB 区别</td>
+            <td>
+                <ol>
+                    MySQL 和 MongoDB 是两种不同类型的数据库管理系统，主要区别在于它们的数据存储方式和查询语言：<br>
+                    <li>MySQL是一个关系型数据库，使用结构化查询语言（SQL）进行数据操作。它将数据存储在表格中，每一行对应一条记录，每一列对应一种属性。MySQL
+                        支持事务处理，并且可以很好地处理复杂查询和多表连接。MySQL通常通过垂直扩展（增加单一服务器的能力）来提升性能。
+                        。</li><br>
+                    <li>MongoDB是一个非关系型（NoSQL）数据库，它以文档的形式存储数据，通常这些文档是 JSON 格式的 BSON 文档。MongoDB
+                        不需要预先定义表格结构，并且易于扩展，适合处理大量非结构化数据。MongoDB设计之初就考虑到了水平扩展（增加更多的服务器来分散负载），适合构建分布式系统</li>
+                    <br>
+                    <!-- BSON（Binary JSON）是 MongoDB 使用的一种二进制形式的数据交换格式。它是 JSON 的一个二进制表示形式 -->
+                    <li>简而言之：
+                        MySQL：关系型，基于表格，使用 SQL 查询。
+                        MongoDB：非关系型，基于文档，使用 BSON 存储数据。</li>
+                </ol>
+            </td>
+
+        </tr>
+        <tr>
+            <td>基本常用的SQL语句</td>
+            <td>这个<a href="./常用SQL语句.md">文档md</a> </td>
+        </tr>
+        <tr>
+            <td>批量插入要用到 数组方法 map与flatMap</td>
+            <td>看看使用方法<a href="./arr.map与flatMap.md">arr.map与flatMap.md</a> <br><br>
+                批量插入 把values放到sql的逻辑 [ a,b,c,d,e,f] ->(?,?),(?,?),(?,?) => (a,b),(c,d),(e,f) 所以用flatMap </td>
+        </tr>
+        <tr>
+            <td>上面那条可以不用看 批量操作看看这个更好</td>
+            <td><a href="../Nodejs操作MySQL/4.改-更改数据.js">更改数据</a> 和 <a href="../Nodejs操作MySQL/3.删-删除数据.js">删除数据</a> </td>
+        </tr>
+        <tr>
+            <td>nodejs操作mysql 连接数据库 与 curd</td>
+            <td>都去好好看看 对应的代码及注释</td>
+        </tr>
+        <tr>
+            <td>在express中 nodejs操作mysql 代码模块化 </td>
+            <td>思路与逻辑跟mongodb的一样,看看 <a
+                    href="../../../a6 p1-p200 Node.js/p130-p155.Mongodb/p136-p148.Mongoose/mongoose模块化/">这个文件夹就行</a>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

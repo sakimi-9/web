@@ -1,0 +1,23 @@
+{
+  "id": "4555762",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2087554",
+      "name": "设计",
+      "font_class": "sheji",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "15726889",
+      "name": "设计美工",
+      "font_class": "shejimeigong",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    }
+  ]
+}

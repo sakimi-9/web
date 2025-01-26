@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .result {
+            width: 200px;
+            height: 150px;
+            border: 2px solid rgb(233, 234, 4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result"></div>
+    <script>
+        //dom树 获取result数组的第一个标签
+        const result = document.getElementsByClassName('result')[0];
+
+        //事件绑定  最顶层的窗口 对象 键盘按下任意键触发  
+        window.onkeydown = () => {
+            //Ajax基本操作
+            //1.创建对象  实例化Ajax类
+            const xhr = new XMLHttpRequest();
+            //自动转化 JSON数据  设置Ajax请求回来的数据都为JSON后,xhr.response会自动将json转化成键值对形式
+            //告诉xhr,请求回来的数据类型都是json,要自动解析成键值对形式
+            xhr.responseType = "json";
+            //2.初始化
+            xhr.open('GET', 'http://localhost:3000/server-json-ie?t=' + Date.now());//在url后面加上不断自动变化的 查询字符串参数 
+            // 来让IE浏览器认为这是一个新的请求,来解决IE把ajax请求缓存后,再次发送同一请求 数据不会更新的问题
+
+            //3.发送
+            xhr.send();
+            //4.事件绑定
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        //手动转化 JSON数据  JSON.parse(jsondata)
+                        // const str = JSON.parse(xhr.response);
+                        // result.innerHTML = str.name;
+
+                        result.innerHTML = xhr.response.name;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

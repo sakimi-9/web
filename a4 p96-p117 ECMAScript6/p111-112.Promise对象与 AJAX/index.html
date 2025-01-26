@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Promise对象</h3>
+    <table border="2px">
+        <tr>
+            <td>promise</td>
+            <td>是异步编程的一种解决方案，比传统的 回调函数与事件 更加合理和强大，避免了回调地狱（即过多嵌套的回调函数导致的代码可读性和可维护性降低的问题），使得异步逻辑更加清晰和易于理解
+                <br>Promise是一种js原生的容器式的构造函数，用来封装异步操作，以同步操作的流程表达出来 <br>此外Promise对象提供统一的接口，让异步操作(比如 Ajax网络请求)更加简单</td>
+        </tr>
+        <tr>
+            <td>格式</td>
+            <td> function 函数名a (url){
+                const promise = Promise(function (resolve,reject){
+                异步操作（
+                声明异步对象 = new一个它的专属构造函数或者fn一个对应函数
+                url给对象的特定属性赋值或方法传参
+                成功时回调resolve（传入对象或其特定属性），失败时回调reject（new Error(错误声明【报错提示或传入特定属性来报错】)）
+                其他更多具体的调用对象属性及方法的操作
+                ）
+                })
+                return promise;
+                }
+                函数名a（'传入url的值'）.then(function(data){成功的结果处理（如，不同的网页操作,将data塞入显示图片）},function(error){失败的结果处理})
+            </td>
+        </tr>
+        <tr>
+            <td>格式解释</td>
+
+            <td>函数名a（url）
+                用于给promise对象传入异步对象的url和将promise里异步操作的结果通过return传出<br><br>Promise对象是一个构造函数，以赋值形式给他声明时，里面为函数形式，new
+                Promise(function(resolve,reject){异步操作函数体}) ，也可用箭头函数 <br><br>
+                调用函数a(传入url参数) 紧跟.then方法（回调两种结果的函数，利用传入的参数，进行相应的网页操作），data对应resolve的传入，error对应reject的传入<br><br>
+                url给对象的特定属性赋值或方法传参:进行url处理<br><br>
+                resolve(参数)，告诉promise对象这个参数是异步操作成功的 并向下传入，reject(参数)，告诉promise对象这个参数是异步操作失败的 并向下传入错误声明<br><br><br>
+                异步操作，最常用的ajax网络请求，它的具体异步操作到时候会给出，不用太担心，知道怎么运用promise对象就行【容器封装异步操作，结尾的调用函数传入参数及.then的两种结果的处理】
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>AJAX，全称为Asynchronous JavaScript and
+                XML（异步JavaScript和XML），是一种网页开发技术，它使得网页能够实现异步更新，也就是说，可以在不重新加载整个页面的情况下，从服务器获取数据并局部更新页面内容。这项技术极大地提升了用户体验，因为用户不再需要等待整个页面刷新就能看到新的数据
+                | 请求一次资源，反复使用</td>
+        </tr>
+    </table>
+    <div id="img1"></div>
+    <script>
+        function getimage(url) {
+            const promise = new Promise(function (resolve, reject) {
+                const image = new Image();
+                image.src = url;
+                image.onload = () => resolve(image);
+                image.onerror = () => reject(new Error("此图加载失败", url));
+            })
+            return promise;
+        }
+        var img1 = document.getElementById("img1");
+        getimage("https://c-ssl.duitang.com/uploads/blog/202111/26/20211126192219_04b64.thumb.1000_0.jpeg").then(data => { img1.appendChild(data) }, error => { img1.innerHTML = "图片加载失败" })
+
+
+
+        //promise对象
+        var getimage1 = function (url) {
+            const promise = new Promise(function (resolve, reject) {// resolve解决 reject拒绝
+                const img2 = new Image();
+                img2.src = url;
+                img2.onload = () => resolve(img2);
+                img2.onerror = () => reject(new Error("图片加载失败"));
+            })
+            return promise;
+        }
+        getimage1("https://img.zcool.cn/community/01ee815da9553ca8012163ba0d9620.jpg@1280w_1l_2o_100sh.jpg").then((data) => img1.appendChild(data), (error) => img1.innerHTML = error)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

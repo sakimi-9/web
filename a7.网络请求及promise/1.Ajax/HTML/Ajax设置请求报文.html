@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        //dom树获取标签
+        const result = document.getElementById('result');
+
+        //标签事件绑定  鼠标悬浮触发
+        result.addEventListener('mouseover', () => {      // 标签对象.addEventListenr('event',()=>{}) 增加事件监听函数
+            //Ajax基本操作
+            //1.创建对象  实例化Ajax类
+            const xhr = new XMLHttpRequest();
+            //2.初始化  
+            xhr.open('POST', 'http://localhost:3000/server');
+            //3.发送        设置请求头 注意拼写
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//设置请求头MIME类型  让浏览器拥有处理请求体里面的表单数据(键值对形式数据)的能力
+            xhr.setRequestHeader('name', 'xyz');//自定义请求头
+            // xhr.send('123321131'); 用xhr.send() 只能发送一遍 
+            xhr.send('a:300&b:600&c=500');//设置Ajax发送给浏览器的请求体   和 HTTP 里面的res.send()一样,支持发送的内容非常灵活
+            //4.事件绑定
+            xhr.onreadystatechange = () => {   //这种  对象.onevent  都是一种事件对象的属性并不直接是函数
+                if (xhr.readyState === 4) {//检测 ajax请求是否处理完毕
+                    if (xhr.status >= 200 && xhr.status < 300) {//检测 与服务器的HTTP通信 是否正常
+                        result.innerHTML = xhr.response;
+                    }
+
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

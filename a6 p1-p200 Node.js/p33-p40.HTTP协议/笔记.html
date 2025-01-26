@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../p32.path模块/table style.css">
+    <link rel="stylesheet" href="./img_style.css">
+</head>
+
+<body>
+    <p>
+    <h2>HTTP 协议</h2>
+    <p>http各种知识的网站，比如 请求报文的具体组成，各部分的用法，响应报文的各状态码代表什么
+        <br>有不清楚的都可以去里面查找<br><br><a
+            href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status</a>
+    </p>
+    <h4>概念</h4>
+    <table>
+        <tr>
+            <td>HTTP协议 介绍</td>
+            <td>HTTP（hypertext transport protocol）协议；<br>
+                中文叫超文本传输协议<br><br><br>
+                是一种基于TCP/IP的应用层通信协议<br><br>
+                这个协议详细规定了 浏览器 与 服务器 之间互相通信的规则。<br><br>
+                协议中主要规定了两个方面的内容<br><br>
+                客户端：用来向服务器发送数据，可以被称之为请求报文<br>
+                服务端：向客户端返回数据，可以被称之为响应报文<br>
+                报文：可以简单理解为就是一堆字符串</td>
+        </tr>
+    </table>
+    <h4>请求报文 组成</h4>
+    <table>
+        <tr>
+            <td>组成</td>
+            <td>
+                <ol>
+                    <li>请求行</li>
+                    <li>请求头</li>
+                    <li>空行</li>
+                    <li>请求体</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>请求行</td>
+            <td>组成<br>
+                <ol>
+                    <li>请求方法 <br>
+                        <ul>
+                            <li>GET 常用 主要用于获取数据</li>
+                            <li>PSOT 常用 主要用于新增数据</li>
+                            <li>PUT/PATCH 主要用于更新数据</li>
+                            <li>DELETE 主要用于删除数据</li>
+                        </ul>
+                    </li>
+                    <li>请求URL (统一资源定位器) 【定位资源在服务器的哪个位置】<br>
+                        <ul><span>例如：http://www.baidu.com:80/index.html?a=100&b=200#logo</span>
+                            <li>http： 协议（https、ftp、ssh等）</li>
+                            <li>www.baidu.com 主机名(主机名=服务器名+域名) www是服务器名，万维网提供的 baidu.com是域名 <br> 这个位置也可以是 主机名/域名/ip</li>
+                            <li>80 端口号</li>
+                            <li>/index.html 路径 资源所在位置的具体路径</li>
+                            <li>a=100&b=200 查询字符串 也就是额外上传参数</li>
+                            <li>#logo 哈希（锚点链接）</li>
+                        </ul>
+                    </li>
+                    <li>HTTP协议版本号</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>请求头</td>
+            <td> 格式为键值对『头名：头值』 <br>
+                暂时知道请求头格式就行，有不懂的，去<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status">网站</a>里面查找
+                <br><br>
+                常键头名及对应解释
+                <br>这个图点<a href="./常见请求头的头名及解释.png">链接</a>查看
+            </td>
+        </tr>
+        <tr>
+            <td>空行</td>
+            <td>就是空行，分隔请求体和上面的部分</td>
+        </tr>
+        <tr>
+            <td>请求体</td>
+            <td>请求体内容的格式是非常灵活的，<br><br>
+                （可以是空）==> GET请求， 也就是请求报文为GET请求方法时 请求体是空的<br>
+                （也可以是字符串，还可以是JSON）===> POST请求<br>
+                例如：<br>
+                字符串：keywords=手机&price=2000<br>
+                JSON：{"keywords":"手机","price":2000}<br></td>
+        </tr>
+        <tr>
+            <td>示例图片</td>
+            <td><img src="./请求报文组成示例图.png"></td>
+        </tr>
+    </table>
+    <h4>响应报文</h4>
+    <table>
+        <tr>
+            <td>响应报文 组成 <br>和请求报文形式一样</td>
+            <td>
+                <ol>
+                    <li>响应行</li>
+                    <li>响应头</li>
+                    <li>空行</li>
+                    <li>响应体</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>响应行</td>
+            <td>
+                <ol><span>举例： HTTP/1.1 200 OK</span>
+                    <li>协议版本号 HTTP/1.1</li>
+                    <li>响应状态码 200 | 404 | 500 响应状态码与下面响应状态描述一一对应</li>
+                    <li>响应状态描述 ok | Not Found | Internal Server Error</li>
+                </ol>
+                常见的响应状态码及描述还有<br>
+                <a href="./响应状态码及描述1.png">响应状态码及描述</a><br>
+                <a href="./各数字开头响应状态码及描述.png">各数字开头响应状态码及描述</a><br><br>
+                还有一些状态码，参考：
+                <a
+                    href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status</a>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td>响应头</td>
+            <td><a href="./常见响应头及描述.png">常见响应头及描述</a></td>
+        </tr>
+        <tr>
+            <td>空行</td>
+            <td>与上面内容分隔响应体的</td>
+        </tr>
+        <tr>
+            <td>响应体</td>
+            <td>响应体内容的类型是非常灵活的，常见的类型有 HTML、CSS、JS、图片、JSON</td>
+        </tr>
+    </table>
+    </p>
+</body>
+
+</html>

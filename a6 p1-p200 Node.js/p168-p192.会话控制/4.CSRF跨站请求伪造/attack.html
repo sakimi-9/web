@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSRF 演示</title>
+  <link rel="stylesheet" href="http://127.0.0.1:3000/logout">
+  <!-- link rel=stylesheet(样式表) href='路径/url'  这个标签本来是用于引入CSS资源的,引入内部静态资源或者外部网络资源
+   但 href='url' 本质是向网站 发送get请求 来获取资源  
+   但 可以发送get请求 结合着 浏览器的允许第三方cookie功能 意味着可以 进行 CSRF跨站请求伪造 来攻击 其他网站
+
+   这里是B网站让 A网站 logout-路由为get时,网站退出登录   
+   所以 解决方法为 将路由及相关配置(表单请求)改为post  来他提高安全性
+   所以说 一般获取及返回数据用get  对资源进行操作时不要用get  -->
+</head>
+
+<body>
+</body>
+
+</html>

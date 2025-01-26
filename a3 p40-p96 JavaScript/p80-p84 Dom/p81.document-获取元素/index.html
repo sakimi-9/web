@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #s1 {
+            background-color: #00ff00;
+        }
+
+        .s {
+            background-color: #c41e1e;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>document对象-方法 获取元素</h3>
+    <span><b>描述:</b>document属于Dom树的节点里的顶层节点。属于当前页面的原生 大 对象。<br><br>通过document顶层节点 可以返回整个页面的所有信息<br>通过调用
+        document对象里的各种方法来获取元素，以此用js对元素进行增删改查</span>
+    <ul><b>通过document对象获取元素的常用方法</b>
+        <li>document.getElementsByTagName("标签")[下标] <br>后面下标省略时，以数组形式返回<b>该标签</b> 的集合 <br>下标指定时，返回数组内该位置的标签及其所有信息
+            <br>最常用</li><br><br>
+        <li>document.getElementsByClassName("类名")[下标]<br> 括号里的参数，类名可写一个或多个 | 后面下标省略时，以数组形式返回<b>含该类名的标签</b> 的集合
+            <br>下标指定时，返回数组内该位置的标签及其所有信息 <br>最常用</li><br><br>
+        <li>document.getElementById("id")<br>后面不用写下标，因为id唯一且不可重复使用<br>返回含该id的标签及所有信息 <br>常用</li><br><br>
+        <li>document.querySelector("CSS选择器") <br>类选择器时 .号索引+类名 <br>id选择器时 #号索引+id
+            <br><br>后面不用写下标，因为只返回匹配到符合条件的第一个标签及其所有信息 <br>如果没有匹配到，则返回null <br>常用</li><br><br>
+        <li>document.querySelectorAll("CSS选择器")[下标]<br>类选择器时 .号索引+类名 <br>id选择器时 #号索引+id
+            <br>后面下标省略时，以伪数组形式NodeList返回<b>使用该类选择器的标签</b> 的集合 （id选择器时省略下标）<br>下标指定时，返回NodeList内该位置的标签及其所有信息
+            <br><br>也可以当d.gEBtgname来使用，以NodeList的形式返回该标签集合的伪数组 <br>常用</li><br><br>
+        <li>document.getElementsByName("标签里定义的名称")[下标]<br> 后面下标省略时，以数组形式返回<b>含该标签名称的标签</b> 的集合
+            <br>下标指定时，返回数组内该位置的标签及其所有信息<br>使用极少</li><br><br>
+    </ul>
+    <div class="s" name="sl">11</div>
+    <div class="s" name="sl">222</div>
+    <div id="s1">234</div>
+    <script>
+        console.log(document.getElementsByTagName("div"));//输出 以数组形式返回div标签集合
+        console.log(document.getElementsByClassName("s")[0]);//输出 以数组形式返回使用类名为s 的标签集合  并指定位置为0的标签及所有信息
+        console.log(document.getElementById("s1"));//输出 使用id为s1的标签及所有信息
+        console.log(document.getElementsByName("sl")[1]);//输出 以数组形式返回标签内名称定义为s1的标签集合  并指定位置为1的标签及所有信息
+        console.log(document.querySelectorAll(".s"));//输出 返回类选择器为.s的NodeLits  NodeList相当于没有中括号[]的伪数组
+        console.log(document.querySelector("#s1"));//输出 返回使用id选择器为#s1的标签及所有信息
+    </script>
+</body>
+
+</html>

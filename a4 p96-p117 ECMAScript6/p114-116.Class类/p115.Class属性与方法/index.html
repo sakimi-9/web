@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Class属性与方法</h3>
+    <table border="2px">
+        <tr>
+            <td>实例属性</td>
+            <td>类里的constructor构造函数和里面的属性，可以被类实例调用，被称为实例属性 <br>实例属性里构造函数和实例方法的this指向，因为实例的属性值传参后赋值给this.属性，所以this.属性
+                this.方法的this都是指向实例</td>
+        </tr>
+        <tr>
+            <td>实例方法</td>
+            <td>类里的方法，可以被类实例调用，被称为实例方法 <br>里面用this指向实例的属性值</td>
+        </tr>
+        <tr>
+            <td>静态方法</td>
+            <td>要创建静态方法，则要在创建的方法前 加上static关键字，静态方法在类里，静态方法是类的专属方法，实例不可调用不可继承（static 公共的，也就是不被实例特殊专用的）<br>调用静态方法:类名.方法
+                <br><br>创建格式:<br>static 方法（）{任务代码块}
+                <br><br>静态方法里this的指向，this永远指向被调用者，调用静态方法的是类，所以指向类，也就是类的专属，不是实例属性实例方法<br><br>另外
+                静态方法和实例方法的方法名可以相同，里面的this指向不同
+            </td>
+        </tr>
+        <tr>
+            <td>静态属性</td>
+            <td>要给类创建静态属性，则要在类的外边(里面声明不了，没有构造函数承载)，进行声明，静态属性这是类专属的属性，实例不可调用不可继承 <br>调用静态属性:类名.属性 <br><br>创建格式:<br>类名.属性
+                = 值</td>
+        </tr>
+    </table>
+    <script>
+        class Lei {
+            //实例属性  
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            //实例方法
+            sayxx() {
+                console.log(`姓名${this.name}
+年龄${this.age}`);
+            }
+            //静态方法
+            static sayxx() {
+                console.log(`类的姓名${this.name}
+类的年龄${this.age}`);
+            }
+        }
+        //静态属性
+        Lei.name = `class`;
+        Lei.age = `999`;
+
+        Lei.sayxx();//调用静态方法
+
+        console.log("my name is", Lei.name);//调用静态属性
+        //类的实例化对象
+        const zs = new Lei("张三", '29');//实例属性值的传入
+        zs.sayxx();//调用实例方法
+    </script>
+</body>
+
+</html>

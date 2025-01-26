@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../p33-p40.HTTP协议/img_style.css">
+    <link rel="stylesheet" href="../p32.path模块/table style.css">
+</head>
+
+<body>
+    <h1>express</h1>
+    <h3>express介绍</h3>
+    <table>
+        <tr>
+            <td>express是什么</td>
+            <td>express 是一个基于 Node.js 平台的极简、灵活的 WEB 应用开发框架，官方网址：<a href="">https://www.expressjs.com.cn/</a><br>
+                简单来说，express 是一个封装好的工具包，封装了很多功能，便于我们开发 WEB 应用（HTTP 服务）</td>
+        </tr>
+        <tr>
+            <td>如何使用express</td>
+            <td>
+                <ol>
+                    <li>npm init (-y) 初始化工作目录</li>
+                    <li>npm install express 安装express框架 <br>(npm下载的慢就用cnpm)</li>
+                    <li>工作js文件内 <a href="./1express路由/express router test.js">(以路由初体验举例)</a>
+                        <ol>
+                            <li>导入express框架模块</li>
+                            <li>创建应用对象，express类的实例化</li>
+                            <li>设置路由规则，调用实例的路由方法</li>
+                            <li>设置服务启动监听函数</li>
+                        </ol>
+                    </li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3>express的router路由</h3>
+    <table>
+        <tr>
+            <td>router是什么</td>
+            <td>官方定义： 路由确定了应用程序如何响应客户端对特定端点的请求 <br><br>
+                人话：路由根据请求的路径参数，返回对应的回调函数(req,res)</td>
+        </tr>
+        <tr>
+            <td>路由的组成</td>
+            <td> 由请求方法,路径及回调函数(request,response)组成 <br>
+                express 中提供了一系列方法，可以很方便的使用路由，使用格式如下：<br>
+                app.method(path，(req,res)=>{ callback 函数体})
+            </td>
+        </tr>
+        <tr>
+            <td>如何了解router</td>
+            <td> router 路由 和 http.createServer 服务对象很像 多了个路径参数<br>
+                内嵌if~else·if判断 method <br>
+                if又内嵌switch语句 case path后 执行对应callback break <br>
+                及 default 其他path 再执行callback</td>
+        </tr>
+        <tr>
+            <td>使用路由的<a href="./2express-router-test/router test.js">一般流程</a> </td>
+            <td>
+                <ol>
+                    <li>导入express框架模块</li>
+                    <li>创建应用对象,express类的实例化</li>
+                    <li>设置路由规则,调用实例的路由方法
+                        <ul>
+                            <li>method为get时
+                                <ol>
+                                    <li>默认页面 /</li>
+                                    <li>主页 /home</li>
+                                    <li>其他页面 /...</li>
+                                    <li>非法页面 *</li>
+                                </ol>
+                            </li>
+                            <li>method为post时
+                                <ol>
+                                    <li>登录页面 /login</li>
+                                </ol>
+                            </li>
+                            <li>method为任意方法，匹配所有方法时
+                                <ol>
+                                    <li>搜索 /search?</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>设置服务启动监听函数</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3>express 获取请求报文</h3>
+    <b>提供框架内router配置获取 , 毕竟跟http太像了</b>
+    <table>
+        <tr>
+            <td>兼容http module 请求报文的原生操作</td>
+            <td>res.method <br>
+                res.url <br>
+                res.httpVersion <br>
+                res.header</td>
+        </tr>
+        <tr>
+            <td>express 提供api的操作</td>
+            <td>res.path <br>
+                res.ip</td>
+        </tr>
+        <tr>
+            <td>详细说明</td>
+            <td><a href="./3express-router-req/express获取请求报文.js">express通过router获取请求报文</a></td>
+        </tr>
+    </table>
+    <h3>express 路由参数</h3>
+    <table>
+        <tr>
+            <td>如何获取路由参数</td>
+            <td><a href="./3express获取路由参数/get router params.js"></a></td>
+        </tr>
+        <tr>
+            <td>根据路由参数响应对应页面</td>
+            <td><a href="./4路由参数 练习/router params test.js"></a></td>
+        </tr>
+    </table>
+    <h3>express 设置响应报文 及 其他单独响应</h3>
+    <table>
+        <tr>
+            <td>兼容http module 响应报文的原生操作</td>
+            <td>
+                <ul>
+                    <li>res.statusCode=</li>
+                    <li>res.statusMessage=</li>
+                    <li>res.setHeader()</li>
+                    <li>res.write()</li>
+                    <li>res.end()</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>express API 操作</td>
+            <td>
+                <ul>
+                    <li>res.status()</li>
+                    <li>res.set()</li>
+                    <li>res.send()</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>其他单独响应API</td>
+            <td>
+                <ul>
+                    <li>res.redirect()</li>
+                    <li>res.download()</li>
+                    <li>res.sendFile()</li>
+                    <li>res.json()</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>具体详细过程</td>
+            <td><a href="./6响应报文设置/response-set.js">response-set</a></td>
+        </tr>
+    </table>
+    <h3>express 中间件</h3>
+    <table>
+        <tr>
+            <td>中间件介绍<br><br>
+                中间件（Middleware）本质是一个回调函数 <br>
+                中间件函数可以像路由回调一样访问 请求对象（request） ， 响应对象（response）</td>
+            <td>
+                中间件的作用<br><br>
+                使用函数封装公共操作，方便代码复用，简化代码
+            </td>
+            <td>中间件的类型
+                <ul>
+                    <li>全局中间件</li>
+                    <li>路由中间件</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>全局中间件</td>
+            <td>每一个请求 到达服务端之后 都会执行全局中间件函数 <br><br>
+                使用流程：<br>
+                <ol>
+                    <li>声明中间件函数 (可以声明多个)</li>
+                    <li>应用对象 使用全局中间件函数 (也可以使用多个，跟vue APP根路径里的一样)</li>
+                </ol>
+            </td>
+            <td><a href="./7中间件/全局中间件.js">全局middleware</a></td>
+        </tr>
+        <tr>
+            <td>路由中间件</td>
+            <td>如果 只需要对某一些路由进行功能封装 ，则就需要路由中间件 <br><br>
+                使用流程：<br>
+                <ol>
+                    <li>声明中间件函数 </li>
+                    <li>受约束路由 使用路由中间件函数 (函数名写在路径后面， 使用时跟全局中间件不同，声明时一样)</li>
+                </ol>
+            </td>
+            <td><a href="./7中间件/路由中间件.js">路由middleware</a></td>
+        </tr>
+    </table>
+    <h3>express 静态资源中间件</h3>
+    <table>
+        <tr>
+            <td>静态资源中间件 介绍</td>
+            <td>express 内置处理静态资源的中间件 <br><br>
+                极大的简化了搭建静态资源服务所需步骤，复杂的多行代码极简为一行
+            </td>
+        </tr>
+        <tr>
+            <td><a href="./8静态资源中间件/middleware-static.js">如何使用</a></td>
+            <td>app.use(express.static(静态资源目录)) <br><br>
+                静态资源目录一般为:__dirname + '/public' <br>
+                也可以是：./public <br>
+                绝对路径更规范
+            </td>
+        </tr>
+        <tr>
+            <td>注意事项</td>
+            <td>
+                <ol>
+                    <li>index.html 文件为默认打开的资源 '/'直接访问时显示的静态资源 <br>
+                        也可以输入静态资源路径访问其他资源</li>
+                    <li>如果静态资源与路由规则(路径也为'/')同时匹配，谁先匹配谁就响应（代码在上面的 显示）</li>
+                    <li>路由响应动态资源，静态资源中间件响应静态资源</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3>express 获取请求体</h3>
+    <table>
+        <tr>
+            <td>兼容http module 获取请求体的原生操作</td>
+            <td>http module 原生操作获取请求体，是进行事件绑定获取 <br><br>
+                req.on('data',chunk=>{}),req.on('end',()=>{}),data接收req-body ,end继续接收成功提示<br><br>
+                另外，post形式时<br>
+                切记，表单控件里，输入框这种，一定要写好 name属性，否则，获取请求体时，读取不到数据，因为键值对对应不上</td>
+        </tr>
+        <tr>
+            <td>express 可以使用 <a href="https://www.npmjs.com/package/body-parser">body-parser</a> (请求体解析器) 包处理请求体
+                <br><br>
+                该包是一个中间件，使用这个中间件，可以通过具象的 body api获取请求体
+            </td>
+            <td>使用流程：
+                <ol>
+                    <li>安装body-parser : cnpm i body-parser</li>
+                    <li>导入body-parser : const bodyParser=require('body-parser')</li>
+                    <li>中间件声明 <br>
+                        //获取 queryString (js)格式的请求体 <br>
+                        const urlencodedParser = bodyParser.urlencoded({ extended: false }); <br>
+                        //获取 json 格式的请求体 <br>
+                        // const jsonParser = bodyParser.json();//获取 json 格式请求体，不用时 要注释掉 或者 干脆不写，否则会导致报错 <br>
+                    </li>
+                    <li>受约束路由使用 中间件 <br>
+                        中间件写入路由参数里后，就可以通过req.body 来获取请求体对象，具体属性可以通过对象索引属性获取<br><br>
+                        这个具象的 body api 是执行完 该中间件后 出现的
+                    </li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>具体详细过程</td>
+            <td><a href="./10获取请求体数据/get req-body.js">get res-body</a></td>
+        </tr>
+    </table>
+    <h3>express 防盗链</h3>
+    <table>
+        <tr>
+            <td>防盗链介绍</td>
+            <td>
+                <ol>
+                    <li>作用：防止其他网站盗用本网站资源</li>
+                    <li>逻辑：访问时，只有本网站的域名才会返回资源，其他域名访问资源时会报错或者不响应资源</li>
+                    <li>如何实现：写个全局中间件，判断请求报文的referer(引用者，网站url)里的hostname是否==本网站url的hostname,符合才next()与代码进行运行，不符合则return
+                        代码停止</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>网站url可能为请求头里的referer或者host</td>
+            <td>为 host 时<br><br>
+                注意,要将路径的协议补充上，new URL('http://' + host) ，否则URL对象里的hostname为空
+                <br><a href="./11防盗链/防盗链.js">参考</a><br><br><br>
+                为referer时<br><br>
+                <a href="./11防盗链/参考课件 防盗链.js">参考</a>
+            </td>
+        </tr>
+    </table>
+    <h3>express Router 路由模块化</h3>
+    <table>
+        <tr>
+            <td>Router 介绍</td>
+            <td>
+                <ol>
+                    <li>什么是 Router <br><br>
+                        express 中的 Router 是一个完整的中间件和路由系统，可以看做是一个小型的 app 对象。<br>
+                        可以理解为，路由模块router通过express.Router()变成了一个中间件,然后暴露导入后，与使用全局中间件一样的方法，都是app.use()
+                    </li>
+                    <li>Router 作用 <br><br>
+                        对路由进行模块化，更方便管理与维护路由，减少冲突产生
+                    </li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>路由模块化 步骤</td>
+            <td>单独的路由文件中
+                <ol>
+                    <li>require express框架</li>
+                    <li>实例化express.Router <br>
+                        <br>
+                        const router = express.Router();
+                    </li>
+                    <li>暴露router <br><br>
+                        module.exports = router;</li>
+                </ol>
+                <br>
+                主文件中
+                <ol>
+                    <li>require 路由模块</li>
+                    <li>应用路由模块 <br><br>
+                        app.use()</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>路由模块化具体过程 <br>
+                全局中间件也可以模块化</td>
+            <td><a href="./12路由模块化/routers/backRouter.js">单独路由文件</a><br>
+                <a href="./12路由模块化/主文件APP.js">主文件</a><br>
+                <a href="./12路由模块化/全局中间件/防盗链.js">全局中间件</a>
+            </td>
+        </tr>
+    </table>
+    <h3>js 模板引擎 ejs</h3>
+    <!-- view engine 模板引擎 -->
+    <table>
+        <tr>
+            <td>ejs 语法 <br>
+                三种标识</td>
+            <td>
+                <ul>
+                    <li><a href="./13JS模板引擎ejs/1 ejs初体验/ejs-test.js">转义表达式标识</a> <br>
+                        <%= %> <br>
+                            一个表达式标识只能存放一个表达式，转义表达式标识会把值转义后再输出
+                    </li>
+                    <li><a href="./13JS模板引擎ejs/2 ejs列表渲染/ejs列表渲染.js"> 非转义表达式标识</a> <br>
+                        <%- %> <br>
+                            非转义表达式标识会把值直接输出，当字符串里混有html标签时，输出该变量用非转义表达式
+                    </li>
+                    <li><a href="./13JS模板引擎ejs/3 ejs条件渲染/ejs条件渲染.js">语句标识</a> <br>
+                        <% %> <br>
+                            用语句标识把语句结构开始与结束那行包住即可，中间的表达式用表达式标识包住
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>ejs 两种渲染</td>
+            <td>
+                <ul>
+                    <li><a href="./13JS模板引擎ejs/2 ejs列表渲染/ejs列表渲染.js">列表渲染</a> </li>
+                    <li><a href="./13JS模板引擎ejs/3 ejs条件渲染/ejs条件渲染.js">条件渲染</a> </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>js文件中直接使用ejs</td>
+            <td>
+                <ol>
+                    <li>安装ejs</li>
+                    <li>require ejs</li>
+                    <li>ejs.render() 渲染</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="./13JS模板引擎ejs/4 express中使用ejs/express中使用ejs.js">express 中如何使用 ejs</a> </td>
+            <td>
+                <ol>
+                    <li>设置模板引擎 app.set('view engine','ejs') <br><br>
+                        安装了就行，不用导入</li>
+                    <li>设置模板文件夹路径 app.set('views',psth.resolve(__dirname+'/views')) <br><br>
+                        是存放含ejs模板语法的文件 夹 路径，文件夹中的文件 扩展名 必须为 .ejs</li>
+                    <li>路由中 响应.渲染() res.render('views中文件名',{data}) <br><br>
+                        这个与res.end()同性质，有且只能有一个</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3><a
+            href="https://express.nodejs.cn/en/starter/generator.html#express-application-generator">express-generator</a>
+    </h3>
+    <table>
+        <tr>
+            <td>express-generator介绍</td>
+            <td>使用应用生成器工具 express-generator 快速创建应用骨架。也等于给工作目录初始化<br>
+                自动生成那些基本的代码,生成骨架后也相当于给工作目录初始化了，就不用cnpm init 了</td>
+        </tr>
+        <tr>
+            <td>使用流程：</td>
+            <td>
+                <ol>
+                    <li>全局安装：<br>
+                        cnpm install -g express-generator</li>
+                    <li>检测是否安装成功：使用 -h 选项显示命令选项<br>
+                        express -h</li>
+                    <li>使用ejs模板引擎在myapp文件夹下创建骨架: <br>
+                        express --view=ejs myapp
+                    </li>
+                    <li>进入工作目录：<br>
+                        cd myapp <br>
+                    </li>
+                    <li>安装依赖：<br>
+                        cnpm i</li>
+                    <li>运行应用文件：浏览器中加载 http://localhost:3000/ 以访问该应用<br>
+                        cnpm start </li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>另外</td>
+            <td>可以看看package.json,里面的script ,启动start 默认设置的 node ./bin/www <br>
+                可以改成 nodemon ./bin/www ,有需要可以改成别的，更方便</td>
+        </tr>
+    </table>
+    <h3>express 文件上传及处理 </h3>
+    <strong>专门处理 上传文件的 包 <a href="https://www.npmjs.com/package/formidable">formidable</a> <br>
+        安装命令：cnpm install formidable
+    </strong>
+    <table>
+        <tr>
+            <td>文件上传</td>
+            <td><a href="./15文件上传及处理/views/portrait.ejs">文件通过表单form上传的</a>，要注意 form属性enctyp="multipart/form-data"
+                input属性type='file',还有input对应的name一定要填写 <br><br>
+                <a href="./15文件上传及处理/routes/index.js">文件上传(显示表单page)的路由</a>
+            </td>
+            <form action="" enctype="multipart/form-data"></form>
+        </tr>
+        <tr>
+            <td>文件处理</td>
+            <td><a href="./15文件上传及处理/routes/index.js">文件处理的路由 及 其中的formidable使用</a><br><br>
+                formidable在里面的应用<br>
+                <ol>
+                    <li>安装formidable：cnpm i formidable</li>
+                    <li>导入formidable：CommJS及ES写法 <br>
+                        const { formidable } = require('formidable'); <br>
+                        //formidable 版本更新之后，不再是一个函数了，变成了对象，所以要用对象解构赋值来导入 <br>
+
+                        // import formidable from 'formidable'; 都用CommJS写法时,ES的写法要改成上面CommJS的写法，否则不兼容<br>
+                    </li>
+                    <li>上传文件处理的路由 formidable部分:
+                        创建form对象时，注意可选参数的那三个设置，解析form请求报文时，注意newFilename的获取，filed与files的区别，文件资源访问url的设置</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>文件处理的代码 复用</td>
+            <td><a href="./15文件上传及处理/routes/index.js">参考这个</a> 就知道怎么对下面代码进行复用了
+                <br>
+                <a href="./formidable文件处理-code复用.md">formidable文件处理-code复用</a>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 1000px;
+            height: 500px;
+            background-color: #d6ee6d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            clear: both;
+            position: relative;
+            left: 100px;
+            top: 200px;
+        }
+
+        .div1{
+            width: 200px;
+            height: 200px;
+            background-color: #77d9f1;
+            margin: 10px;
+            border-radius: 10px 30px 60px 50%;
+            box-shadow:20px 20px 40px rgba(23, 182, 23,0.5);
+            float: left;
+        }
+        .div2{
+            width: 200px;
+            height: 200px;
+            background-color: #24025e;
+            margin: 10px;
+            border-radius:50%;
+            box-shadow:-20px -20px 80px rgba(40, 46, 40, 0.5);
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <h3>CSS常用新特性 圆角与阴影</h3>
+    <table border="2px">
+        <tr>
+            <td>圆角 border-radius</td>
+            <td>border-radius:值 <br>值有两种设置方式 npx 和 n% <br><ol>
+                <li>一次性设置一个值时 所有角都圆 npx 或 n%  | 50%和100% 时为圆</li>
+                <li>一次性设置两个值时 左上-右下对角 右上-左下对角</li>
+                <li>一次性设置三个值时 左上角 另一对角 右下角 </li>
+                <li>一次性设置四个值时 (顺时针) 左上 右上 右下 左下</li>
+            </ol></td>
+        </tr>
+        <tr>
+            <td>阴影 box-shadow</td>
+            <td>box-shadow:h-shadow(px) v-shadow(px) blur(px) color <br>
+            box-shadow:水平偏移量(必选) 垂直偏移量(必选) 模糊度(向外模糊的距离,可选) 模糊颜色(可选)<br>
+        <ul>偏移量设置: 
+            <li>水平和垂直都为0时 默认向四周蔓延一点</li>
+            <li>值为负时,水平向左偏移 垂直向上偏移</li>
+            <li>值为正时,水平向右偏移 垂直向下偏移</li>
+            <li>(常用)水平和垂直偏移量都为正 也就是向右下偏移</li>
+        </ul></td>
+        </tr>
+    </table>
+    <div class="container"><div class="div1"></div>
+    <div class="div2"></div></div>
+</body>
+</html>

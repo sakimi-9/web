@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        td {
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        p i {
+            color: aqua;
+        }
+
+        b>span {
+            color: rgb(72, 180, 144);
+        }
+
+        h5+h6 {
+            color: brown;
+        }
+
+        h2~h3 {
+            color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>关系选择器</h1>
+    <strong>E F 为元素指代</strong>
+    <table>
+        <tr>
+            <td>种类</td>
+            <td>格式|说明</td>
+            <td>示例</td>
+        </tr>
+        <tr>
+            <td>后代选择器</td>
+            <td>E F{声明}|E'之内'的所有F都进行声明</td>
+            <td>
+                <p><i>w</i><i>www<i>wwww</i>w</i></p>
+            </td>
+        </tr>
+        <tr>
+            <td>子代选择器</td>
+            <td>E>F{声明}|E'之内'第一层F(F内的所有元素都算)进行声明,被其他E的第一层子代元素嵌套的内层F声明无效</td>
+            <td><b>
+                    <span>www<del> <span>www</span></del></span>
+                    <div> <span>mmm </span></div>
+                </b></td>
+        </tr>
+        <tr>
+            <td>紧邻兄弟选择器</td>
+            <td>E+F{声明}|E'之下'的第一个'兄弟'F进行声明|上面的F无效</td>
+            <td>
+                <h5>ccc</h5>
+                <h6>www</h6>
+                <h6>mmm</h6>
+            </td>
+        </tr>
+        <tr>
+            <td>通用兄弟选择器</td>
+            <td>E~F{声明}|E'之下'的所有兄弟F都会进行声明|上面的F无效</td>
+            <td>
+                <h2>ccc</h2>
+                <h3>wwww</h3>
+                <h3>wwww</h3>
+                <h3>wwww</h3>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

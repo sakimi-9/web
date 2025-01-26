@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>事件类型之键盘事件</h3>
+    <table border="2px"><b>键盘事件类型</b><br><strong>格式:Dom0级时 元素节点.<i>on</i>事件类型 = function（）{事件处理}</strong>
+        <tr>
+            <td>keydown</td>
+            <td>按键按下触发 <br> 现在与键盘按键的输入也是同步触发</td>
+            <!-- 键盘按键的输入是抬起抬起触发，所以用这个类型会事件触发不同步，比如:控制台打印时第一次按下会打印空值 -->
+        </tr>
+        <tr>
+            <td>keyup</td>
+            <td>按键抬起触发 <br>与键盘按键的输入同步触发，键盘事件类型中一般用这个类型</td>
+        </tr>
+        <tr>
+            <td>keypress</td>
+            <td>按下有值按键触发，无值按键不会触发 <br>无值按键有ctrl del shift F1 等等 ，有值按键是字符（数字 字母 <i> 空格</i>）按键 <br>有keydown时，优先触发keydown
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table border="2px"><span>与键盘事件相关的 Event 属性 <b>keyCode</b></span>
+        <tr>
+            <td>keyCode</td>
+            <td>返回按下按键的唯一标识（数字）</td>
+        </tr>
+        <tr>
+            <td>如何使用</td>
+            <td>放在键盘事件的监听函数中 <br>比如:打印按键的唯一标识 元素节点.<i>on</i>键盘事件类型 = function（e）{console.log(event.keyCode);事件处理}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>最常用的一个按键标识</td>
+            <td>回车的唯一标识为13 空格的唯一标识为32</td>
+        </tr>
+        <tr>
+            <td>回车的唯一标识用处</td>
+            <td>常用于检测按下回车后进行某些事件（如 开始搜索 然后跳转 ）<br><br>格式:在键盘事件的监听函数中嵌套 if（e.keyCode === 13）{按下回车的事件处理}</td>
+        </tr>
+    </table><br><br>
+    <span>与键盘事件相关的 Event 属性 target 中的 <b>value</b></span>
+    <ul>
+        <li>常用于返回用户输入的内容 使用:在键盘事件的监听函数中 event.target.value</li>
+        <li>value(值) <ol>
+                <li>在表单的input标签里 value="代替文本"</li>
+                <li>在setAttributeNode里 id/class.value = "id名/类名"</li>
+                <li>在表单form的event的targer里 e.target.value 代表用户输入的内容</li>
+            </ol>
+        </li>
+    </ul>
+    <form>
+        <input type="text" id="q1">
+        <input type="text" id="q2">
+        <input type="text" id="q3">
+    </form>
+    <script>
+        var input_q1 = document.getElementById("q1");
+        var input_q2 = document.getElementById("q2");
+        var input_q3 = document.getElementById("q3");
+        input_q1.onkeydown = function (event) {
+            console.log("按下触发与按键的值输入不同步");
+            console.log(event.keyCode);
+        }
+        input_q2.onkeyup = function (e) {
+            console.log("抬起触发与按键的值输入同步");
+            if (e.keyCode === 13) {
+                console.log("我敲了回车");
+            }
+        }
+        input_q3.onkeypress = function (e) {
+            console.log("有值按键按下才有效");
+            if (e.keyCode === 13 | e.keyCode === 32) {             //按下回车/空格 打印用户输入的内容
+                console.log(event.target.value);
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

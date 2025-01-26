@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>模板语法</h3>
+    <p>教学视频上讲的是vue里重要且基础的知识，要学习更多细节知识，那就要看 <a href="https://cn.vuejs.org/guide/introduction.html">vue官网文档</a>来学习,或者其他更加全面的教学视频
+    <br><br>打开太慢那就科学上网，打开let vpn 打开进程管理器关闭k网卡服务，右下角点开k网卡服务界面，把快速设置的都关了 这样let vpn 才可以正常运行 </p>
+    <b>vue项目文件夹 src源代码文件夹介绍</b>
+    <table border="2px">
+        <tr>
+            <td>assets文件夹</td>
+            <td>存放静态资源的，比如 公共的CSS 图片资源</td>
+        </tr>
+        <tr>
+            <td>components文件夹</td>
+            <td>存放vue公共组件的，一般拿里默认的helloworld.vue来改就行了，把没有用的先删了，留下装template标签和script标签，template相当于html里的body，script用来写业务逻辑，style调用外部css,也可以不留 <br>暂时不要创建新的vue文件在components里，以防端口冲突</td>
+        </tr>
+        <tr>
+            <td>APP.vue根组件</td>
+            <td>主入口的组件，根组件，所有的组件都是在这里进行引用与显示的</td>
+        </tr>
+        <tr>
+            <td>main.js主入口文件</td>
+            <td>所有程序的主入口，引入vue，创建vue的app对象，在app上进行显示等</td>
+        </tr>
+        <tr>
+            <td>registerServiceWorker.js监听文件</td>
+            <td>监听写代码的文件，暂时不用管</td>
+        </tr>
+    </table>
+    <em>全部内容在Hello World.vue中</em>
+</body>
+</html>

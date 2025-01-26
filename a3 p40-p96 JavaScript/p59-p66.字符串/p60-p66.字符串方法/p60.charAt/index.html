@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 charAt</h3>
+    <p>
+    <table border="2px">
+        <tr><b>charAt</b>
+            <td>用处:</td>
+            <td>用来返回字符串中指定位置的字符 <br>所有与位置相关的第一个都是从0开始</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>str 字符串变量名，位置n从0正数开始 str.charAt(n)<br>
+                倒数位置开始时， str.charAt(str.length-n)</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>位置的值为负数还有等于或超出字符串长度时，则返回空字符串“”</li>
+                    <li>需要返回字符串中倒数位置的字符时:可以在填值的括号内用字符串的长度-n <br>因为字符串长度从1开始，位置从0开始，所以长度-n就代表着倒数第n的位置<br><br></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    </p>
+    <script>
+        var str = '晴川历历汉阳树，芳草萋萋鹦鹉洲';
+        document.write(str.charAt(-2));//返回空字符串
+        document.write(str.charAt(0));//返回 晴
+        document.write('<br>');
+        document.write(str.charAt(str.length - 1));//返回 洲
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./CSS/img_style.css">
+    <link rel="stylesheet" href="./CSS/table style.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>CommonJS与ES Modules 的叫法</td>
+            <td>这两都是js文件模块化的一种规范 <br><br>
+                <ul>
+                    <li>cjs模块化写法 require导入方法 都-> CommonJs </li><br>
+                    <li>ES/ESM/mjs模块化写法 import/expor的导入导出方法 都-> ES Modules</li>
+                </ul>
+
+            </td>
+        </tr>
+        <tr>
+            <td>要在Nodejs文件中使用 ES模块化写法</td>
+            <td>则要告诉 Node.js 你的文件是一个 ES 模块，可以在文件扩展名使用 .mjs 或者在 package.json 文件中设置 "type": "module" <br><br>
+                还要注意 ES模块化写法 导入的路径 要写完整(包括文件扩展名),CommonJS的 写不写完整都行 <br>
+                一个项目中不能同时使用两种模块化写法</td>
+        </tr>
+        <tr>
+            <td>CommonJS与ES Modules 的区别</td>
+            <td>
+                <ul>
+                    <li>导入/导出语法：CJS 使用 require 和 module.exports，而 ESM 使用 import 和 export。</li>
+                    <li>加载方式：CJS 是同步的，而 ESM 是异步的。</li>
+                    <li>运行时 vs 编译时：CJS 在运行时解析模块依赖，ESM 在编译时解析。</li>
+                    <li>互操作性：虽然 Node.js 支持两种模块系统，但在某些情况下，它们可能无法直接互操作</li>
+                    <li>兼容性:CommonJs的对导入外部依赖的兼容性更高,毕竟Nodejs以这种起家的</li>
+                </ul>
+            </td>
+        <tr>
+            <td>mjs 具体的导入导出方式</td>
+            <td>
+                <ul>
+                    <li><a href="./JS/export-test.js">导出</a> </li>
+                    <li><a href="./JS/import-test.js">导入</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tr>
+    </table>
+</body>
+
+</html>

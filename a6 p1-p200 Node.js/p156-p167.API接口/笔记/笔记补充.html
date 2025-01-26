@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../p33-p40.HTTP协议/img_style.css">
+    <link rel="stylesheet" href="../../p32.path模块/table style.css">
+</head>
+
+<body>
+    <h3>笔记补充</h3>
+    <table>
+        <tr>
+            <td>数据接口与返回格式</td>
+            <td>接口是服务端的路由规则,在项目里面,接口通常给客户端返回JSON格式的资源,也可能是XML格式</td>
+        </tr>
+        <tr>
+            <td>请求方法 更新 put与patch </td>
+            <td>put 完全替换 相当于mongodb命令的db.collection.replaceOne() 一个对象替换另一个对象<br><br>
+                patch 局部替换 相当于mongodb命令的db.collection.updateOne() 对象中指定属性的值的替换</td>
+        </tr>
+        <tr>
+            <td>json-server id维护 </td>
+            <td>json-server会自动维护id,接口测试时,可以不填写id</td>
+        </tr>
+        <tr>
+            <td>使用接口测试工具要打开对应接口服务</td>
+            <td>比如:使用apipost,要打开json-server服务</td>
+        </tr>
+        <tr>
+            <td>MIME类型</td>
+            <td>请求头或响应头 中 字段 connect-type 设置好了对应的MIME类型,浏览器才能正确显示对应类型的数据</td>
+        </tr>
+        <tr>
+            <td>接口测试工具中 MIME类型 x-www-form-urlencoded或urlencoded, 这两是同一个意思 </td>
+            <td>中文 表单url编码 url编码<br>
+                都是处理请求体中 键值对形式(类似查询字符串参数)的表单数据的,会把键值对形式的表单数据->js对象形式,然后解析 <br><br>
+                比如 app应用express的urlencoded中间件<br>
+                app.use(express.urlencoded({ extended: false }));<br>
+                这样,中间件不管请求体中js对象形式或键值对形式的表单数据都可以解析处理</td>
+        </tr>
+        <tr>
+            <td>接口测试工具中 MIME类型 form-data </td>
+            <td>用于解析 表单数据和文件上传组合的混合类型数据 <br>
+                比如:上传头像和填写用户名</td>
+        </tr>
+        <tr>
+            <td>接口测试工具中 query或queryString </td>
+            <td>都是查询字符串参数,会在url处显示的那个
+                <br><br>
+                另外,查询字符串参数与param参数是有区别的,<br>
+                param参数一般是url中的id,而不是url中的键值对
+            </td>
+        </tr>
+        <tr>
+            <td>api接口 结合 案例</td>
+            <td>把routers中响应web页面的router代码复制一遍,放在routers中新建api文件夹中<br>
+                把路由配置中响应页面的改写成josn形式,多余响应页面删掉<br>
+                改的josn形式也有一定规则 <br>
+                <a href="../p162-p167.案例功能完善/accounts(记账本)/routes/api/accounts.js">如</a>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

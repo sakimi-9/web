@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./table style.css">
+</head>
+
+<body>
+    <h3>path模块 各API</h3>
+    <p>使用path模块也要跟使用fs模块一样，先用require导入<br>
+        <i>let path = require('path');</i>
+    </p>
+    <table>
+        <tr>
+            <td>resolve() 方法 <br>最常用</td>
+            <td>两个参数(绝对路径，相对路径) <br>
+                用于规范拼接绝对路径和相对路径 一般为 path.resolve(__dirname,'/文件全名') <br><br>
+                __dirname+'/文件全名' 也可以拼接为 文件的绝对路径 但是不规范 <br>
+                可以理解为 resolve方法是将 __dirname+'/文件全名' 的拼接 规范化</td>
+        </tr>
+        <tr>
+            <td>sep 属性
+            </td>
+            <td>返回当前操作系统的路径分割符 Windows \ mac / <br><br>path.sep</td>
+        </tr>
+        <tr>
+            <td>parse() 方法</td>
+            <td>参数传入路径<br><br>
+                __filename 保存着 当前文件的绝对路径 但是不能拿来直接用 需要转义<br>
+                先用__filename 获取路径 再用parse方法<br><br>
+                let str_path = __filename<br><br><br>
+                解析路径 返回 存储路径全部信息的object <br>
+                path.parse(str_path) <br>
+            </td>
+        </tr>
+        <tr>
+        <tr>
+            <td>以下方法都是返回 路径object里的数据</td>
+            <td>
+                <b>参数传入路径,解析路径返回存储路径信息object里的</b>
+                <ol>
+                    <li>basename() 方法 文件全名<br>path.basename(str_path)</li>
+                    <li>dirname() 方法 文件所在目录的绝对路径 <br>path.dirname(str_path)</li>
+                    <li>extname() 方法 文件扩展名<br>path.extname(str_path)
+                    </li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

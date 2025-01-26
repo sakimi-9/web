@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 20px 30px;
+            margin: 10px;
+        }
+
+        table,
+        tr:nth-child(odd) {
+            background: #aef;
+        }
+
+        table,
+        tr:nth-child(even) {
+            background: #fec;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        let tds = document.querySelectorAll('td');//返回所有td标签的数组给tds
+        tds.forEach(item => {//数组遍历，对每个元素进行事件绑定，点击之后修改样式
+            item.onclick = () => {
+                item.style.backgroundColor = '#0f0'
+                // item.style.cssText = 'background-Color:black;'
+                // item.setAttribute('style', 'background-Color:black;')
+            }
+        });
+    </script>
+</body>
+
+</html>

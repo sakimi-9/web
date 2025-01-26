@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../p33-p40.HTTP协议/img_style.css">
+    <link rel="stylesheet" href="../../p32.path模块/table style.css">
+</head>
+
+<body>
+    <h3>笔记补充</h3>
+    <table>
+        <tr>
+            <td>session配置与操作session</td>
+            <td>具体细节多看看<a href="../2.express操作session/操作session.js">这个</a> 笔记上一些没有说清楚</td>
+        </tr>
+        <tr>
+            <td>关于CSRF跨站请求伪造</td>
+            <td>link rel=stylesheet(样式表) href='路径/url' 这个标签本来是用于引入CSS资源的,引入内部静态资源或者外部网络资源<br>
+                但 href='url' 本质是向网站 发送get请求 来获取资源<br>
+                但 可以发送get请求 意味着可以 进行 CSRF跨站请求伪造 来攻击 其他网站<br><br>
+
+                这里就是让 路由为get时,网站退出登录<br>
+                所以 解决方法为 将路由及相关配置(表单请求)改为post 来他提高安全性<br>
+                所以说 一般获取及返回数据用get 对资源进行操作时不要用get</td>
+        </tr>
+        <tr>
+            <td>关于执行404中间件的逻辑
+            </td>
+            <td>
+                <ol>为什么
+                    <li>导航栏url输入错误或者说进入路由的限定路径错误</li>
+                    <li>控件发出的method与进入路由的method不匹配</li>
+                </ol>
+                将会执行这个中间件<br>
+                因为每个中间件执行之后都会执行这个404中间件, 不同的是, 其他的有对应路由(method与路径来匹配)的跳转, 然后有页面响应, 就不会跳转404页面, 无法匹配对应路由的, 就会跳转到404
+            </td>
+        </tr>
+        <tr>
+            <td>对于JWT的详细理解</td>
+            <td>JWT（JSON Web Token ）是目前最流行的跨域认证(Web应用程序之间的身份验证)解决方案，可用于基于 token 的身份验证,JWT 使 token 的生成与校验更规范<br><br>
+                jwt可以说是一种方案,也可以指的是jwt的token <br><br>
+                JWT由三部分组成：头部（Header）、负载（Payload）以及签名（Signature）。这些部分以点（.）分隔<br>
+                <ol>
+                    <li>头部,token的类型和签名算法的信息</li>
+                    <li>负载,包含了用户信息及签发相关的信息</li>
+                    <li>签名,密钥结合前两部分签名(加密)的结果,防止数据篡改</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>会话控制与接口api的部分逻辑理解</td>
+            <td>
+                <ol>
+                    <li>为什么JWT要写在接口api里面,及cookie与session怎么不写进去
+                        <br><br>
+                        因为JWT的token要手动添加到请求头才可以往服务器请求,前端页面获取token后可以进行便捷登录(如 微信的
+                        点击登录以获取完整服务,这不是用cookie的sid自动登录的,更不是输入账号密码登录的) <br><br>
+
+                        cookie与session返回的cookie的sid,都因为cookie存在本地客户端及自动向服务端上传的特性,所以它不需要通过接口获取进行页面交互才能生效
+                    </li>
+                    <li></li>
+                    <li>xx</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>关于 工作目录初始化操作 cnpm init </strong> <br>
+                看好下面的笔记,别犯这种错误了,否则这种意外错误有得受了 </td>
+            <td>如果这个工作目录要从0开始搭建项目,那就进行初始化操作 cnpm init <br><br>
+                如果这个工作目录是要复制其他模块代码来进行代码复用,那就不要初始化操作了,否则(猜测)复制来的代码package.json的包名与初始化后的工作目录的包名不同,会导致异常错误
+                <br><br>
+                运行项目时,是要在工作目录上运行,也就是子级有package.json文件的这个文件夹,否则运行时找不到package.js文件会报错
+            </td>
+        </tr>
+        <tr>
+            <td>错误处理 里面记得 return </td>
+            <td>大部分错误处理时,要及时 return,防止代码继续向下运行导致异常错误</td>
+        </tr>
+        <tr>
+            <td><strong> 多个文件要把同一个文件导入进去时 切忌无脑复制导入的代码 </strong></td>
+            <td>
+                <ul>
+                    <li>要么把那个代码在每个文件中敲出来</li>
+                    <li>要么复制后立刻把路径给改了</li>
+                    <br>
+                    因为多个文件的路径各不相同,相对路径或者说子父级关系都不一样,无脑复制导入代码肯定出问题
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>修改本地域名与隐藏端口号</td>
+            <td>修改本地域名 <br><br><br>
+                就是把要填写的 localhost 或 127.0.0.1 改成其他的 ,本质是让其他的域名映射到 127.0.0.1 <br><br>
+                去这里 C:\Windows\System32\drivers\etc\hosts ,末尾加一行 如: <br>
+                127.0.0.1 www.host.com <br><br><br><br><br>
+                隐藏端口号 <br><br><br>
+                去代码里面,把端口号改成默认的 80 就行了,这样就可以输入url时不输入 端口号了
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

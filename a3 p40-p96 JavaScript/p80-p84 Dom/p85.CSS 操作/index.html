@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>CSS 操作</h3>
+    <table border="2px"><b>三种用js通过Dom控制CSS的操作</b>
+        <tr>
+            <td>元素节点的setAttribute()方法</td>
+            <td>格式:<br>标签变量名.setAttribute("style","声明(集合)")</td>
+            <td>优点:最简单 <br>将style属性与值声明集合 塞入 标签</td>
+        </tr>
+        <tr>
+            <td>元素节点的style属性</td>
+            <td>格式: <br>标签变量名.style.样式属性 = "样式属性的值" <br>或<br>标签style属性的变量名.样式属性="样式属性的值"</td>
+            <td>优点:最清晰 <br>将标签style属性里的各个样式属性赋值</td>
+        </tr>
+        <tr>
+            <td>元素节点里style的cssText属性</td>
+            <td>格式: <br>标签变量名.style.cssText = "声明(集合)" <br>或<br>标签style属性的变量名.cssText="声明(集合)"</td>
+            <td>格式；7分简单3分清晰 <br>将声明集合赋值给标签style属性里的cssText属性</td>
+        </tr>
+    </table><em>注意赋值时等号左边的属性是小驼峰命名法</em>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        //元素节点的setAttribute()方法
+        var div_0 = document.getElementsByTagName("div")[0];
+        div_0.setAttribute("style", "width:400px;height:400px;background-color:red;");
+        //元素节点的style属性
+        var div_1_style = document.getElementsByTagName("div")[1].style;
+        div_1_style.width = "500px";
+        div_1_style.height = "500px";
+        div_1_style.backgroundColor = "#00ff00";
+        //元素节点里style的cssText属性
+        var div_2_style = document.getElementsByTagName("div")[2].style;
+        div_2_style.cssText = "width:600px;height:600px;background-color:#0000ff;"
+
+
+    </script>
+</body>
+
+</html>

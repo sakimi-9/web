@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>element-plus 字体图标引入</h3>
+    <p>element-plus中的字体图标有额外步骤才可以使用</p>
+    <ol><b>组件库字体图标 使用步骤</b>
+        <li>命令行安装组件库 cnpm install element-plus --save <br>
+            然后完整引入或者按需引入
+        </li>
+        <li>命令行安装组件库-字体图标 cnpm install @element-plus/icons-vue</li>
+        <li>全局注册 在src文件夹里创建plugins文件夹 ，文件夹里icons.js 存放全局注册文件<br>
+            import * as components from '@element-plus/icons-vue'
+            export default {
+            install :(app)=>{
+            for (const key in components){
+            const componentConfig = components[key];
+            app.component(componentConfig.name,componentConfig);
+            }
+            }
+            };
+        </li>
+        <li>在主入口main.js 引入icons.js文件 并挂载elementIcon <br>
+            import elementIcon from './plugins/icons'
+            app.use(elementIcon)
+        </li>
+        <li>使用 <br>
+            去官网点击字体图标复制，然后放在组件中
+        </li>
+    </ol>
+    <p>
+        字体图标属性 写在标签里就行 size和color ，搭配动态属性 v-bind（:）更好
+    </p>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./promise.js"></script>
+    <!-- 引入外部的自定义Promise构造函数 -->
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {//这里不是new(继承)一个新的Promise类,而是 调用 引入的Promise构造函数
+            // ### 构造函数与类是两个概念, 构造函数与类相似,可以模仿类的功能 [都是创建对象用的,大写首字母,用new来调用]    类是ES6引入的,可以说是新的更加简洁与面向对象方式的'构造函数'
+
+            //三种改变promise对象 状态与结果的方式
+            setTimeout(() => { //异步任务情况
+                // resolve('ok');
+                reject('error');
+
+            }, 1000);
+            // throw "报错";//抛出的异常可以是字符串 也可以是  错误对象Error
+
+        });
+        // console.log(p);
+        p.then(value => {
+            console.log(value);
+        }, reason => {
+            console.warn(reason);
+        })
+        console.log(p);
+
+    </script>
+</body>
+
+</html>

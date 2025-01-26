@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>对象的扩展</h3>
+    <table border="2px">
+        <tr>
+            <td>属性简洁表达</td>
+            <td>
+                <ul>
+                    <li>当属性名和属性值名称一样时（这是在调用外部的同名变量），可以省略属性值 <br>举例:var name="a" ;
+                        var object ={
+                        name:name,(可省略成下面这个)
+                        name,
+                        } </li>
+                    <li>方法可以省略成方法名的形式出现 <br>举例:var object = {
+                        getname:function(){函数体}，（可简洁成下面这种）
+                        getname（）{函数体}，
+                        }</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>属性名表达式</td>
+            <td>属性名可以写在中括号里[]，[]可以识别语法，那么在[]里可以 调用外部变量名的值 写表达式 <br>举例:var a=1,b=2;var name="zs" var object ={
+                [name]:38,
+                [a+b]:"3"
+                } </td>
+        </tr>
+        <tr>
+            <td>对象的扩展运算符...</td>
+            <td>可以将对象里的键值对全部拎出来（不能直接返回输出），拎
+                给另外的对象 <br>格式:var object = {键值对}; var object1 = {键值对，键值对，...object}</td>
+        </tr>
+    </table>
+    <script>
+        var name = "张三";
+        var a = 1, b = 2;
+        var object = {
+            name,
+            [name + "age"]: 32,
+            [a + b]: "3",
+            getname() {
+                return "hello world"
+            }
+        }
+        object1 = {
+            fz: 0,
+            gz: 3000,
+            ...object
+        }
+        console.log(object1);
+    </script>
+</body>
+
+</html>

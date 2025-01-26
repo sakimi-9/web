@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise 几个关键问题</title>
+</head>
+
+<body>
+    <p>promise 几个关键问题 <a
+            href="https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_Promise%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md#4promise%E7%9A%84%E5%87%A0%E4%B8%AA%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98">Notzen</a>
+    </p>
+    <script>
+        //链式调用  异常传递  中断链式调用
+        const p = new Promise((resolve, reject) => {
+            if (1) {
+                resolve('000');
+            }
+            reject('err');
+        });
+        p.then(value => {
+            return new Promise((resolve, reject) => {
+                console.log(value);
+                console.log(p);
+
+                resolve();
+            });/**p.then()根据调用的回调函数,返回对应状态的新promise对象
+                回调函数里面可以嵌套promise对象,onresolve()所返回的新promise对象的状态与结果由里面嵌套的决定,onreject()时 状态为rejected 结果由嵌套的决定
+            **/
+        }).then(value => {//上一个promise对象为resolved/fulfilled,所以可以继续向下 链式调用
+            console.log('111');
+            console.log(p);
+            return Promise.reject('错误异常') // || throw new Error("错误异常");  抛出异常也能将promise对象状态改变
+        }).then(value => {
+            console.log('222');
+            console.log(p);
+            return new Promise(() => { });//中断链式调用的方法有且只有一个  返回一个 状态为pendding的新promise对象   
+        }).then(value => {
+            console.log('333');
+            console.log(p);
+        }).catch(reason => {//上面链式调用过程中 因为 异常穿透 所以 只要有一个promise对象状态为rejected  reject()异常都会被最后的.catch捕获并进行错误处理
+            console.warn(reason);
+            console.log(p);
+        })
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组方法 concat</h3>
+    <table border="2px">
+        <tr><b>concat</b>
+            <td>用处:</td>
+            <td>用于数组连接，返回一个新数组，不改变原来的数组 <br><br>要连接的为一个多（n）维数组，则返回一个新的多(n)维数组</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>连接主体.concat(连接对象，【/+号隔开】连接对象)</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>连接主体和连接对象是数组还是变量名都可以，连接对象可以是一个或多个</li>
+                    <li><b>连接主体为数组，concat括号里</b>
+                        的连接对象数据类型不是数组时，会强制转换成数组类型再相连<br>也就是concat不管括号里的数据类型，直接合并成<b>数组</b><br><br>括号里为n维数组的连接后返回n维数组
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>+号连接:</td>
+            <td> <strong>+号连接可以代替字符串的concat,都是 <i>不能代替数组的concat</i></strong><br><br>用+号连接数组，则会把几个数组转化为一个完整的字符串</td>
+        </tr>
+    </table>
+    <script>
+        var arr = [1, 2, 3];
+        var arr1 = [4];
+        //1.一维数组 元素直接合并
+        //2.根据连接主体，来进行非主体类型转化， 这里 往数组类型转化   
+        //3，多维数组 一维的元素合并，深维的保留[]再合并
+        console.log(arr.concat(arr1, '5', [6], [7, [8, [9]]]));// 总  非数组的会转化为一维数组，然后元素合并 ， 一维数组的直接元素合并  ，多维数组的会将第一维元素合并，更深维的方括号[]不会去掉，然后再合并.比如 :一维数组.concat(n维数组),返回的数组为n为数组
+        console.log(arr + arr1);//+号相连，转化为字符串返回
+    </script>
+</body>
+
+</html>

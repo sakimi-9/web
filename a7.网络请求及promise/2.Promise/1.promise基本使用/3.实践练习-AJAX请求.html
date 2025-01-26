@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1,
+        button,
+        div {
+            margin: 20px;
+        }
+
+        div {
+            width: 600px;
+            height: 600px;
+            border: 2px solid rgb(176, 230, 173);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>promise 写 AJAX</h1>
+    <hr>
+    <button id="btn">点击按钮发送AJAX获取内容</button>
+    <div id="div">
+    </div>
+    <script>
+        //dom树 获取标签对象
+        const btn = document.getElementById('btn');
+        const div = document.getElementById('div');
+
+        //btn 事件绑定
+        btn.addEventListener('click', () => {
+            //AJAX的使用
+            //1.类的实例化
+            const xhr = new XMLHttpRequest();
+            //2.初始化
+            xhr.open('GET', 'http://localhost:3000/AJAX');
+            //3.发送请求
+            xhr.send();
+            //4.处理请求结果  事件绑定
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {//判断 ajax请求处理完毕
+                    if (xhr.status >= 200 && xhr.status < 300) {//判断 与路由的通信正常
+                        div.innerHTML = xhr.response;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

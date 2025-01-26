@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    img {
+        width: 800px;
+        height: auto;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+</style>
+
+<body>
+    <h3><a
+            href="https://www.bilibili.com/video/BV1gY4y1U78C/?p=84&spm_id_from=pageDriver&vd_source=fd101f9f2a3b78d7b2b056f02fa9d819">Element属性
+            获取元素位置</a></h3>
+    <table border="2px">
+        <tr>
+            <td>属性</td>
+            <td>描述</td>
+        </tr>
+        <tr>
+            <td>clientHeight</td>
+            <td>获取元素高度包括 padding 部分，但是不包括 border、margin</td>
+        </tr>
+        <tr>
+            <td>clientWidth</td>
+            <td>获取元素宽度包括 padding 部分，但是不包括 border、 margin</td>
+        </tr>
+        <tr>
+            <td>scrollHeight</td>
+            <td>元素总高度，它包括padding,但是不包括border、 margin包括溢出的不可见内容
+            </td>
+        </tr>
+        <tr>
+            <td>scrollWidth</td>
+            <td>元素总宽度，它包括padding,但是不包括border、margin包括溢出的不可见内容 <br>实际开发环境中，大部分情况，这一对与上面那对没有区别，因为不会设置隐藏内容
+            </td>
+        </tr>
+        <tr>
+            <td>scrollLeft</td>
+            <td>元素的水平滚动条向右滚动的像素数量</td>
+        </tr>
+        <tr>
+            <td>scrollTop</td>
+            <td>元素的垂直滚动条向下滚动的像素数量 </td>
+        </tr>
+        <tr>
+            <td>offsetHeight</td>
+            <td>元素的CSS垂直高度（单位像素）,包括元素本身的高度、padding和border </td>
+        </tr>
+        <tr>
+            <td>offsetWidth</td>
+            <td>元素的CSS水平宽度（单位像素）,包括元素本身的高度、padding和border</td>
+        </tr>
+        <tr>
+            <td>offsetLeft</td>
+            <td>到定位父级左边界的间距 <br>没有定位父级则以顶层文档为基准</td>
+        </tr>
+        <tr>
+            <td>offsetTop</td>
+            <td>到定位父级上边界的间距<br>没有定位父级则以顶层文档为基准</td>
+        </tr>
+    </table><b>格式:变量名.获取位置的属性</b><br><br>
+    <p>获取视口高度 document.documentElement.clientHeight <span>视口的高度是当前屏幕窗口的高度<br><br>获取页面高度 document.body.clientHeight
+            页面的高度是内容所撑开的高度</span><br><br><br>
+        <span>让浏览器自带的外边距（水平的）8px失效，使用以下全局声明 <br>
+            *{padding:0；margin:0；}</span><br><br>
+    </p>
+    <img src="./Element 属性 获取元素位置 .png">
+    <script>
+        var img = document.getElementsByTagName("img")[0];
+        console.log(img.clientWidth);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!-- 启用与取消注释:CTRL+/ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 300px;
+            background-color: #cade82;
+            padding: 20px;
+            border: 2px solid rgb(214, 112, 112);
+            margin: 50px;
+        }
+
+        #div2 {
+            width: 300px;
+            height: 300px;
+            background-color: #8ae4eb;
+            padding: 20px;
+            border: 2px solid rgb(105, 98, 189);
+            margin: 50px;
+        }
+
+        /* 先设置盒子的大小 宽与高
+        再设置盒子的对齐方式
+        再设置颜色 背景颜色 与 文字颜色
+        再设置 盒子的各个元素
+         */
+    </style>
+</head>
+
+<body>
+    <h3 align="center">box model,让页面更加整洁美观</h3>
+    <table border="2"><b>box model 的元素</b>
+        <tr>
+            <td>元素种类</td>
+            <td>描述</td>
+            <td>值</td>
+        </tr>
+        <tr>
+            <td>content 内容</td>
+            <td>文本·图片等</td>
+            <td>(单词不用写)填充的就是内容</td>
+        </tr>
+        <tr>
+            <td>padding内边距</td>
+            <td>设置content与border的距离,padding是透明的,设置大小后会撑开原来的容器</td>
+            <td>
+                <ul>
+                    <li>padding(一个值时)设置的是内容与边框四个方向的距离</li>
+                    <li>padding-(top·bottom·left·right)【常用,清晰明了,方便控制】</li>
+                    <li>padding(两个值时):上下 左右 </li>
+                    <li>padding(三个值时):上 左右 下 </li>
+                    <li>padding(四个值时 顺时针):上 右 下 左 </li>
+                </ul>
+            </td>
+        </tr>
+        <td>border边框设置</td>
+        <td>padding与margin中间夹着的边框</td>
+        <td>线的粗细npx(空格)线的形式(空格)线的颜色 |CSS里的border有并列的三个值,这三个值都要设置才能使样式生效 <br>线的大小要带单位,线的形式solid(实线)为常用,线的颜色也不要忘</td>
+        <tr>
+            <td>margin外边距</td>
+            <td>设置该容器与另一个容器的距离,margin也是透明的,设置大小后会撑开容器之间的距离</td>
+            <td>值的设置方式与padding的一样</td>
+        </tr>
+    </table>
+    <b>示例</b>
+    <div id="div1">
+        content
+    </div>
+    <div id="div2">
+        content
+    </div>
+</body>
+
+</html>

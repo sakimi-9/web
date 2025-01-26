@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Async函数</h3>
+    <table border="2px">
+        <tr>
+            <td>async函数 描述</td>
+            <td>async函数里包括await,async~await，让异步操作更加方便
+                <br>async函数可以将异步操作变为同步操作，意思是强制按顺序执行，异步操作在前，执行完了才会继续向下执行,这个可以很好的处理网络请求接口之间的依赖关系<br><br>async函数里调用异步操作（包裹）函数，是直接传参就能执行，不需要用异步操作函数的.then((data)=>{},(error)=>{})才能执行获得相应的结果
+            </td>
+        </tr>
+        <tr>
+            <td>格式</td>
+            <td>async function 函数名b (传入调用函数的参数){
+                await 函数名a（传入参数） ；
+                函数名c（传入参数） ；
+                }</td>
+        </tr>
+        <tr>
+            <td>格式解释</td>
+            <td>函数名b相当于一个容器，里按指定执行顺序，放着调用的异步操作包裹函数和同步操作函数<br><br>
+                async 让容器函数b可以进行同步化， 里面的 await 让异步操作包裹函数同步化<br><br>
+                异步操作包裹函数a，它里面包裹着promise对象，返回promise里运行的结果，promise对象里封装着异步操作<br><br>
+                函数b（）里的参数是给调用函数传参的<br><br>
+                函数c是同步操作函数
+            </td>
+        </tr>
+    </table>
+    <p>关于resolve(),括号里放异步操作对象或其对象的指定属性，<br> 如果处于异步函数中，那么括号里可以不放参数，代表传入这个函数的执行结果，<br><br>
+        比如:setTimeout(()=>{代码块 resolve},delay)</p>
+    <div id="o"></div>
+    <script>
+        var getimages = function (url_1, url_2) {
+            const promise = new Promise((resolve, rejectt) => {
+                const image_1 = new Image();
+                const image_2 = new Image();
+                image_1.src = url_1;
+                image_2.src = url_2;
+                image_1.onload = setTimeout(() => {
+                    o.appendChild(image_1); resolve(); //将图片塞入父容器
+                }, 2000);
+                image_2.onload = setTimeout(() => {
+                    o.appendChild(image_2); resolve();
+                }, 2000);
+                image_1.onerror = () => rejectt(new Error("图片加载失败"));
+                image_2.onerror = image_1.onerror;
+            })
+            return promise;
+        }
+        var image_e_3 = document.createElement("div");
+        var image_fn_3 = (url_3) => { image_e_3.innerHTML = `<img src=${url_3} >`; o.appendChild(image_e_3) };
+        var o = document.getElementById("o");
+        async function asysccontainer(url_1, url_2, url_3) {
+            await getimages(url_1, url_2);
+            image_fn_3(url_3);
+        }
+        asysccontainer('u2.jpg', 'u1.jpg', 'u3.webp');
+
+        //定时器的问题，还有图片显示顺序的问题，暂时没有实力解决
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Set数据结构</h3>
+    <table border="2px">
+        <tr>
+            <td>Set（）的描述</td>
+            <td>Set（）是一种构造函数，构造出特殊的数组(可以使用数组扩展运算符...)，不能出现重复元素的特殊数组，自身并不是数组array</td>
+        </tr>
+        <tr>
+            <td>创建一个空的set数据结构</td>
+            <td>var s = new Set()</td>
+        </tr>
+        <tr>
+            <td>给空Set内添加元素</td>
+            <td>s.add(数值) <br>s.add(数组) <br>s.add(字符串)</td>
+        </tr>
+        <tr>
+            <td>forEach(传递变量 = >{代码块} )</td>
+            <td>forEach将数组内的元素循环遍历，并通过传递变量，将遍历的元素作用代码块 <br>格式:数组.forEach(传递变量 = >{代码块} )<br><br>可以用forEach给空set塞入指定去重数组
+                <br>比如:var s = new Set() ;
+                arr.forEach(x = >{s.add(x)} )
+            </td>
+        </tr>
+        <tr>
+            <td>new Set()括号里不会强制转换类型，只是去重</td>
+            <td>比如 new Set(5,"5") //5,"5"</td>
+        </tr>
+        <tr>
+            <td>作用 去重 | new Set()后再往里填入参数</td>
+            <td>
+                <ul>
+                    <li>给数组去重 <br>var arr1 = [...new Set（有重复元素的数组arr）]</li>
+                    <li>给字符串去重 <br>var str1 = [...new Set(字符串)].jion("")</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+
+    <script>
+        var arr = [1, 1, 7, 2, 5, 3, 2, 3, 4, 5, 6, 7, 8];
+        var s = new Set();
+        arr.forEach(x => {
+            s.add(x)
+        });
+        console.log(s);
+        var arr1 = [...new Set([3, 3, 3])];
+        console.log(arr1);
+        var str1 = [... new Set("ssdfefff")].join("");
+        console.log(str1);
+    </script>
+</body>
+
+</html>

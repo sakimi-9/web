@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <strong>表单 控件input(单标签)的三种常用属性:type=“text|password|submit”</strong><br>
+    <ul>
+        <li>文本框:type="text" 输入文字·数字等</li>
+        <li>密码框:type="password" 输入密码,用星号/圆点显示 </li>
+        <li>提交按钮:type="submit" 生成提交按钮,可通过 value="代替文本" 来替换显示信息</li>
+    </ul>
+    <strong>textarea</strong>
+    <p>cols: 规定 textarea 的宽度，具体为一列包含的字符数。这是大约的宽度，浏览器可能会根据实际情况进行调整。<br><br>
+        rows: 规定 textarea 的高度，具体为显示的行数。同样，这也是一个大约的数值。<br><br>
+        name: 定义表单提交时此 textarea 的名称，这对于后端处理表单数据是必要的。<br><br>
+        id: 提供一个唯一的标识符，可以用于CSS样式或JavaScript脚本中引用这个元素。<br><br>
+        placeholder: 可以添加一个提示信息，当 textarea 为空时显示，一旦用户开始输入就会消失。<br><br>
+        wrap: 用于指定文本换行方式，可以是 "hard" 或 "soft"，但HTML5中已被废弃，浏览器通常忽略此属性。<br><br>
+        readonly: 如果设置，用户不能编辑文本。<br><br>
+        disabled: 如果设置，整个 textarea 将被禁用，用户不能与其交互。<br><br>
+        required: 如果设置，表单提交前必须填写此 textarea。</p>
+    <strong>select下拉列表式选择菜单</strong>
+    <P> select 标签通常与 option 标签一起使用，后者定义了下拉列表中的每一个可选项<br><br><br>
+        multiple:如果设置了这个属性，用户可以选择多个选项。<br><br>
+        disabled:如果设置，选择框变为不可用状态。<br><br>
+        size:定义下拉列表在没有展开时可见的选项数目。<br><br>
+        autofocus:如果设置，页面加载时选择框将自动获得焦点。<br><br>
+    </P>
+    <form action="">
+        账号:<input type="text"><br>
+        密码:<input type="password"><br>
+        <input type="submit" value="登录">
+        <textarea name="" id="">多行伸缩文本框</textarea>
+    </form>
+    <form action="/submit_form">
+        <label for="colors">选择你喜欢的颜色:</label>
+        <select id="colors" name="colors">
+            <option value="red">红色</option>
+            <option value="green">绿色</option>
+            <option value="blue">蓝色</option>
+        </select>
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>

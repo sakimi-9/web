@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+            padding: 5px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>同源策略与跨域 </h3>
+    <table>
+        <tr>
+            <td>关于同源策略</td>
+            <td>请求的资源都来自同一页面或者服务端,协议 域名 端口号 都一致才符合同源策略 <br>
+                比如: 页面资源来自File协议(本地静态页面),页面数据来自HTTP协议(路由服务),这需要跨域才能让两个资源在一个页面
+        </tr>
+        </td>
+        <tr>
+            <td>关于跨域</td>
+            <td>解决跨域有两种方式: <br>
+                <ol>
+                    <ul>jsonp <br><br>
+                        利用的是script标签跨域发送GET请求获取js代码 <br> 有一些标签本生就具有跨域能力,可以引入外部资源,link(CSS) script(JS) img(图片) 等
+                        <br>这些本质是在向其他页面或者服务端发送GET请求获取资源 <br><br>
+                        比如:静态页面引入外部的原生js,File协议向HTTP协议发送GET请求获取js代码,这也是jsonp
+                    </ul>
+                    <ul>CORS <br><br>
+                        跨域资源共享,CORS 是官方的跨域解决方案,设置对应的响应头,让浏览器内部可以处理与返回跨域资源 <br>
+                        <br><br>常在路由服务中为ajax设置这三个 <br>
+                        <ol>
+                            <li>//设置响应头 允许URL跨域请求(* 表示来自任何URL的) 只要跟ajax请求有关的路由,都要设置这个跨域 <br>
+                                response.setHeader('Access-Control-Allow-Origin', '*');//默认只支持GET POST 要更多请求方法,设置第三个
+                            </li>
+                            <li>//设置响应头 允许自定义响应头 这样Ajax设置的自定义请求头才能生效 <br>
+                                response.setHeader('Access-Control-Allow-Headers', '*');</li>
+                            <li> //设置响应头 允许所有请求方法 这样Ajax设置的更多请求方法才能生效 <br>
+                                response.setHeader('Access-Control-Allow-Method', '*');</li>
+                        </ol>
+                    </ul>
+                </ol>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

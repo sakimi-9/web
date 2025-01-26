@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .result {
+            width: 200px;
+            height: 150px;
+            border: 2px solid rgb(233, 234, 4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result"></div>
+    <script>
+        //dom树 获取result数组的第一个标签
+        const result = document.getElementsByClassName('result')[0];
+
+        //事件绑定  最顶层的窗口 对象 键盘按下任意键触发  
+        window.onkeydown = () => {
+            //Ajax基本操作
+            //1.创建对象  实例化Ajax类
+            const xhr = new XMLHttpRequest();
+
+            //设置 Ajax请求 超时为2S
+            xhr.timeout = 2000;//单位ms
+            xhr.ontimeout = () => {//超时callback
+                alert('请求超时,请稍后重试~~');
+            }
+
+            //设置 网络异常 callback
+            xhr.onerror = function () {
+                alert('网络异常,请检查网络~~');
+            }
+
+            //2.初始化
+            xhr.open('GET', 'http://localhost:3000/server-delay-ie?t=' + Date.now());
+            //3.发送
+            xhr.send();
+            //4.事件绑定
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

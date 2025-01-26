@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>break 与 continue</h3>
+    <ul>
+        <li>breake: 跳出本轮所有循环</li>
+        <li> continue:跳出此次循环，回到条件判断处，符合则进行下一次循环</li>
+    </ul>
+        
+    <script>
+        
+        // break跳出本轮所有循环
+        for (var i = 1;i <= 10 ; i++){
+            document.write(i);
+            if(i == 5){
+                document.write("跳出循环");
+                break;
+            }
+        }
+        document.write("<br>")
+        // continue跳出此次循环，进行下一次循环
+        for (var i = 1;i <= 10 ; i++){
+            if(i == 5){
+                document.write("跳出循环");
+                continue;
+            } 
+            document.write(i);
+        }
+
+    </script>
+</body>
+</html>

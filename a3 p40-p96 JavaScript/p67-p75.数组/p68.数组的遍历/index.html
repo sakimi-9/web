@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>数组的遍历</h3>
+    <b>数组的遍历:把里面的元素都拿出来一遍，通常用循环来遍历 <br>循环的终点用小于array.length就行，不用去数数组的最终位置</b>
+    <ol>
+        <li>for循环</li>
+        <li>while循环</li>
+        <li>for~in 循环 :格式如 for(var i in array){
+            console.log(array[i]); } <br>要注意的是，for~in循环很简约，但它是按枚举整个原型链的索引来遍历的，只打印索引时可能会遍历到数组修改的属性</li>
+    </ol>
+    <script>
+        var arr = "昔人已乘黄鹤去，此地空余黄鹤楼。 黄鹤一去不复返，白云千载空悠悠。晴川历历汉阳树，芳草萋萋鹦鹉洲。暮乡关何处是？烟波江上使人愁。";
+        arr = arr.split("");// .split("") 全分割
+        // console.log(arr.join(""));// .join("") 全合并，也不改变原字符串
+        console.log(arr);
+        // for循环遍历
+        for (var i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+        // while循环遍历
+        var i = 0;
+        while (i < arr.length) {
+            console.log(arr[i]);
+            i++;
+        }
+        // for~in 循环遍历
+        for (var i in arr) {
+            console.log(arr[i]);
+        }
+    </script>
+</body>
+
+</html>

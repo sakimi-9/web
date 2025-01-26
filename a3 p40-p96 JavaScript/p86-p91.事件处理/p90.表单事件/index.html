@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>事件类型之表单事件</h3>
+    <table border="2px">
+        <tr>
+            <td>input</td>
+            <td>输入框输入时触发 <br><br>格式:Dom0级 input节点.oninput = function（）{事件处理}</td>
+        </tr>
+        <tr>
+            <td>select</td>
+            <td>在输入框中选中内容时触发 <br><br>格式:Dom0级 input节点.onselect = function（）{事件处理}</td>
+        </tr>
+        <tr>
+            <td>change</td>
+            <td>输入框内容改变完成时触发 <br>改变完成，敲回车或者失去鼠标焦点（鼠标点击文本框之外的区域） | change的触发频率要比input低很多<br><br>格式:Dom0级 input节点.onchange
+                = function（）{事件处理} <br><br>这三个都是与输入框强相关，都是写在input节点后</td>
+        </tr>
+        <tr>
+            <td>reset() 这是一个表单节点的方法</td>
+            <td>表单重置（清空）时(表单成员变回默认值)触发 <br>点击按钮触发，清空表单 | 所以是写在button节点的onclick的监听函数中，调用表单方法的形式出现 <br><br>格式:Dom0级
+                button节点.onclick = function（）{表单变量名.reset（）;事件处理}</td>
+        </tr>
+        <tr>
+            <td>submit</td>
+            <td>当表单数据向服务器提交时触发 <br>在input标签里设置好name="文本框名" 到时候提交数据时 会以 文本框名=内容 提交，意思是 名为文本框名的input里的内容为"内容"
+                <br><br>格式:HTMl级也可以 form标签里 onsubmit="函数（）" js : function 函数名（）{事件处理}<br><br> Dom0级 form节点.onsubmit =
+                function（）{事件处理}</td>
+        </tr>
+    </table>
+    <form id="form_1" action="服务器地址">
+        <input type="text" name="文本框" id="input_1">
+        <button id="btn_1">提交</button>
+        <button id="btn_2">重置</button>
+    </form>
+    <script>
+        var form_1 = document.getElementById("form_1");
+        var input_1 = document.getElementById("input_1");
+        var btn_2 = document.getElementById("btn_2");
+        input_1.oninput = function (e) {
+            console.log(e.target.value);    //在输入框输入触发
+        }
+        input_1.onselect = function (e) {
+            console.log("选中文本触发");        //输入框中选中文本触发
+        }
+        input_1.onchange = function (e) {
+            console.log("内容改变完成触发");        //输入框中内容改变完成触发
+        }
+        btn_2.onclick = function () {
+            form_1.reset();
+            console.log("清空表单");            //单击重置按钮 清空表单
+        }
+        form_1.onsubmit = function () {
+            console.log("sss");                 //提交表单数据触发
+        }
+    </script>
+</body>
+
+</html>

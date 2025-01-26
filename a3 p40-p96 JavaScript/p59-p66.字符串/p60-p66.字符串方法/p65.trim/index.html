@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 trim</h3>
+    <table boeder="2px">
+        <tr>
+            <td>用处:</td>
+            <td>用于返回去掉字符串前后空格的新字符串，也不改变原字符串</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>字符串.trim();</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>trim()不仅可以去掉字符串两端的空格，还可以去掉两端的制表符(\t,\v) 换行符(\n) 回车符(\r) <br>只能去掉两端的空格符等，中间的去不了！ </li>
+                    <li>es6扩展方法 trimStart()和trimEnd() <br>trimStart() 去掉前边的空格符等 <br>trimEnd() 去掉后边的空格符等</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <script>
+        document.write("<br>");
+        document.write("<br>");
+
+        // trim 格式示例 去掉两端的空格 再返回新的字符串
+        var str = "    晴川历历汉阳树，芳草萋萋鹦鹉洲。    ";
+        document.write(str.trim());
+        document.write("<br>");
+        document.write("<br>");
+
+
+        // trim es6 扩展 trimStart 与 trimEnd
+        document.write(str.trimStart());
+        document.write("<br>");
+        document.write(str.trimEnd());
+    </script>
+</body>
+
+</html>

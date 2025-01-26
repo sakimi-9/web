@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串扩展</h3>
+    <table border="2px">
+        <tr>
+            <td>unicode表示法</td>
+            <td>ES6加强了对Unicode的支持，允许采用\uxxxx形式表示一个字符(包括表情包)，其中xxxx表示字符的Unicode码点。
+                <br><br>
+                Unicode 介绍
+                统一码（Unicode),也叫万国码、单一码，是计算机科学领域里的一项业界标准，包括字符集、编码方案等。<br>
+                Unicode是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。<br><br>unicode使用格式，字符串形式包裹Unicode码
+                :"\u字符码点"
+            </td>
+        </tr>
+        <tr>
+            <td>字符串遍历接口（方法，机制） for~of</td>
+            <td>for~of循环遍历字符串，最方便，直接遍历，不用管下标 <br><br>格式:for(声明类型 变量 of 字符串变量名\字符串){ console.log(变量名)}
+                <br><br>示例:for(let i of "str"){console.log(i)} <br> 而 for~in来遍历字符串 <br> for(var i in
+                "string"){console.log("string"[i])}
+            </td>
+        </tr>
+        <tr>
+            <td>模板字符串</td>
+            <td>定义:模板字符串是加强版字符串，用`反引号标识，可以当作普通字符串使用 <br>`内容`<br><br>也可以直接在代码里定义多行字符串（不用转义换行处）<br>`ss
+                ce
+                e`<br><br> 还可以在字符串中非常简洁的嵌入动态变量,用${动态变量（比如 href ）} <br>`随机数为${x} `<br></td>
+        </tr>
+    </table>
+    <script>
+        console.log("\u0067");//g
+
+        for (let i of "string") {
+            console.log(i);
+        }
+
+        let a = 5;
+        let b = 5;
+        console.log(`str`);
+        console.log(`1
+                        2
+                            3
+                                4
+                                    5`);
+        console.log(`a+b=${a + b}`);
+
+    </script>
+</body>
+
+</html>

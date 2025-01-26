@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=|, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Math 对象</h3>
+    <table border="2px">
+        <tr>
+            <td>描述</td>
+            <td>Math对象是js的原生的数学库，提供各种各样的数学功能 <br>可以调用对象中各种各样的函数，调用格式就是调用对象中的函数,括号里输入参数 <br><br>Math.函数名（参数）</td>
+        </tr>
+        <tr>
+            <td>Math对象中常用的方法</td>
+            <td>
+                <ul type="circle">
+                    <li>Math.abs() 取绝对值</li><br><br>
+                    <li>Math.max() 取其中最大值 <br>Math.min() 取其中最小值</li><br><br>
+                    <li>Math.ceil() 向上取整（有小数部分就向上入1） <br>Math.floor 向下取整（不管小数多大，都舍去）</li><br>ceil(天花板) floor(地板)<br>
+                    <li>Math.random() 取大于等于0小于1的随机数 可由此取min-max的随机数:<br>
+                        function 函数名(min,max){
+                        return Math.random()*(max-min)+min;
+                        } <br><br>
+                    </li>
+                    <!--
+Math.random()：这是一个内置的JavaScript函数，它生成一个0到1之间的随机小数，不包括1。
+
+Math.random() * (max - min)：这部分代码将随机数乘以max和min之间的差值。这样，生成的随机数就被缩放到了(min,max)。
+
+Math.random() * (max - min) + min：将上一步的结果加上min，这样生成的随机数就会在[min,max)，包括min。
+
+Math.floor()：这是一个内置的JavaScript函数，它将一个数字向下舍入到最近的整数。由于我们需要的是整数，所以使用Math.floor()来确保结果是整数。 -->
+                </ul>
+            </td>
+        </tr>
+    </table>
+    console.log(Math.abs(-1)); //取绝对值 为1
+    console.log(Math.max(1, 2, 3, 66, 777, 888, 34));//取其中最大值 为888
+    console.log(Math.min(1, 3, 2, -9));//取其中最小值 为-9
+    console.log(Math.ceil(10.00001));//向上取整 有小数就入1 为 11
+    console.log(Math.floor(10.999999));//向下取整 不管小数部分多大 都舍去 为10
+    // 输出 1-100的随机整数
+    function g(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+    }
+    //模拟 100里面抽到99要多少次
+    while (a = g(1, 100) != 99) {
+    console.log(a);
+    }
+    console.log("99");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<b>要在js代码里换行，输入换行标签就行,这个仅限于 document.write() <br>console.log() 的换行，用es6de字符串扩展の字符串模板 `` ,这个换行很方便，代码换行，打印就会换行<br>
+    比如:document.write("<br> ");<br>
+    输出时有字符串加变量，用+号相连或者用逗号相连
+</b>
+
+<body>
+    <script>
+        // 输出1-100的和
+        // var m = 0;
+        // for (var n = 1; n <= 100; n++) {
+        //     m += n;
+        // }
+        // document.write('1-100的和为:'+m);
+
+        // 输出1-1000的奇数
+        //   document.write('输出1-1000的奇数:');
+        //     for(var n1 = 1 ; n1 <= 1000 ; n1++){
+        //         if(n1%2 != 0){
+        //             document.write(' '+n1);
+        //         }
+        //     };
+
+        // 打印99乘法口诀表
+        var a, b;
+        for (a = 1; a <= 9; a++) {
+            document.write("<br>");
+            for (b = a; b <= 9; b++) {
+                document.write(" ", a, "*", b, "=", a * b);
+            }
+        };
+        document.write('<br>');
+        document.write('<br>');
+        document.write('<br>');
+        var n, m;
+        for (var n = 1; n <= 9; n++) {
+            document.write('<br> ');
+            for (m = 1; m <= n; m++) {
+                document.write(" ", m, "*", n, "=", n * m);
+            }
+        }
+        // 就两个点需要注意，[m由n来决定起点/n和m开始起点一样]（式子逐行减少）或者[注意m由n来决定终点（控制每一行有多少个式子,式子逐行增加）]，每次外循环输出换行 “<br>”
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1,
+        button {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>promise-抽奖</h1>
+    <hr>
+    <button id="btn">点击抽奖</button>
+    <script>
+        //dom树获取btn标签对象
+        const btn = document.getElementById('btn');
+        //事件绑定  单击按钮
+        btn.addEventListener('click', () => {
+
+            //promise 
+            let promise = new Promise((resolve, reject) => { // resolve解决 reject拒绝
+                setTimeout(() => {//定时器 延迟1.5s 展现弹窗获奖结果
+                    let huojiangfc = (min, max) => {//随机数函数  0-100
+                        return Math.floor(Math.random() * (max - min) + min);//向下取整
+                    }
+
+                    let gl = huojiangfc(1, 100);//gl是中将概率对应的数字
+                    if (gl < 30) {//30%的获奖概率
+                        resolve(gl)//这是传入.then的resolve的实参
+                    } else (gl >= 30)
+                    reject(gl)
+                }, 0);
+
+            })
+
+            //用.then的方法给promise传入 resolve和reject的参数
+            promise.then(
+                (value) => {//这是形参 value  值 
+                    alert(`恭喜获奖,奖品为保时捷30元代金券!您中将号码为${value}`)
+                    console.log(value)
+                }, (reason) => {//reason 路由
+                    alert(`很遗憾,未获奖.您的号码为${reason}`);
+                    console.log(reason);
+                });
+        })//先执行 函数,遇到promise类所需的resolve和reject函数时,再将.then里的函数参数传入到类的相应位置,此时,promise里的实参传入
+
+    </script>
+</body>
+
+</html>

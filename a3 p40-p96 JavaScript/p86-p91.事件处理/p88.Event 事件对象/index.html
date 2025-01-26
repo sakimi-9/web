@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Event 事件对象</h3>
+    <table border="2px">
+        <tr>
+            <td><b>定义:</b></td>
+            <td>
+                <p>事件发生后，会产生一个相应的事件对象，作为参数传给监听函数</p>
+            </td>
+        </tr>
+        <tr>
+            <td><b>描述:</b></td>
+            <td>
+                <p>事件的所有信息是以对象的数据类型存储，将事件对象里的所有信息作为参数传给此事件的监听函数，<br> 在事件触发时，监听函数能够调用事件对象的属性及方法，来让事件触发满足更多需求</p>
+            </td>
+        </tr>
+        <tr>
+            <td><b>格式:</b></td>
+            <td>
+                <p>Dom0级的 元素标签.事件类型 = function(event){event.属性/方法（）；事件处理} <br> event可以简写成e , 用event有跳字提示</p>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <b>Event 中常用属性</b>
+    <ul>
+        <li>target: 返回此事件作用的标签及其所有信息</li><br>
+        <li>type: 返回此事件的事件类型</li><br>
+    </ul>
+    <br><br>
+    <ul><b>Event 中常用方法</b>
+        <li>preventDefault(): 阻止默认事件 <br>解释:事件触发时，阻止该标签的默认效果响应 <br>比如:click触发时，a标签的跳转效果失效</li><br><br>
+        <li>stopPropagation(): 阻止事件冒泡 <br>解释:子容器的事件触发时，阻止冒泡传递给父容器，让父容器不能同步触发该事件 <br>比如:子容器的click触发时进行事件处理，父容器同步生效失败</li>
+    </ul>
+    <div id="s1">
+        <div id="s2"></div>
+    </div>
+    <script>
+        var div_s1 = document.getElementById("s1");
+        var div_s2 = document.getElementById("s2");
+        div_s1.style.cssText = "width:500px;height:500px;background-color:#999";
+        div_s2.setAttribute("style", "width:300px;height:300px;background-color:#0f0");
+        var content = document.createTextNode("我是内容");
+        div_s2.appendChild(content);
+        div_s2.innerHTML = "<a herf='https://cn.bing.com/images/search?q=%E5%B0%8F%E5%A7%90%E5%A7%90%E5%9B%BE%E7%89%87&form=IQFRML&first=1' title='更多图片'>更多图片</a>";
+        div_s1.innerText = "hello \(@^0^@)/"
+        div_s1.onclick = function (e) {
+            console.log(e);//返回 事件对象所存储的所有信息
+            console.log(e.target);//返回 事件作用的标签及所有信息
+            console.log(e.type);//返回 此事件的事件类型
+
+        };
+        div_s2.onclick = function (e) {
+            event.preventDefault();//阻止跳转响应
+            event.stopPropagation();//阻止父容器也打印
+            console.log(e.target);
+        };
+    </script>
+</body>
+
+</html>

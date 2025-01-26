@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 700px;
+            height: 700px;
+            background-color: #000000;
+            border: 2px solid wheat;
+            /* border 不要老是忘记带单位px */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .div1 {
+            height: 100px;
+            width: 100px;
+            background-color: #ff0116;
+            flex: 2;
+        }
+
+        .div2 {
+            height: 100px;
+            width: 100px;
+            background-color: #2701ff;
+            flex: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>弹性盒子</h3>
+    <p><b>弹性盒子由弹性容器(flex container)和弹性子元素(flex item)组成</b><br>作用:为了让页面适应不同的屏幕与设备</p>
+    <table border="2">
+        <tr>
+            <td>弹性容器(flex container)/父元素</td>
+            <td>
+                <ul>属性与值
+                    <li>display:flex 将容器设置为弹性盒子 display(表现)</li>
+                    <li>flex-direction:row(默认横向)|row-reverse(横向反转排列)|column(竖向)|column-reverse(竖向反转)
+                        设置弹性盒子的排列方向<br>text-deraction(文本划线装饰)与flex-direction(弹性盒子排列方向)<br></li>
+                    <li>justify-content:flex-start(默认,弹性项紧挨左行头的padding)|flex-end(弹性项紧挨右行尾)|center(y轴贯穿弹性项居中)
+                        设置弹性项沿主轴(x轴)方向对齐 “田”字的中间那一行就是主轴线 <br>just(公正) ify(动词后缀)</li>
+                    <li>align-items:flex-start(默认,弹性项紧挨上行头)|flex-end(弹性项紧挨下行尾)|center(x轴贯穿弹性项居中)</li> 设置弹性项沿主轴(y轴)方向对齐
+                    “田”字的中间那一竖就是侧轴线<br>
+                    <span color="red">反向排列也会让对齐位置reverse</span>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>弹性子元素(flex item)</td>
+            <td>只有一个属性和值<br>felx-grow(常用flex)设置该弹性项的在总宽/高度的占比 值只填数字 设置后宽/高度会失效 <br>比如 弹性项为align-items:center 排列 设置flex:1
+                其他总高度为4 那么该弹性项高度占1/5</td>
+        </tr>
+    </table>
+    <div class="container">
+        <div class="div1"> </div>
+        <div class="div2"> </div>
+    </div>
+</body>
+
+</html>

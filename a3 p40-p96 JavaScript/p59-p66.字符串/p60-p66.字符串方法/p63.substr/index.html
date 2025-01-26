@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 substr</h3>
+    <table border="2px">
+        <tr>
+            <td>描述:</td>
+            <td>区别:</td>
+        </tr>
+        <tr>
+            <td>substr与substring的方法作用都相同</td>
+            <td>
+                <ol>
+                    <li>第一个参数是起始位置 <br>但第二个参数是要返回的字符串 <b>长度</b></li>
+                    <li>第一个参数为负数时，代表 <b>倒数（从-1开始）</b>计算起始位置</li>
+                    <li>第二个参数为负数时，会自动转化为0，代表长度为0，返回空字符串“ ”</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <script>
+        // substr 格式示例
+        document.write("<br>");
+        var str = "晴川历历汉阳树";
+        document.write(str.substr(0, 2));//晴川
+        document.write("<br>");
+        document.write("<br>");
+
+        // substr 第一个参数为负数时，第二个参数省略，从起始位置返回到结束
+        document.write(str.substr(-3));//汉阳树
+        document.write("<br>");
+        document.write("<br>");
+
+        // substr 第二参数为负数或0时，返回空字符串
+        document.write(str.substr(5, -99));//
+    </script>
+</body>
+
+</html>

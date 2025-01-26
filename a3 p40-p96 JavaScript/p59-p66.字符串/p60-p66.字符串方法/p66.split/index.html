@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>字符串方法 split</h3>
+    <table border="2px">
+        <tr>
+            <td>用处:</td>
+            <td>用于分割字符串，以数组形式返回</td>
+        </tr>
+        <tr>
+            <td>格式:</td>
+            <td>str 字符串变量名 str.split("分割符",长度参数) <br> str.split("") <br>str.split()</td>
+        </tr>
+        <tr>
+            <td>描述:</td>
+            <td>
+                <ul>
+                    <li>可以规定（字符串中出现的字符为）要移除的分割符，然后以数组形式返回没有分割符的字符串</li>
+                    <li>长度参数可以省略，长度参数规定的是数组长度n，返回数组长度前n的子字符，大于该长度n不会被返回（也就是大于数组个数n的不要） <br><br>长度参数为0时，返回空数组[] <br><br>
+                        长度参数大于最大数组长度时，仍旧按照最大长度来返回，也就是 相当于省略长度参数</li><br>
+                    <li>分割符为空字符串时，字符串会被全部分割，以数组形式返回所有单个子字符</li>
+                    <li>split()空格内为空时，代表没有规定分割符，以数组形式返回完整的字符串</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <script>
+
+        // split 规定（字符串中的子字符为）分割符
+        var str = "晴川|历历|汉阳树|，芳草|萋萋|鹦鹉洲。";
+        var str1 = str.split("|");
+        console.log(str1);//["晴川","历历","汉阳树，","芳草","萋萋","鹦鹉洲。"]
+
+        // split 规定空字符串为分割符，全分割
+        var str2 = str.split("");
+        console.log(str2);
+
+        // split 括号内为空，没有规定分割符 ，返回完整字符串
+        var str3 = str.split();
+        console.log(str3);
+
+        // split 规定长度参数为0  ，返回空数组
+        console.log(str.split("", 0));
+        // split 规定长度参数为99 ，大于最大长度的，按最大长度返回（相当于省略长度参数）
+        console.log(str.split("|", 99));
+        // split 规定长度参数为5 ，返回数组长度前5的子字符，之后的不被返回
+        console.log(str.split("|", 5));
+
+
+    </script>
+</body>
+
+</html>

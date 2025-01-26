@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container1 {
+            width: 700px;
+            height: 700px;
+            background-color: #190119;
+            left: 200px;
+        }
+
+        .container2 {
+            width: 700px;
+            height: 700px;
+            background-color: #cd71cd;
+            position: relative;
+            left: 200px;
+        }
+
+        .div1 {
+            width: 200px;
+            height: 200px;
+            background-color: #8ad9e2;
+            position: relative;
+            left: 100px;
+            top: 50px;
+        }
+
+        .div2 {
+            width: 200px;
+            height: 200px;
+            background-color: #75e68a;
+            position: absolute;
+        }
+
+        .div2-1 {
+            width: 200px;
+            height: 200px;
+            background-color: #75e68a;
+            position: absolute;
+            right: 100px;
+        }
+
+        .aside {
+            width: 60px;
+            height: 300px;
+            background-color: #12e9e9;
+            position: fixed;
+            right: 0px;
+            bottom: 50px;
+        }
+
+        table,
+        td {
+            border: 2px solid rgb(51, 104, 153);
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>定位position</h3>
+    <table>
+        <tr>
+            <td>定位的种类(position的值)</td>
+            <td>描述</td>
+            <td>注意</td>
+        </tr>
+        <tr>
+            <td>relative相对定位</td>
+            <td>在文档流(层)中,设置位置 | 设置position:relative后,再设置left | right | top |bottom:npx 来调整容器 <i>对这四个方向的距离</i></td>
+            <td>relative和absolute会随着具有定位的父级容器container移动而移动,如果container没有定位,则向上跟随有定位的上级容器移动而移动,如果都没有,则处于文档顶层来定位</td>
+        </tr>
+        <tr>
+            <td>absolute绝对定位</td>
+            <td>absolute脱离文档流,设置位置| 设置position:absolute后,再设置left | right | top |bottom:npx 来调整脱离文档流的该容器 <i>对这四个方向的距离</i>
+            </td>
+            <td>absolute与relative的区别是,absolute脱离文档流,其他都一样</td>
+        </tr>
+        <tr>
+            <td>fixed固定定位</td>
+            <td>fixed脱离文档流,设置位置| 设置position:relative后,再设置left | right | top |bottom:npx 来固定容器始终 <i>对这四个方向的距离</i></td>
+            <td>fixed与absolute的区别是,fixed始终固定在设置的位置,不受滑动页面影响,其他都一样</td>
+        </tr>
+    </table>
+    <b>补充一个相关知识</b>
+    <br><strong>z-index设置图层优先级<br>z-index:n <br>(无单位)值越大,图层优先级越高,越在上面显示</strong>
+    <div class="container1">
+        <div class="div1"></div>
+        <div class="div2-1"></div>
+    </div>
+    <div class="container2">
+        <div class="div1"></div>
+        <div class="div2"></div>
+    </div>
+    <div class="aside"></div>
+
+</body>
+
+</html>
