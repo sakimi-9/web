@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //async关键字,async可以标记一个函数使其成为异步函数并返回一个promise对象,值为promise的结果值
+        async function main() {
+            return 'ok';
+        }
+        let result = main();
+        console.log(result);
+
+        //await
+        //async函数中可以没有await,但await必须要写在async函数中
+
+        //await表达式
+        async function a(param) {
+            let pro = new Promise((resolve, reject) => {
+                resolve(param);
+            });
+            //1.await右侧常为promise对象
+            let p1 = await pro;
+            console.log(p1);
+            //2.await一般不为其他值,为其他值时,await就是那个值
+            let p2 = await 100;
+            console.log(p2);
+            //3.await右侧为promise对象,对象的状态为reject时,会自动抛出异常,需要用try catch捕获
+            let pro2 = new Promise((resolve, reject) => {
+                reject('error');
+            });
+            try {
+                let p3 = await pro2;
+            } catch (error) {
+                console.warn('error:', error);
+            }
+
+
+        }
+        a(' is ok');
+
+    </script>
+
+</body>
+
+</html>
