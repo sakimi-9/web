@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <style>
+        .container {
+            margin: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+        }
+        .get-btn { background-color: #4CAF50; }    /* 绿色 */
+        .random-btn { background-color: #2196F3; }  /* 蓝色 */
+        .concurrent-btn { background-color: #FF9800; } /* 橙色 */
+        
+        .text-box {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .cancel-dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <button onclick="getAllPosts()" class="btn get-btn">获取所有数据</button>
+            <button onclick="getRandomPost()" class="btn random-btn">随机查询</button>
+            <button onclick="concurrentRequests()" class="btn concurrent-btn">并发请求</button>
+        </div>
+        <textarea id="result1" class="text-box" readonly placeholder="所有数据结果..."></textarea>
+        <textarea id="result2" class="text-box" readonly placeholder="随机查询结果..."></textarea>
+    </div>
+
+    <!-- 取消请求对话框 -->
+    <div id="cancelDialog" class="cancel-dialog">
+        <h3>请求超时</h3>
+        <p>当前请求已经超过2秒，是否取消请求？</p>
+        <button onclick="cancelRequest()" class="btn" style="background-color: #f44336;">取消请求</button>
+        <button onclick="continueRequest()" class="btn" style="background-color: #4CAF50;">继续等待</button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        // axios 配置
+        const config = {
+            baseURL: 'http://localhost:3000/',
+            timeout: 10000 // 10秒超时
+        };
+
+        // 创建取消令牌
+        let cancelTokenSource = null;
+
+        // 添加请求状态标志
+        let isRequesting = false;
+
+        // 显示取消对话框
+        function showCancelDialog() {
+            if (isRequesting) {
+                document.getElementById('cancelDialog').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            }
+        }
+
+        // 隐藏取消对话框
+        function hideCancelDialog() {
+            document.getElementById('cancelDialog').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // 取消请求
+        function cancelRequest() {
+            if (cancelTokenSource) {
+                cancelTokenSource.cancel('用户取消了请求');
+            }
+            isRequesting = false; // 重置请求状态
+            hideCancelDialog();
+        }
+
+        // 继续请求
+        function continueRequest() {
+            hideCancelDialog();
+            // 继续请求时不重置isRequesting，让请求继续进行
+        }
+
+        // 获取所有文章
+        async function getAllPosts() {
+            if (isRequesting) return;
+            isRequesting = true;
+            cancelTokenSource = axios.CancelToken.source();
+            
+            let timeoutId = setTimeout(showCancelDialog, 2000);
+
+            try {
+                const response = await axios.get('posts', {
+                    ...config,
+                    cancelToken: cancelTokenSource.token
+                });
+
+                clearTimeout(timeoutId); // 清除超时计时器
+                hideCancelDialog(); // 请求成功时关闭弹窗
+                isRequesting = false;
+                document.getElementById('result1').value = JSON.stringify(response.data, null, 2);
+            } catch (error) {
+                clearTimeout(timeoutId);
+                hideCancelDialog(); // 请求失败时也关闭弹窗
+                isRequesting = false;
+                if (axios.isCancel(error)) {
+                    document.getElementById('result1').value = '请求已取消';
+                } else {
+                    document.getElementById('result1').value = `错误: ${error.message}`;
+                }
+            }
+        }
+
+        // 获取随机文章
+        async function getRandomPost() {
+            if (isRequesting) return;
+            isRequesting = true;
+            cancelTokenSource = axios.CancelToken.source();
+            
+            let timeoutId = setTimeout(showCancelDialog, 2000);
+
+            try {
+                // 先获取所有文章
+                const allPosts = await axios.get('posts', config);
+                const posts = allPosts.data;
+                if (posts.length === 0) {
+                    clearTimeout(timeoutId);
+                    hideCancelDialog();
+                    isRequesting = false;
+                    document.getElementById('result2').value = '没有可用的文章';
+                    return;
+                }
+
+                // 随机选择一篇文章
+                const randomIndex = Math.floor(Math.random() * posts.length);
+                const randomId = posts[randomIndex].id;
+
+                const response = await axios.get(`posts/${randomId}`, {
+                    ...config,
+                    cancelToken: cancelTokenSource.token
+                });
+
+                clearTimeout(timeoutId);
+                hideCancelDialog(); // 请求成功时关闭弹窗
+                isRequesting = false;
+                document.getElementById('result2').value = JSON.stringify(response.data, null, 2);
+            } catch (error) {
+                clearTimeout(timeoutId);
+                hideCancelDialog(); // 请求失败时也关闭弹窗
+                isRequesting = false;
+                if (axios.isCancel(error)) {
+                    document.getElementById('result2').value = '请求已取消';
+                } else {
+                    document.getElementById('result2').value = `错误: ${error.message}`;
+                }
+            }
+        }
+
+        // 并发请求
+        async function concurrentRequests() {
+            if (isRequesting) return;
+            isRequesting = true;
+            cancelTokenSource = axios.CancelToken.source();
+            
+            let timeoutId = setTimeout(showCancelDialog, 2000);
+
+            try {
+                // 获取所有文章的请求
+                const getAllRequest = axios.get('posts', {
+                    ...config,
+                    cancelToken: cancelTokenSource.token
+                });
+
+                // 获取随机文章的请求
+                const allPosts = await axios.get('posts', config);
+                const posts = allPosts.data;
+                const randomIndex = Math.floor(Math.random() * posts.length);
+                const randomId = posts[randomIndex].id;
+                const getRandomRequest = axios.get(`posts/${randomId}`, {
+                    ...config,
+                    cancelToken: cancelTokenSource.token
+                });
+
+                const [allResponse, randomResponse] = await Promise.all([
+                    getAllRequest,
+                    getRandomRequest
+                ]);
+
+                clearTimeout(timeoutId);
+                hideCancelDialog(); // 请求成功时关闭弹窗
+                isRequesting = false;
+                document.getElementById('result1').value = JSON.stringify(allResponse.data, null, 2);
+                document.getElementById('result2').value = JSON.stringify(randomResponse.data, null, 2);
+            } catch (error) {
+                clearTimeout(timeoutId);
+                hideCancelDialog(); // 请求失败时也关闭弹窗
+                isRequesting = false;
+                if (axios.isCancel(error)) {
+                    document.getElementById('result1').value = '请求已取消';
+                    document.getElementById('result2').value = '请求已取消';
+                } else {
+                    document.getElementById('result1').value = `错误: ${error.message}`;
+                    document.getElementById('result2').value = `错误: ${error.message}`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <style>
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+        }
+        .get-btn { background-color: #4CAF50; }    /* 绿色表示GET */
+        .post-btn { background-color: #2196F3; }   /* 蓝色表示POST */
+        .put-btn { background-color: #FF9800; }    /* 橙色表示PUT */
+        .delete-btn { background-color: #f44336; } /* 红色表示DELETE */
+        .modal-content {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button onclick="getPosts()" class="btn get-btn">GET 获取文章</button>
+        <button onclick="createPost()" class="btn post-btn">POST 创建文章</button>
+        <button onclick="updatePost()" class="btn put-btn">PUT 更新文章</button>
+        <button onclick="deletePost()" class="btn delete-btn">DELETE 删除文章</button>
+    </div>
+
+    <!-- 修改选择ID的模态框 -->
+    <div id="idSelector" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        background: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000;">
+        <h3 id="modalTitle">选择文章</h3>
+        <div class="modal-content">
+            <div id="idList" style="margin: 10px 0;"></div>
+            
+            <!-- 添加表单部分 -->
+            <div id="postForm" style="display: none;">
+                <div class="form-group">
+                    <label for="title">标题：</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="author">作者：</label>
+                    <input type="text" id="author" name="author">
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 15px;">
+            <button onclick="closeIdSelector()" style="margin-right: 10px;">取消</button>
+            <button onclick="confirmSelection()" style="background: #4CAF50; color: white; border: none; padding: 5px 10px;">确定</button>
+        </div>
+    </div>
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.5); z-index: 999;"></div>
+
+    <div id="result" style="margin: 20px; padding: 10px; border: 1px solid #ccc;">
+        结果将显示在这里...
+    </div>
+
+    <script>
+        // 基础配置
+        axios.defaults.baseURL = 'http://localhost:3000/';
+
+        // 添加请求拦截器
+        axios.interceptors.request.use(
+            function (config) {
+                // 验证请求数据
+                if (config.method === 'post' || config.method === 'put') {
+                    // 验证请求体数据
+                    const data = config.data;
+                    if (data) {
+                        // 验证标题和作者不能包含特殊字符
+                        const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+                        if (specialChars.test(data.title) || specialChars.test(data.author)) {
+                            throw new Error('标题和作者不能包含特殊字符');
+                        }
+                    }
+                }
+
+                // 验证URL中的ID参数（适用于PUT和DELETE请求）
+                if (config.url.includes('/posts/')) {
+                    const id = config.url.split('/posts/')[1];
+                    // 验证ID格式：只能包含字母、数字和下划线
+                    if (!/^[a-zA-Z0-9_]+$/.test(id)) {
+                        throw new Error('非法的ID格式');
+                    }
+                }
+
+                // 添加时间戳
+                config.headers['request-time'] = new Date().toISOString();
+                return config;
+            },
+            function (error) {
+                return Promise.reject(error);
+            }
+        );
+
+        // 添加响应拦截器
+        axios.interceptors.response.use(
+            function (response) {
+                // 验证响应数据
+                if (Array.isArray(response.data)) {
+                    // 过滤掉包含非法ID的数据
+                    response.data = response.data.filter(item => {
+                        return /^[a-zA-Z0-9_]+$/.test(item.id);
+                    });
+                } else if (response.data && response.data.id) {
+                    // 单个数据的ID验证
+                    if (!/^[a-zA-Z0-9_]+$/.test(response.data.id)) {
+                        throw new Error('响应数据包含非法ID');
+                    }
+                }
+
+                // 添加响应时间
+                response.headers['response-time'] = new Date().toISOString();
+                return response;
+            },
+            function (error) {
+                // 处理特定的错误情况
+                if (error.response) {
+                    switch (error.response.status) {
+                        case 400:
+                            error.message = '请求错误';
+                            break;
+                        case 404:
+                            error.message = '请求的资源不存在';
+                            break;
+                        case 500:
+                            error.message = '服务器错误';
+                            break;
+                        default:
+                            error.message = `未知错误: ${error.message}`;
+                    }
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        // 修改showResult函数以显示更详细的信息
+        function showResult(message, data) {
+            const resultDiv = document.getElementById('result');
+            const time = new Date().toLocaleTimeString();
+            resultDiv.innerHTML = `
+                <h3>${message}</h3>
+                <p>处理时间: ${time}</p>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+
+        // 添加一个通用的弹窗提示函数
+        function showAlert(message, type = 'error') {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 15px 25px;
+                border-radius: 5px;
+                color: white;
+                font-size: 16px;
+                z-index: 2000;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            `;
+            
+            // 根据类型设置不同的背景色
+            alertDiv.style.backgroundColor = type === 'error' ? '#f44336' : '#4CAF50';
+            alertDiv.textContent = message;
+            
+            document.body.appendChild(alertDiv);
+            
+            // 3秒后自动消失
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
+
+        // 修改表单验证部分
+        function validateForm(title, author) {
+            const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+            
+            if (!title.trim() || !author.trim()) {
+                showAlert('标题和作者不能为空');
+                return false;
+            }
+            
+            if (specialChars.test(title)) {
+                showAlert('标题不能包含特殊字符');
+                return false;
+            }
+            
+            if (specialChars.test(author)) {
+                showAlert('作者名不能包含特殊字符');
+                return false;
+            }
+            
+            if (title.length > 50) {
+                showAlert('标题长度不能超过50个字符');
+                return false;
+            }
+            
+            if (author.length > 20) {
+                showAlert('作者名长度不能超过20个字符');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // 修改确认选择函数
+        function confirmSelection() {
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            
+            if (currentOperation === 'create') {
+                if (!validateForm(title, author)) {
+                    return;
+                }
+                executeCreate(title, author);
+            } else if (currentOperation === 'update') {
+                const selected = document.querySelector('input[name="postId"]:checked');
+                if (!selected) {
+                    showAlert('请选择要更新的文章');
+                    return;
+                }
+                if (!validateForm(title, author)) {
+                    return;
+                }
+                executeUpdate(selected.value, title, author);
+            } else if (currentOperation === 'delete') {
+                const selected = document.querySelectorAll('input[name="postId"]:checked');
+                if (selected.length === 0) {
+                    showAlert('请至少选择一篇要删除的文章');
+                    return;
+                }
+                executeDelete(Array.from(selected).map(el => el.value));
+            }
+            
+            closeIdSelector();
+        }
+
+        // 存储当前选中的ID和操作类型
+        let selectedId = null;
+        let currentOperation = null;
+
+        // 显示ID选择器
+        async function showIdSelector(operation) {
+            currentOperation = operation;
+            const modalTitle = document.getElementById('modalTitle');
+            const postForm = document.getElementById('postForm');
+            
+            try {
+                const response = await axios.get('/posts');
+                const posts = response.data;
+                const idList = document.getElementById('idList');
+                
+                // 根据操作类型设置不同的显示内容
+                if (operation === 'delete') {
+                    modalTitle.textContent = '选择要删除的文章';
+                    postForm.style.display = 'none';
+                    idList.innerHTML = posts.map(post => `
+                        <div style="margin: 5px 0;">
+                            <input type="checkbox" name="postId" value="${post.id}" id="post${post.id}">
+                            <label for="post${post.id}">ID: ${post.id} - ${post.title}</label>
+                        </div>
+                    `).join('');
+                } else if (operation === 'update' || operation === 'create') {
+                    modalTitle.textContent = operation === 'update' ? '选择要更新的文章' : '创建新文章';
+                    postForm.style.display = 'block';
+                    
+                    if (operation === 'update') {
+                        idList.innerHTML = posts.map(post => `
+                            <div style="margin: 5px 0;">
+                                <input type="radio" name="postId" value="${post.id}" id="post${post.id}">
+                                <label for="post${post.id}">ID: ${post.id} - ${post.title}</label>
+                            </div>
+                        `).join('');
+                    } else {
+                        idList.style.display = 'none';
+                    }
+                }
+
+                document.getElementById('idSelector').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            } catch (error) {
+                showResult('获取文章列表失败：', error.message);
+            }
+        }
+
+        // 关闭模态框时清理表单
+        function closeIdSelector() {
+            document.getElementById('idSelector').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('title').value = '';
+            document.getElementById('author').value = '';
+            document.getElementById('idList').style.display = 'block';
+            selectedId = null;
+            currentOperation = null;
+        }
+
+        // 执行创建操作
+        async function executeCreate(title, author) {
+            try {
+                const newPost = { title, author };
+                const response = await axios.post('/posts', newPost);
+                showResult('POST请求成功：', response.data);
+            } catch (error) {
+                showResult('POST请求失败：', error.message);
+            }
+        }
+
+        // 执行更新操作
+        async function executeUpdate(id, title, author) {
+            try {
+                const updatedPost = { title, author };
+                const response = await axios.put(`/posts/${id}`, updatedPost);
+                showResult('PUT请求成功：', response.data);
+            } catch (error) {
+                showResult('PUT请求失败：', error.message);
+            }
+        }
+
+        // 执行删除操作
+        async function executeDelete(ids) {
+            try {
+                const results = await Promise.all(
+                    ids.map(id => axios.delete(`/posts/${id}`))
+                );
+                showResult('DELETE请求成功：', results.map(r => r.data));
+            } catch (error) {
+                showResult('DELETE请求失败：', error.message);
+            }
+        }
+
+        // 修改原有的函数调用
+        function createPost() {
+            showIdSelector('create');
+        }
+
+        function updatePost() {
+            showIdSelector('update');
+        }
+
+        function deletePost() {
+            showIdSelector('delete');
+        }
+
+        // 1. GET请求 - 获取所有文章
+        async function getPosts() {
+            try {
+                const response = await axios.get('/posts');
+                showResult('GET请求成功：', response.data);
+            } catch (error) {
+                showResult('GET请求失败：', error.message);
+            }
+        }
+    </script>
+</body>
+
+</html>
