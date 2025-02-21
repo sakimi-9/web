@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch请求处理</title>
+    <style>
+        .container {
+            margin: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+        }
+        .query-btn { background-color: #4CAF50; }    /* 绿色 */
+        .stream-btn { background-color: #2196F3; }   /* 蓝色 */
+        
+        .text-box {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            position: relative;
+        }
+
+        .response-info {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .id-item {
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .error-message {
+            color: red;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <button onclick="showQueryOptions()" class="btn query-btn">查询数据</button>
+            <button onclick="showStreamOptions()" class="btn stream-btn">流式查询</button>
+        </div>
+        <div id="result1" class="text-box" onmouseover="showResponseInfo(this, 0)" onmouseout="hideResponseInfo(this)">
+            查询结果将显示在这里...
+            <div class="response-info"></div>
+        </div>
+        <div id="result2" class="text-box" onmouseover="showResponseInfo(this, 1)" onmouseout="hideResponseInfo(this)">
+            流式查询结果将显示在这里...
+            <div class="response-info"></div>
+        </div>
+    </div>
+
+    <!-- 查询选项模态框 -->
+    <div id="queryModal" class="modal">
+        <h3>选择查询方式</h3>
+        <div>
+            <input type="radio" name="queryType" value="all" id="queryAll" checked>
+            <label for="queryAll">查询所有</label>
+            <input type="radio" name="queryType" value="single" id="querySingle">
+            <label for="querySingle">按ID查询</label>
+        </div>
+        <div id="idList" style="margin-top: 10px; max-height: 200px; overflow-y: auto;"></div>
+        <div style="margin-top: 15px;">
+            <button onclick="closeModal('queryModal')" class="btn" style="background-color: #f44336;">取消</button>
+            <button onclick="executeQuery()" class="btn" style="background-color: #4CAF50;">确定</button>
+        </div>
+    </div>
+
+    <!-- 流式查询模态框 -->
+    <div id="streamModal" class="modal">
+        <h3>选择流式查询选项</h3>
+        <div id="streamIdList" style="margin: 10px 0; max-height: 200px; overflow-y: auto;"></div>
+        <div>
+            <input type="radio" name="displayMode" value="concurrent" id="concurrent" checked>
+            <label for="concurrent">一并显示</label>
+            <input type="radio" name="displayMode" value="sequential" id="sequential">
+            <label for="sequential">逐条显示</label>
+        </div>
+        <div style="margin-top: 15px;">
+            <button onclick="closeModal('streamModal')" class="btn" style="background-color: #f44336;">取消</button>
+            <button onclick="executeStreamQuery()" class="btn" style="background-color: #4CAF50;">确定</button>
+        </div>
+    </div>
+
+    <!-- 确认对话框 -->
+    <div id="confirmModal" class="modal">
+        <h3>确认执行查询</h3>
+        <p>是否确定执行当前查询？</p>
+        <div>
+            <button onclick="closeModal('confirmModal')" class="btn" style="background-color: #f44336;">取消</button>
+            <button onclick="confirmStreamQuery()" class="btn" style="background-color: #4CAF50;">确定</button>
+        </div>
+    </div>
+
+    <!-- 取消流式请求对话框 -->
+    <div id="cancelStreamModal" class="modal">
+        <h3>取消流式请求</h3>
+        <p>是否要取消当前流式请求？</p>
+        <div>
+            <button onclick="closeModal('cancelStreamModal')" class="btn" style="background-color: #f44336;">否</button>
+            <button onclick="cancelStreamRequest()" class="btn" style="background-color: #4CAF50;">是</button>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        // 修改响应信息存储结构
+        const responseInfo = [{}, {}];
+        let currentController = null;
+        let isStreaming = false;
+
+        // 添加防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // 存储每个文本框的最后打印时间
+        const lastPrintTime = [0, 0];
+
+        // 显示查询选项
+        async function showQueryOptions() {
+            const modal = document.getElementById('queryModal');
+            const idList = document.getElementById('idList');
+            
+            try {
+                const response = await fetch('http://localhost:3000/posts');
+                const data = await response.json();
+                
+                idList.innerHTML = data.map(post => `
+                    <div class="id-item">
+                        <input type="radio" name="postId" value="${post.id}" id="post${post.id}">
+                        <label for="post${post.id}">ID: ${post.id} - ${post.content.substring(0, 20)}...</label>
+                    </div>
+                `).join('');
+                
+                showModal('queryModal');
+            } catch (error) {
+                showError('获取ID列表失败：' + error.message);
+            }
+        }
+
+        // 显示流式查询选项
+        async function showStreamOptions() {
+            const modal = document.getElementById('streamModal');
+            const idList = document.getElementById('streamIdList');
+            
+            try {
+                const response = await fetch('http://localhost:3000/posts');
+                const data = await response.json();
+                
+                idList.innerHTML = data.map(post => `
+                    <div class="id-item">
+                        <input type="checkbox" name="streamPostId" value="${post.id}" id="streamPost${post.id}">
+                        <label for="streamPost${post.id}">ID: ${post.id} - ${post.content.substring(0, 20)}...</label>
+                    </div>
+                `).join('');
+                
+                showModal('streamModal');
+            } catch (error) {
+                showError('获取ID列表失败：' + error.message);
+            }
+        }
+
+        // 执行查询
+        async function executeQuery() {
+            const queryType = document.querySelector('input[name="queryType"]:checked').value;
+            const resultDiv = document.getElementById('result1');
+            
+            try {
+                let url = 'http://localhost:3000/posts';
+                if (queryType === 'single') {
+                    const selectedId = document.querySelector('input[name="postId"]:checked')?.value;
+                    if (!selectedId) {
+                        throw new Error('请选择一个ID');
+                    }
+                    url += `/${selectedId}`;
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                // 存储完整的响应信息
+                responseInfo[0] = {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries()),
+                    url: response.url,
+                    data: data
+                };
+                
+                // 只显示content内容
+                if (Array.isArray(data)) {
+                    resultDiv.textContent = data.map(item => item.content).join('\n\n');
+                } else {
+                    resultDiv.textContent = data.content;
+                }
+                closeModal('queryModal');
+            } catch (error) {
+                showError('查询失败：' + error.message);
+            }
+        }
+
+        // 执行流式查询
+        function executeStreamQuery() {
+            const selectedIds = Array.from(document.querySelectorAll('input[name="streamPostId"]:checked'))
+                .map(input => input.value);
+            
+            if (selectedIds.length === 0) {
+                showError('请至少选择一个ID');
+                return;
+            }
+            
+            showModal('confirmModal');
+        }
+
+        // 确认流式查询
+        async function confirmStreamQuery() {
+            const displayMode = document.querySelector('input[name="displayMode"]:checked').value;
+            const selectedIds = Array.from(document.querySelectorAll('input[name="streamPostId"]:checked'))
+                .map(input => input.value);
+            const resultDiv = document.getElementById('result2');
+            
+            closeModal('confirmModal');
+            closeModal('streamModal');
+            
+            if (displayMode === 'concurrent') {
+                try {
+                    const responses = await Promise.all(selectedIds.map(id => 
+                        fetch(`http://localhost:3000/posts/${id}`)
+                    ));
+                    const results = await Promise.all(responses.map(res => res.json()));
+                    
+                    // 存储响应信息
+                    responseInfo[1] = {
+                        status: responses[0].status,
+                        statusText: responses[0].statusText,
+                        headers: Object.fromEntries(responses[0].headers.entries()),
+                        url: responses[0].url,
+                        data: results
+                    };
+                    
+                    // 只显示content内容
+                    resultDiv.textContent = results.map(item => item.content).join('\n\n');
+                } catch (error) {
+                    showError('并发请求失败：' + error.message);
+                }
+            } else {
+                // 逐条显示
+                isStreaming = true;
+                currentController = new AbortController();
+                resultDiv.textContent = '';
+                const streamResponses = [];
+                
+                try {
+                    for (const id of selectedIds) {
+                        if (!isStreaming) break;
+                        
+                        const response = await fetch(`http://localhost:3000/posts/${id}`, {
+                            signal: currentController.signal
+                        });
+                        const data = await response.json();
+                        streamResponses.push({response, data});
+                        
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        resultDiv.textContent += data.content + '\n\n';
+                    }
+
+                    // 存储最后一次响应的信息
+                    if (streamResponses.length > 0) {
+                        const lastResponse = streamResponses[streamResponses.length - 1].response;
+                        responseInfo[1] = {
+                            status: lastResponse.status,
+                            statusText: lastResponse.statusText,
+                            headers: Object.fromEntries(lastResponse.headers.entries()),
+                            url: lastResponse.url,
+                            data: streamResponses.map(r => r.data)
+                        };
+                    }
+                } catch (error) {
+                    if (error.name === 'AbortError') {
+                        resultDiv.textContent += '请求已取消';
+                    } else {
+                        showError('流式请求失败：' + error.message);
+                    }
+                } finally {
+                    isStreaming = false;
+                }
+            }
+        }
+
+        // 取消流式请求
+        function cancelStreamRequest() {
+            if (currentController) {
+                currentController.abort();
+                isStreaming = false;
+            }
+            closeModal('cancelStreamModal');
+        }
+
+        // 修改显示响应信息函数
+        function showResponseInfo(element, index) {
+            const info = responseInfo[index];
+            const now = Date.now();
+
+            // 如果距离上次打印不足3秒，直接返回
+            if (now - lastPrintTime[index] < 3000) {
+                return;
+            }
+
+            // 检查是否有响应数据
+            if (Object.keys(info).length === 0) {
+                console.log("还未获取数据，无法输出响应信息");
+                lastPrintTime[index] = now;
+                return;
+            }
+
+            // 在控制台输出详细信息
+            console.group('Response 对象信息');
+            console.log('状态码:', info.status);
+            console.log('状态文本:', info.statusText);
+            console.log('URL:', info.url);
+            console.log('响应头:');
+            console.table(info.headers);
+            console.log('响应体:');
+            console.log(info.data);
+            console.groupEnd();
+
+            // 更新最后打印时间
+            lastPrintTime[index] = now;
+
+            // 在元素上显示简要信息
+            const infoDiv = element.querySelector('.response-info');
+            infoDiv.innerHTML = `
+                <strong>状态码:</strong> ${info.status} ${info.statusText}<br>
+                <strong>URL:</strong> ${info.url}<br>
+                <strong>提示:</strong> 详细信息请查看控制台
+            `;
+            infoDiv.style.display = 'block';
+        }
+
+        // 创建防抖版本的显示响应信息函数
+        const debouncedShowResponseInfo = debounce(showResponseInfo, 100);
+
+        // 修改HTML中的事件绑定
+        document.getElementById('result1').onmouseover = function() {
+            debouncedShowResponseInfo(this, 0);
+        };
+        document.getElementById('result2').onmouseover = function() {
+            debouncedShowResponseInfo(this, 1);
+        };
+
+        // 隐藏响应信息
+        function hideResponseInfo(element) {
+            element.querySelector('.response-info').style.display = 'none';
+        }
+
+        // 显示错误信息
+        function showError(message) {
+            const error = document.createElement('div');
+            error.className = 'error-message';
+            error.textContent = message;
+            document.querySelector('.container').appendChild(error);
+            setTimeout(() => error.remove(), 3000);
+        }
+
+        // 显示模态框
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        // 关闭模态框
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // 监听ESC键
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && isStreaming) {
+                showModal('cancelStreamModal');
+            }
+        });
+    </script>
+</body>
+</html>
