@@ -25,7 +25,7 @@ credentials：是否携带 Cookie（如 include、same-origin）。
 mode：请求模式（如 cors、no-cors）。
 signal：用于取消请求的 AbortController 信号。
 
-5. 响应处理
+5. 响应处理        对返回的响应报文处理
 Response 对象：包含状态码、头信息和响应体。
 解析响应体：通过 .json()、.text()、.blob() 等方法。
 流式响应：通过 ReadableStream 处理流式数据。
