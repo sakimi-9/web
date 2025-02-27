@@ -118,8 +118,7 @@ class Dog extends Animal {
         return `${this.name}:汪汪汪!`;
     }
     //对父类 具体方法 的覆盖
-    override
-    eat(): string {
+    override eat(): string {
         return `${this.name}正在吃东西`;
     }
 }
