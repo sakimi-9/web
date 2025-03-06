@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 })
 export class AppController {
   constructor(private readonly appService: AppService) { }
-  @Version('1') //版本控制 路由级别  
+  // @Version('1') //版本控制 路由级别  
   @Get()
   getHello(): string {
     return this.appService.getHello();

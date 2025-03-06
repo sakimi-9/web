@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Version } from '@nestjs/common';
 import { WjmService } from './wjm.service';
 import { CreateWjmDto } from './dto/create-wjm.dto';
 import { UpdateWjmDto } from './dto/update-wjm.dto';
 
-@Controller('wjm')
+@Controller({
+  path: 'wjm',
+  version: '3'
+})
 export class WjmController {
-  constructor(private readonly wjmService: WjmService) {}
+  constructor(private readonly wjmService: WjmService) { }
 
   @Post()
   create(@Body() createWjmDto: CreateWjmDto) {
@@ -17,6 +20,8 @@ export class WjmController {
     return this.wjmService.findAll();
   }
 
+  //路由级的 版本控制 版本也是前缀  紧挨着根路径后面
+  @Version('1')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.wjmService.findOne(+id);
