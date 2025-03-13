@@ -42,7 +42,7 @@ export class UserModule_2 { }
 
 
 //  一般写在config.module.ts 
-import { DynamicModule } from '@nestjs/common';//引入动态模块的类
+import { DynamicModule } from '@nestjs/common';//引入动态模块的类型
 
 interface Options {//定义接口 这里实际上可以与 自定义类型 type 替换
   path: string;
