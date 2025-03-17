@@ -22,11 +22,15 @@ let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
+    addTags(addTagsDto) {
+        return this.userService.addTags(addTagsDto);
+    }
     create(createUserDto) {
         return this.userService.create(createUserDto);
     }
-    findAll(keyWord = '', page = 1, pageSize = 10) {
-        return this.userService.findAll({ keyWord, page: +page, pageSize: +pageSize });
+    async findAll(keyWord = '', page = 1, pageSize = 10) {
+        const result = await this.userService.findAll({ keyWord, page: +page, pageSize: +pageSize });
+        return result;
     }
     update(id, updateUserDto) {
         return this.userService.update(+id, updateUserDto);
@@ -36,6 +40,16 @@ let UserController = class UserController {
     }
 };
 exports.UserController = UserController;
+__decorate([
+    (0, common_1.Post)('tags'),
+    (0, swagger_1.ApiOperation)({ summary: '为用户添加标签' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: '添加成功' }),
+    (0, swagger_1.ApiBody)({ type: create_user_dto_1.AddTagsDto }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "addTags", null);
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiOperation)({ summary: '创建用户' }),
@@ -56,7 +70,7 @@ __decorate([
     __param(2, (0, common_1.Query)('pageSize')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Number, Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Patch)(':id'),

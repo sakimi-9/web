@@ -12,4 +12,13 @@ export class CreateUserDto {
     @IsNotEmpty({ message: '描述不能为空' })
     @IsString({ message: '描述必须是字符串' })
     desc: string;
-} 
+}
+
+// 添加标签的DTO
+export class AddTagsDto {
+    @ApiProperty({ description: '标签列表', example: ['tag1', 'tag2'] })
+    tags: string[];
+
+    @ApiProperty({ description: '用户ID', example: 1 })
+    userId: number;
+}

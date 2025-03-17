@@ -11,7 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
+const tags_entity_1 = require("./tags.entity");
 let User = class User {
+    toJSON() {
+        const user = { ...this };
+        if (user.tags) {
+            user.tags = user.tags.map(tag => {
+                return {
+                    id: tag.id,
+                    tags: tag.tags
+                };
+            });
+        }
+        return user;
+    }
 };
 exports.User = User;
 __decorate([
@@ -19,17 +32,25 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "varchar", length: 255 }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], User.prototype, "desc", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: () => 'CURRENT_TIMESTAMP' }),
+    (0, typeorm_1.Generated)('uuid'),
+    __metadata("design:type", String)
+], User.prototype, "uuid", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)({ type: "timestamp" }),
     __metadata("design:type", Date)
 ], User.prototype, "createTime", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => tags_entity_1.Tags, (tag) => tag.user, { cascade: true }),
+    __metadata("design:type", Array)
+], User.prototype, "tags", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

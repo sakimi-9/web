@@ -2,9 +2,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { Tags } from './entities/tags.entity';
 export declare class UserService {
     private readonly userRepository;
-    constructor(userRepository: Repository<User>);
+    private readonly tagRepository;
+    constructor(userRepository: Repository<User>, tagRepository: Repository<Tags>);
     create(createUserDto: CreateUserDto): Promise<{
         message: string;
         data: User;
@@ -24,5 +26,20 @@ export declare class UserService {
     }>;
     remove(id: number): Promise<{
         message: string;
+    }>;
+    addTags(params: {
+        tags: string[];
+        userId: number;
+    }): Promise<{
+        message: string;
+        data: {
+            id: number;
+            name: string;
+            desc: string;
+            tags: {
+                id: number;
+                tags: string;
+            }[];
+        };
     }>;
 }

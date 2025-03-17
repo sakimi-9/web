@@ -1,13 +1,24 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, AddTagsDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
+
 
 @ApiTags('用户管理')
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) { }
+
+    // 增加tag的接口
+    @Post('tags')
+    @ApiOperation({ summary: '为用户添加标签' })
+    @ApiResponse({ status: 201, description: '添加成功' })
+    @ApiBody({ type: AddTagsDto })
+    addTags(@Body() addTagsDto: { tags: string[], userId: number }) {
+        return this.userService.addTags(addTagsDto);
+    }
 
     @Post()
     @ApiOperation({ summary: '创建用户' })
@@ -21,12 +32,13 @@ export class UserController {
     @ApiQuery({ name: 'keyWord', required: false })
     @ApiQuery({ name: 'page', required: false })
     @ApiQuery({ name: 'pageSize', required: false })
-    findAll(
+    async findAll(
         @Query('keyWord') keyWord: string = '',
         @Query('page') page: number = 1,
         @Query('pageSize') pageSize: number = 10,
     ) {
-        return this.userService.findAll({ keyWord, page: +page, pageSize: +pageSize });
+        const result = await this.userService.findAll({ keyWord, page: +page, pageSize: +pageSize });
+        return result;
     }
 
     @Patch(':id')

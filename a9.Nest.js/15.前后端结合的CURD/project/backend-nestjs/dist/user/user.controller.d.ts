@@ -4,6 +4,21 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
+    addTags(addTagsDto: {
+        tags: string[];
+        userId: number;
+    }): Promise<{
+        message: string;
+        data: {
+            id: number;
+            name: string;
+            desc: string;
+            tags: {
+                id: number;
+                tags: string;
+            }[];
+        };
+    }>;
     create(createUserDto: CreateUserDto): Promise<{
         message: string;
         data: import("./entities/user.entity").User;

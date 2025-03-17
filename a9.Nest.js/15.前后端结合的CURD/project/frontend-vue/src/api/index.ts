@@ -38,4 +38,7 @@ export const getList = (params: any) => instance.get('/user', { params })
 export const delUser = (data: { id: number }) => instance.delete(`/user/${data.id}`)
 
 // 更新用户
-export const updateUser = (data: any) => instance.patch(`/user/${data.id}`, data) 
+export const updateUser = (data: any) => instance.patch(`/user/${data.id}`, data)
+
+// 添加tag
+export const addTags = (data: any) => instance.post('/user/tags', data)

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateUserDto = void 0;
+exports.AddTagsDto = exports.CreateUserDto = void 0;
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
 class CreateUserDto {
@@ -28,4 +28,15 @@ __decorate([
     (0, class_validator_1.IsString)({ message: '描述必须是字符串' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "desc", void 0);
+class AddTagsDto {
+}
+exports.AddTagsDto = AddTagsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: '标签列表', example: ['tag1', 'tag2'] }),
+    __metadata("design:type", Array)
+], AddTagsDto.prototype, "tags", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: '用户ID', example: 1 }),
+    __metadata("design:type", Number)
+], AddTagsDto.prototype, "userId", void 0);
 //# sourceMappingURL=create-user.dto.js.map

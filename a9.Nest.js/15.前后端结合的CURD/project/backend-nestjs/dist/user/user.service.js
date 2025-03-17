@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
 const user_entity_1 = require("./entities/user.entity");
+const tags_entity_1 = require("./entities/tags.entity");
 let UserService = class UserService {
-    constructor(userRepository) {
+    constructor(userRepository, tagRepository) {
         this.userRepository = userRepository;
+        this.tagRepository = tagRepository;
     }
     async create(createUserDto) {
         const user = this.userRepository.create(createUserDto);
@@ -28,6 +30,7 @@ let UserService = class UserService {
     }
     async findAll(query) {
         const [data, total] = await this.userRepository.findAndCount({
+            relations: ['tags'],
             where: {
                 name: (0, typeorm_1.Like)(`%${query.keyWord}%`),
             },
@@ -53,17 +56,73 @@ let UserService = class UserService {
         return { message: '更新成功' };
     }
     async remove(id) {
-        const result = await this.userRepository.delete(id);
-        if (result.affected === 0) {
+        const user = await this.userRepository.findOne({
+            where: { id },
+            relations: ['tags']
+        });
+        if (!user) {
             throw new common_1.NotFoundException(`ID为${id}的用户不存在`);
         }
+        if (user.tags && user.tags.length > 0) {
+            await this.tagRepository.remove(user.tags);
+        }
+        await this.userRepository.remove(user);
         return { message: '删除成功' };
+    }
+    async addTags(params) {
+        const userInfo = await this.userRepository.findOne({
+            where: { id: params.userId },
+            relations: ['tags']
+        });
+        if (!userInfo) {
+            throw new common_1.NotFoundException(`ID为${params.userId}的用户不存在`);
+        }
+        const existingTags = userInfo.tags || [];
+        const existingTagValues = existingTags.map(tag => tag.tags);
+        const tagList = [];
+        for (const tagValue of params.tags) {
+            if (!existingTagValues.includes(tagValue)) {
+                let tag = new tags_entity_1.Tags();
+                tag.tags = tagValue;
+                tag.user = userInfo;
+                await this.tagRepository.save(tag);
+                tagList.push(tag);
+            }
+        }
+        if (tagList.length === 0) {
+            return {
+                message: '没有新标签被添加，标签可能已存在',
+                data: {
+                    id: userInfo.id,
+                    name: userInfo.name,
+                    desc: userInfo.desc,
+                    tags: existingTags.map(tag => ({
+                        id: tag.id,
+                        tags: tag.tags
+                    }))
+                }
+            };
+        }
+        return {
+            message: '标签添加成功',
+            data: {
+                id: userInfo.id,
+                name: userInfo.name,
+                desc: userInfo.desc,
+                tags: [...existingTags, ...tagList].map(tag => ({
+                    id: tag.id,
+                    tags: tag.tags
+                }))
+            }
+        };
     }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(1, (0, typeorm_2.InjectRepository)(tags_entity_1.Tags)),
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, ClassSerializerInterceptor } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -11,6 +12,9 @@ async function bootstrap() {
 
     // 全局验证管道
     app.useGlobalPipes(new ValidationPipe());
+
+    // 添加全局序列化拦截器
+    app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get('Reflector')));
 
     // Swagger文档
     const config = new DocumentBuilder()
@@ -22,7 +26,7 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document);
 
     await app.listen(3000);
-    console.log('应用已启动: http://localhost:3000');
+    console.log('应用已启动: http://localhost:8080');
     console.log('API文档: http://localhost:3000/api');
 }
 bootstrap(); 
