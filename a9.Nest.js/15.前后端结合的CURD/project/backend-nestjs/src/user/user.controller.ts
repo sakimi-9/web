@@ -1,0 +1,45 @@
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ValidationPipe } from '@nestjs/common';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+
+@ApiTags('用户管理')
+@Controller('user')
+export class UserController {
+    constructor(private readonly userService: UserService) { }
+
+    @Post()
+    @ApiOperation({ summary: '创建用户' })
+    @ApiResponse({ status: 201, description: '创建成功' })
+    create(@Body(ValidationPipe) createUserDto: CreateUserDto) {
+        return this.userService.create(createUserDto);
+    }
+
+    @Get()
+    @ApiOperation({ summary: '获取用户列表' })
+    @ApiQuery({ name: 'keyWord', required: false })
+    @ApiQuery({ name: 'page', required: false })
+    @ApiQuery({ name: 'pageSize', required: false })
+    findAll(
+        @Query('keyWord') keyWord: string = '',
+        @Query('page') page: number = 1,
+        @Query('pageSize') pageSize: number = 10,
+    ) {
+        return this.userService.findAll({ keyWord, page: +page, pageSize: +pageSize });
+    }
+
+    @Patch(':id')
+    @ApiOperation({ summary: '更新用户' })
+    @ApiParam({ name: 'id', description: '用户ID' })
+    update(@Param('id') id: string, @Body(ValidationPipe) updateUserDto: UpdateUserDto) {
+        return this.userService.update(+id, updateUserDto);
+    }
+
+    @Delete(':id')
+    @ApiOperation({ summary: '删除用户' })
+    @ApiParam({ name: 'id', description: '用户ID' })
+    remove(@Param('id') id: string) {
+        return this.userService.remove(+id);
+    }
+} 
