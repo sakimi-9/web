@@ -1,0 +1,56 @@
+html,
+body,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.header {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.button {
+  color: #007bff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: rgb(0, 98.4, 204);
+}
+
+.button-secondary {
+  color: #6c757d;
+  background-color: #6c757d;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.button-secondary:hover {
+  background-color: rgb(84.3605150215, 91.3905579399, 97.6394849785);
+}
+
+/*# sourceMappingURL=styles.css.map */

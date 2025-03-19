@@ -1,0 +1,9 @@
+// 使用变量
+@use "../abstracts/variables";
+
+.header {
+    background-color: variables.$primary-color;
+    color: white;
+    padding: variables.$spacing;
+    text-align: center;
+}

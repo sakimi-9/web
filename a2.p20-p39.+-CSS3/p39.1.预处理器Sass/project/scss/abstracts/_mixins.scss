@@ -1,0 +1,16 @@
+@use "../abstracts/variables";
+
+// 定义一个按钮混合
+@mixin button-style($color, $background-color, $hover-background-color) {
+    color: $color;
+    background-color: $background-color;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-size: variables.$font-size-base; // 使用命名空间访问变量
+    cursor: pointer;
+
+    &:hover {
+        background-color: $hover-background-color;
+    }
+}

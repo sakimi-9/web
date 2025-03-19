@@ -1,0 +1,15 @@
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+@use "sass:color";
+
+.button {
+    @include mixins.button-style(variables.$primary-color,
+        variables.$primary-color,
+        color.adjust(variables.$primary-color, $lightness: -10%));
+}
+
+.button-secondary {
+    @include mixins.button-style(variables.$secondary-color,
+        variables.$secondary-color,
+        color.adjust(variables.$secondary-color, $lightness: -10%));
+}
