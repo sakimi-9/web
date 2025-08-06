@@ -1,7 +1,9 @@
 @import "tailwindcss";
+/*tailwind V4起 引入资源 只引入这句就行，而不是老版本的三句*/
+@custom-variant dark (&:where(.dark, .dark *));
+/* 让tailwind 通过dark类名切换主题生效 的关键语句,通过unocss指令 引入工具链中切换暗色主题的相关资源
+UnoCSS 是一种即时原子化 CSS 引擎（工具） */
 
-
-/* 这里是全局定义的传统的css样式，不是单个页面的，可以配合tailwindcss使用，如果 */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
